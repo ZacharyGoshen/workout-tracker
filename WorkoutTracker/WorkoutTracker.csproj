@@ -32,6 +32,7 @@
     <Folder Include="Controllers\" />
     <Folder Include="Models\" />
     <Folder Include="ClientApp\src\app\models\" />
+    <Folder Include="ClientApp\src\app\components\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="ClientApp\dist\main-es2015.js" />

@@ -8,6 +8,7 @@ namespace WorkoutTracker.DAL
     public partial class WorkoutTrackerContext : DbContext
     {
         public DbSet<WorkoutPlan> WorkoutPlans { get; set; }
+        public DbSet<WorkoutSession> WorkoutSessions { get; set; }
 
         public WorkoutTrackerContext()
         {
@@ -28,9 +29,10 @@ namespace WorkoutTracker.DAL
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            OnModelCreatingPartial(modelBuilder);
+            modelBuilder.Entity<WorkoutPlan>()
+                .HasMany(wp => wp.WorkoutSessions)
+                .WithOne(ws => ws.WorkoutPlan);
         }
 
-        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 }
