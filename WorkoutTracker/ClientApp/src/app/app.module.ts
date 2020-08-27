@@ -6,11 +6,14 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { WorkoutSessionListComponent } from './components/workout-session-list/workout-session-list.component';
+import { WorkoutSessionComponent } from './components/workout-session/workout-session.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
     AppComponent,
     WorkoutSessionListComponent,
+    WorkoutSessionComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -18,7 +21,8 @@ import { WorkoutSessionListComponent } from './components/workout-session-list/w
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: WorkoutSessionListComponent, pathMatch: 'full' },
-    ])
+    ]),
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

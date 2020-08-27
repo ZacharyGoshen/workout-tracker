@@ -1,5 +1,7 @@
 <div>
-    <div *ngFor="let workoutSession of workoutSessions">
-        {{ workoutSession.workoutPlanId }}
-    </div>
+    <app-workout-session
+        *ngFor="let workoutSession of workoutSessions"
+        [workoutSession]="workoutSession"
+    >
+    </app-workout-session>
 </div>

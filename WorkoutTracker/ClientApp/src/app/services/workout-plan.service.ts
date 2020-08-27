@@ -12,6 +12,10 @@ export class WorkoutPlanService {
 
   constructor(private http: HttpClient) { }
 
+  getWorkoutPlanById(id: number): Observable<WorkoutPlan> {
+    return this.http.get<WorkoutPlan>(`${this.workoutPlansUrl}/${id}`);
+  }
+
   getWorkoutPlans(): Observable<WorkoutPlan[]> {
     return this.http.get<WorkoutPlan[]>(this.workoutPlansUrl);
   }

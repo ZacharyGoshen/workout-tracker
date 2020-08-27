@@ -26,6 +26,10 @@
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
     <Content Remove="$(SpaRoot)**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+    <None Include="**/*" />
+    <None Include="**/*" />
+    <None Include="**/*" />
+    <None Include="**/*" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,6 +37,7 @@
     <Folder Include="Models\" />
     <Folder Include="ClientApp\src\app\models\" />
     <Folder Include="ClientApp\src\app\components\" />
+    <Folder Include="ClientApp\src\app\components\workout-session\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="ClientApp\dist\main-es2015.js" />

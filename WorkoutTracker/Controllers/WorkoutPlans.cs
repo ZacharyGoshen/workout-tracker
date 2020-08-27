@@ -17,5 +17,14 @@ namespace WorkoutTracker.Controllers
             var workoutPlans = context.WorkoutPlans.ToList();
             return Json(workoutPlans);
         }
+
+        [HttpGet]
+        [Route("workoutPlans/{id}")]
+        public JsonResult GetById(int id)
+        {
+            var context = new WorkoutTrackerContext();
+            var workoutPlan = context.WorkoutPlans.Where(wp => wp.Id == id).First();
+            return Json(workoutPlan);
+        }
     }
 }

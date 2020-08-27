@@ -1,12 +1,16 @@
 ﻿<Properties StartupConfiguration="{C51E2E51-15C3-45FE-B9A6-6106F1B57330}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="WorkoutTracker/Models/WorkoutSession.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="WorkoutTracker/ClientApp/src/app/app.module.ts">
     <Files>
-      <File FileName="WorkoutTracker/ClientApp/src/app/components/workout-session-list/workout-session-list.component.html" Line="3" Column="38" />
-      <File FileName="WorkoutTracker/ClientApp/src/app/models/workout-session.ts" Line="1" Column="1" />
-      <File FileName="WorkoutTracker/ClientApp/src/app/components/workout-session-list/workout-session-list.component.ts" Line="22" Column="114" />
-      <File FileName="WorkoutTracker/Controllers/WorkoutSessions.cs" Line="18" Column="58" />
-      <File FileName="WorkoutTracker/Models/WorkoutPlan.cs" Line="1" Column="1" />
-      <File FileName="WorkoutTracker/Models/WorkoutSession.cs" Line="1" Column="1" />
+      <File FileName="WorkoutTracker/ClientApp/src/app/components/workout-session-list/workout-session-list.component.html" Line="1" Column="15" />
+      <File FileName="WorkoutTracker/ClientApp/src/app/components/workout-session-list/workout-session-list.component.ts" Line="1" Column="1" />
+      <File FileName="WorkoutTracker/ClientApp/src/app/components/workout-session/workout-session.component.ts" Line="26" Column="25" />
+      <File FileName="WorkoutTracker/ClientApp/src/app/components/workout-session/workout-session.component.html" Line="1" Column="24" />
+      <File FileName="WorkoutTracker/ClientApp/src/app/services/workout-plan.service.ts" Line="15" Column="60" />
+      <File FileName="WorkoutTracker/ClientApp/src/app/models/workout-plan.ts" Line="1" Column="1" />
+      <File FileName="WorkoutTracker/ClientApp/src/app/models/workout-session.ts" Line="5" Column="25" />
+      <File FileName="WorkoutTracker/Controllers/WorkoutPlans.cs" Line="22" Column="34" />
+      <File FileName="WorkoutTracker/Controllers/WorkoutSessions.cs" Line="22" Column="1" />
+      <File FileName="WorkoutTracker/ClientApp/src/app/app.module.ts" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -17,18 +21,18 @@
                 <Node name="src" expanded="True">
                   <Node name="app" expanded="True">
                     <Node name="components" expanded="True">
+                      <Node name="workout-session" expanded="True" />
                       <Node name="workout-session-list" expanded="True" />
                     </Node>
                     <Node name="models" expanded="True" />
                     <Node name="services" expanded="True" />
+                    <Node name="app.module.ts" selected="True" />
                   </Node>
                 </Node>
               </Node>
               <Node name="Controllers" expanded="True" />
               <Node name="DAL" expanded="True" />
-              <Node name="Models" expanded="True">
-                <Node name="WorkoutSession.cs" selected="True" />
-              </Node>
+              <Node name="Models" expanded="True" />
             </Node>
           </Node>
         </State>
