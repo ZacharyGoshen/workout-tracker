@@ -1,11 +1,14 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using WorkoutTracker.Models;
 
 namespace WorkoutTracker.DAL
 {
     public partial class WorkoutTrackerContext : DbContext
     {
+        public DbSet<WorkoutPlan> WorkoutPlans { get; set; }
+
         public WorkoutTrackerContext()
         {
         }
