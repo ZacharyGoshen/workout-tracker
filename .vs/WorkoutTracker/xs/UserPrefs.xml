@@ -1,0 +1,34 @@
+﻿<Properties StartupConfiguration="{C51E2E51-15C3-45FE-B9A6-6106F1B57330}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="WorkoutTracker/ClientApp/src/app/app.component.html">
+    <Files>
+      <File FileName="WorkoutTracker/ClientApp/src/app/app.module.ts" Line="1" Column="1" />
+      <File FileName="WorkoutTracker/ClientApp/src/app/home/home.component.html" />
+      <File FileName="WorkoutTracker/ClientApp/src/app/app.component.html" Line="1" Column="7" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="WorkoutTracker" expanded="True">
+            <Node name="WorkoutTracker" expanded="True">
+              <Node name="ClientApp" expanded="True">
+                <Node name="src" expanded="True">
+                  <Node name="app" expanded="True">
+                    <Node name="home" expanded="True" />
+                    <Node name="app.component.html" selected="True" />
+                  </Node>
+                </Node>
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.WorkoutTracker PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
