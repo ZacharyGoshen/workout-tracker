@@ -1,1 +1,9 @@
-<div *ngIf="workoutPlan">{{ workoutPlan.name }}</div>
+<div *ngIf="workoutPlan">
+    <div>
+        {{ dateToShortFormat(workoutSession.date) }}
+    </div>
+    <div>
+        {{ workoutPlan.name }}
+    </div>
+    <button (click)="deleteWorkoutSession()">Delete workout session</button>
+</div>

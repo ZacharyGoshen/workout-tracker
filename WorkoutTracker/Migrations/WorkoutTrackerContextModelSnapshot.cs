@@ -36,6 +36,9 @@ namespace WorkoutTracker.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<string>("Date")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
                     b.Property<int>("WorkoutPlanId")
                         .HasColumnType("int");
 

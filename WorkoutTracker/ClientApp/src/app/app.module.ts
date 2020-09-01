@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { WorkoutSessionListComponent } from './components/workout-session-list/workout-session-list.component';
 import { WorkoutSessionComponent } from './components/workout-session/workout-session.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     RouterModule.forRoot([
       { path: '', component: WorkoutSessionListComponent, pathMatch: 'full' },
     ]),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

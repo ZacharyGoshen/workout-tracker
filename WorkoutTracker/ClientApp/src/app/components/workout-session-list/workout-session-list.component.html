@@ -1,7 +1,18 @@
 <div>
+    <h2>Past workout sessions</h2>
     <app-workout-session
         *ngFor="let workoutSession of workoutSessions"
         [workoutSession]="workoutSession"
+        (workoutSessionDelete)="deleteWorkoutSession($event)"
     >
     </app-workout-session>
+    <h4>Add new workout session</h4>
+    <select #workoutPlanName>
+        <option *ngFor="let workoutPlan of workoutPlans">
+            {{ workoutPlan.name }}
+        </option>
+    </select>
+    <button (click)="addWorkoutSession(workoutPlanName.value)">
+        Add workout
+    </button>
 </div>
