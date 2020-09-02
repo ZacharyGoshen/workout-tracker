@@ -7,12 +7,13 @@
     >
     </app-workout-session>
     <h4>Add new workout session</h4>
+    <input #workoutSessionDate type="date"/>
     <select #workoutPlanName>
         <option *ngFor="let workoutPlan of workoutPlans">
             {{ workoutPlan.name }}
         </option>
     </select>
-    <button (click)="addWorkoutSession(workoutPlanName.value)">
+    <button (click)="addWorkoutSession(workoutSessionDate.value, workoutPlanName.value)">
         Add workout
     </button>
 </div>

@@ -5,13 +5,16 @@ import { Injectable } from '@angular/core';
 })
 export class DateService {
 
-  constructor() { }
+  const months = {
+    1: 'Jan', 2: 'Feb', 3: 'Mar', 4: 'Apr', 5: 'May', 6: 'Jun',
+    7: 'Jul', 8: 'Aug', 9: 'Sep', 10: 'Oct', 11: 'Nov', 12: 'Dec'
+  };
 
-  toShortFormat(isoString: string) {
-    let date = new Date(isoString);
-    let year = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(date);
-    let month = new Intl.DateTimeFormat('en', { month: 'short' }).format(date);
-    let day = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(date);
+  toShortFormat(dateString: string) {
+    let datePortion = dateString.split('T')[0];
+    let year = datePortion.split('-')[0];
+    let month = this.months[parseInt(datePortion.split('-')[1])];
+    let day = datePortion.split('-')[2];
     return `${month} ${day}, ${year}`;
   }
 }
