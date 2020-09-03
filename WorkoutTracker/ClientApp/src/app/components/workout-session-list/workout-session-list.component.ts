@@ -36,7 +36,7 @@ export class WorkoutSessionListComponent implements OnInit {
       workoutPlan.id
     );
     this.workoutSessionService.addWorkoutSession(workoutSession)
-      .subscribe(workoutSession => this.workoutSessions.push(workoutSession));
+      .subscribe(ws => this.workoutSessions.push(ws));
   }
 
   deleteWorkoutSession(workoutSessionId: number): void {

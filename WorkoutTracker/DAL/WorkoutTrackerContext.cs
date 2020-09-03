@@ -9,6 +9,7 @@ namespace WorkoutTracker.DAL
     {
         public DbSet<WorkoutPlan> WorkoutPlans { get; set; }
         public DbSet<WorkoutSession> WorkoutSessions { get; set; }
+        public DbSet<SetPlan> SetPlans { get; set; }
 
         public WorkoutTrackerContext()
         {
@@ -32,6 +33,10 @@ namespace WorkoutTracker.DAL
             modelBuilder.Entity<WorkoutPlan>()
                 .HasMany(wp => wp.WorkoutSessions)
                 .WithOne(ws => ws.WorkoutPlan);
+
+            modelBuilder.Entity<WorkoutPlan>()
+                .HasMany(wp => wp.SetPlans)
+                .WithOne(sp => sp.WorkoutPlan);
         }
 
     }

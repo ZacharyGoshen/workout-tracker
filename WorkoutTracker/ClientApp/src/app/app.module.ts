@@ -9,19 +9,24 @@ import { WorkoutSessionListComponent } from './components/workout-session-list/w
 import { WorkoutSessionComponent } from './components/workout-session/workout-session.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
+import { WorkoutPlanListComponent } from './components/workout-plan-list/workout-plan-list.component';
+import { WorkoutPlanComponent } from './components/workout-plan/workout-plan.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     WorkoutSessionListComponent,
     WorkoutSessionComponent,
+    WorkoutPlanListComponent,
+    WorkoutPlanComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: WorkoutSessionListComponent, pathMatch: 'full' },
+      { path: 'workout-sessions', component: WorkoutSessionListComponent, pathMatch: 'full' },
+      { path: 'workout-plans', component: WorkoutPlanListComponent, pathMatch: 'full' },
     ]),
     BrowserAnimationsModule,
     MatTableModule

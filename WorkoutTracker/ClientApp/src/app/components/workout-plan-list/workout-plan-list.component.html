@@ -1,0 +1,14 @@
+<div>
+    <h2>My Workout Plans</h2>
+    <app-workout-plan
+        *ngFor="let workoutPlan of workoutPlans"
+        [workoutPlan]="workoutPlan"
+        (workoutPlanDelete)="deleteWorkoutPlan($event)"
+    >
+    </app-workout-plan>
+    <h4>Add new workout plan</h4>
+    <input #workoutPlanName/>
+    <button (click)="addWorkoutPlan(workoutPlanName.value)">
+        Add workout plan
+    </button>
+</div>

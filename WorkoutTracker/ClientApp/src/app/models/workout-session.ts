@@ -1,6 +1,7 @@
 import { WorkoutPlan } from "./workout-plan";
 
 export class WorkoutSession {
+
   id: number;
   date: string;
   workoutPlanId: number;
@@ -9,6 +10,5 @@ export class WorkoutSession {
     this.date = date;
     this.workoutPlanId = workoutPlanId;
   }
-
 
 }

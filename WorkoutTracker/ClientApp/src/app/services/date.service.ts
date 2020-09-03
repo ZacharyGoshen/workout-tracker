@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class DateService {
 
-  const months = {
+  private months = {
     1: 'Jan', 2: 'Feb', 3: 'Mar', 4: 'Apr', 5: 'May', 6: 'Jun',
     7: 'Jul', 8: 'Aug', 9: 'Sep', 10: 'Oct', 11: 'Nov', 12: 'Dec'
   };
@@ -17,4 +17,5 @@ export class DateService {
     let day = datePortion.split('-')[2];
     return `${month} ${day}, ${year}`;
   }
+
 }
