@@ -11,6 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
 import { WorkoutPlanListComponent } from './components/workout-plan-list/workout-plan-list.component';
 import { WorkoutPlanComponent } from './components/workout-plan/workout-plan.component';
+import { SetPlanComponent } from './components/set-plan/set-plan.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { WorkoutPlanComponent } from './components/workout-plan/workout-plan.com
     WorkoutSessionComponent,
     WorkoutPlanListComponent,
     WorkoutPlanComponent,
+    SetPlanComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

@@ -1,4 +1,5 @@
 <div>
-    <div>{{ workoutPlan.name }}</div>
+    <h5>{{ workoutPlan.name }}</h5>
+    <app-set-plan *ngFor="let setPlan of setPlans" [setPlan]="setPlan" ></app-set-plan>
     <button (click)="deleteWorkoutPlan()">Delete workout plan</button>
 </div>

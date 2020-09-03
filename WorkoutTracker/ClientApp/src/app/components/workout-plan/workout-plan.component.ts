@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { WorkoutPlan } from '../../models/workout-plan';
 import { EventEmitter } from '@angular/core';
+import { SetPlan } from '../../models/set-plan';
+import { SetPlanService } from '../../services/set-plan.service';
 
 @Component({
   selector: 'app-workout-plan',
@@ -13,12 +15,20 @@ export class WorkoutPlanComponent implements OnInit {
 
   @Output() workoutPlanDelete: EventEmitter<number> = new EventEmitter();
 
-  constructor() { }
+  setPlans: SetPlan[];
+
+  constructor(private setPlanService: SetPlanService) { }
 
   ngOnInit() {
+    this.getSetPlans();
   }
 
   deleteWorkoutPlan(): void {
     this.workoutPlanDelete.emit(this.workoutPlan.id);
+  }
+
+  getSetPlans(): void {
+    this.setPlanService.getSetPlansWithWorkoutPlanId(this.workoutPlan.id)
+      .subscribe(sp => this.setPlans = sp);
   }
 }

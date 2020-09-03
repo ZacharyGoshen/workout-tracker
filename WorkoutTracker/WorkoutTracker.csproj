@@ -30,6 +30,16 @@
     <None Include="**/*" />
     <None Include="**/*" />
     <None Include="**/*" />
+    <None Include="$(SpaRoot)**" />
+    <None Include="**/*" />
+    <None Include="**/*" />
+    <None Include="**/*" />
+    <None Include="**/*" />
+    <None Include="$(SpaRoot)**" />
+    <None Include="**/*" />
+    <None Include="**/*" />
+    <None Include="**/*" />
+    <None Include="**/*" />
   </ItemGroup>
 
   <ItemGroup>
