@@ -5,5 +5,6 @@ export class SetPlan {
   reps: number;
   restTime: number;
   workoutPlanId: number;
+  exerciseId: number;
 
 }

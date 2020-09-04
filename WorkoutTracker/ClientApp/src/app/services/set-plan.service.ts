@@ -17,6 +17,6 @@ export class SetPlanService {
   constructor(private http: HttpClient) { }
 
   getSetPlansWithWorkoutPlanId(workoutPlanId: number): Observable<SetPlan[]> {
-    return this.http.get<SetPlan>(`${this.setPlansUrl}?workoutPlanId=${workoutPlanId}`);
+    return this.http.get<SetPlan[]>(`${this.setPlansUrl}?workoutPlanId=${workoutPlanId}`);
   }
 }

@@ -10,5 +10,8 @@ namespace WorkoutTracker.Models
 
         public int WorkoutPlanId { get; set; }
         public WorkoutPlan WorkoutPlan { get; set; }
+
+        public int ExerciseId { get; set; }
+        public Exercise Exercise { get; set; }
     }
 }

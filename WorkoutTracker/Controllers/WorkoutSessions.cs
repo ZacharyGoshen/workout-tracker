@@ -21,7 +21,7 @@ namespace WorkoutTracker.Controllers
         }
 
         [HttpGet]
-        [Route("workoutSessions/id")]
+        [Route("workoutSessions/{id}")]
         public JsonResult GetById(int id)
         {
             var context = new WorkoutTrackerContext();

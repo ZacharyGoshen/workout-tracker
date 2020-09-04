@@ -16,10 +16,27 @@ namespace WorkoutTracker.Migrations
                 .HasAnnotation("ProductVersion", "3.1.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
+            modelBuilder.Entity("WorkoutTracker.Models.Exercise", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Exercises");
+                });
+
             modelBuilder.Entity("WorkoutTracker.Models.SetPlan", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("ExerciseId")
                         .HasColumnType("int");
 
                     b.Property<int>("Order")
@@ -35,6 +52,8 @@ namespace WorkoutTracker.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ExerciseId");
 
                     b.HasIndex("WorkoutPlanId");
 
@@ -77,6 +96,12 @@ namespace WorkoutTracker.Migrations
 
             modelBuilder.Entity("WorkoutTracker.Models.SetPlan", b =>
                 {
+                    b.HasOne("WorkoutTracker.Models.Exercise", "Exercise")
+                        .WithMany("SetPlans")
+                        .HasForeignKey("ExerciseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("WorkoutTracker.Models.WorkoutPlan", "WorkoutPlan")
                         .WithMany("SetPlans")
                         .HasForeignKey("WorkoutPlanId")

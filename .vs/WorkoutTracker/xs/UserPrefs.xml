@@ -1,10 +1,11 @@
 ﻿<Properties StartupConfiguration="{C51E2E51-15C3-45FE-B9A6-6106F1B57330}|Default">
   <MonoDevelop.Ide.Workbench ActiveDocument="WorkoutTracker/ClientApp/src/app/components/set-plan/set-plan.component.ts">
     <Files>
-      <File FileName="WorkoutTracker/ClientApp/src/app/components/workout-plan/workout-plan.component.html" Line="3" Column="71" />
-      <File FileName="WorkoutTracker/ClientApp/src/app/components/set-plan/set-plan.component.html" Line="1" Column="5" />
-      <File FileName="WorkoutTracker/ClientApp/src/app/components/set-plan/set-plan.component.ts" Line="11" Column="11" />
-      <File FileName="WorkoutTracker/ClientApp/src/app/components/workout-plan-list/workout-plan-list.component.html" Line="1" Column="1" />
+      <File FileName="WorkoutTracker/ClientApp/angular.json" Line="17" Column="32" />
+      <File FileName="WorkoutTracker/Controllers/Exercises.cs" Line="17" Column="45" />
+      <File FileName="WorkoutTracker/Controllers/WorkoutSessions.cs" Line="24" Column="37" />
+      <File FileName="WorkoutTracker/Controllers/WorkoutPlans.cs" Line="1" Column="1" />
+      <File FileName="WorkoutTracker/ClientApp/src/app/components/set-plan/set-plan.component.ts" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -15,13 +16,10 @@
                 <Node name="src" expanded="True">
                   <Node name="app" expanded="True">
                     <Node name="components" expanded="True">
-                      <Node name="set-plan" expanded="True" />
-                      <Node name="workout-plan" expanded="True">
-                        <Node name="workout-plan.component.ts" selected="True" />
+                      <Node name="set-plan" expanded="True">
+                        <Node name="set-plan.component.ts" selected="True" />
                       </Node>
-                      <Node name="workout-plan-list" expanded="True" />
                     </Node>
-                    <Node name="services" expanded="True" />
                   </Node>
                 </Node>
               </Node>
@@ -30,9 +28,6 @@
             </Node>
           </Node>
         </State>
-      </Pad>
-      <Pad Id="MonoDevelop.Debugger.WatchPad">
-        <State />
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
