@@ -1,5 +1,21 @@
 <div>
     <h5>{{ workoutPlan.name }}</h5>
-    <app-set-plan *ngFor="let setPlan of setPlans" [setPlan]="setPlan"></app-set-plan>
+    <app-set-plan
+        *ngFor="let setPlan of setPlans"
+        [setPlan]="setPlan"
+        (setPlanDelete)="deleteSetPlan($event)"
+    >
+    </app-set-plan>
+    <h6>Add set</h6>
+    <select #exerciseName>
+        <option *ngFor="let exercise of exercises">
+            {{ exercise.name }}
+        </option>
+    </select>
+    <div>Reps</div>
+    <input #reps/>
+    <div>Rest Time</div>
+    <input #restTime/>
+    <button (click)="addSetPlan(exerciseName.value, reps.value, restTime.value)">Add set</button>
     <button (click)="deleteWorkoutPlan()">Delete workout plan</button>
 </div>

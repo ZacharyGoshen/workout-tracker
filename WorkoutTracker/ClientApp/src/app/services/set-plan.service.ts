@@ -19,4 +19,12 @@ export class SetPlanService {
   getSetPlansWithWorkoutPlanId(workoutPlanId: number): Observable<SetPlan[]> {
     return this.http.get<SetPlan[]>(`${this.setPlansUrl}?workoutPlanId=${workoutPlanId}`);
   }
+
+  addSetPlan(setPlan: SetPlan): Observable<SetPlan> {
+    return this.http.post<SetPlan>(this.setPlansUrl, setPlan, this.httpOptions);
+  }
+
+  deleteSetPlan(setPlanId: number): Observable<SetPlan> {
+    return this.http.delete<SetPlan>(`${this.setPlansUrl}/${setPlanId}`);
+  }
 }

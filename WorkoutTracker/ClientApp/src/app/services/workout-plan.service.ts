@@ -25,6 +25,7 @@ export class WorkoutPlanService {
   }
 
   addWorkoutPlan(workoutPlan: WorkoutPlan): Observable<WorkoutPlan> {
+    console.log(workoutPlan);
     return this.http.post<WorkoutPlan>(this.workoutPlansUrl, workoutPlan, this.httpOptions);
   }
 

@@ -20,4 +20,16 @@ export class ExerciseService {
     return this.http.get<Exercise>(`${this.exercisesUrl}/${id}`);
   }
 
+  getExercises(): Observable<Exercise[]> {
+    return this.http.get<Exercise[]>(this.exercisesUrl);
+  }
+
+  addExercise(exercise: Exercise): Observable<Exercise> {
+    return this.http.post<Exercise>(this.exercisesUrl, exercise, this.httpOptions);
+  }
+
+  deleteExercise(exerciseId: number): Observable<Exercise> {
+    let url = `${this.exercisesUrl}/${exerciseId}`;
+    return this.http.delete<Exercise>(url);
+  }
 }

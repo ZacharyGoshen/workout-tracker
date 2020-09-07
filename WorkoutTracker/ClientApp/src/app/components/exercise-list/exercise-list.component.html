@@ -1,0 +1,12 @@
+<div>
+    <h2>My Exercises</h2>
+    <app-exercise
+        *ngFor="let exercise of exercises"
+        [exercise]="exercise"
+        (exerciseDelete)="deleteExercise($event)"
+    >
+    </app-exercise>
+    <h4>Add new exercise</h4>
+    <input #exerciseName/>
+    <button (click)="addExercise(exerciseName.value)">Add exercise</button>
+</div>

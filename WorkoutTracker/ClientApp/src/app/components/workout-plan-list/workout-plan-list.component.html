@@ -2,6 +2,7 @@
     <h2>My Workout Plans</h2>
     <app-workout-plan
         *ngFor="let workoutPlan of workoutPlans"
+        [exercises]="exercises"
         [workoutPlan]="workoutPlan"
         (workoutPlanDelete)="deleteWorkoutPlan($event)"
     >

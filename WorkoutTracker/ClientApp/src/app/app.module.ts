@@ -10,6 +10,9 @@ import { WorkoutSessionComponent } from './components/workout-session/workout-se
 import { WorkoutPlanListComponent } from './components/workout-plan-list/workout-plan-list.component';
 import { WorkoutPlanComponent } from './components/workout-plan/workout-plan.component';
 import { SetPlanComponent } from './components/set-plan/set-plan.component';
+import { ExerciseListComponent } from './components/exercise-list/exercise-list.component';
+import { ExerciseComponent } from './components/exercise/exercise.component';
+import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
 
 @NgModule({
   declarations: [
@@ -19,14 +22,18 @@ import { SetPlanComponent } from './components/set-plan/set-plan.component';
     WorkoutPlanListComponent,
     WorkoutPlanComponent,
     SetPlanComponent,
+    ExerciseListComponent,
+    ExerciseComponent,
+    NavigationBarComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: 'workout-sessions', component: WorkoutSessionListComponent, pathMatch: 'full' },
-      { path: 'workout-plans', component: WorkoutPlanListComponent, pathMatch: 'full' },
+      { path: 'app/exercises', component: ExerciseListComponent, pathMatch: 'full' },
+      { path: 'app/workout-plans', component: WorkoutPlanListComponent, pathMatch: 'full' },
+      { path: 'app/workout-sessions', component: WorkoutSessionListComponent, pathMatch: 'full' },
     ])
   ],
   providers: [],

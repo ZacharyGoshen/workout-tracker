@@ -1,5 +1,3 @@
-import { WorkoutSession } from "./workout-session";
-
 export class WorkoutPlan {
 
   id: number;
