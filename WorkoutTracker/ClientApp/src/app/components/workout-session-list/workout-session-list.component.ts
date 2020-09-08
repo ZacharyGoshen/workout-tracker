@@ -44,7 +44,7 @@ export class WorkoutSessionListComponent implements OnInit {
 
     forkJoin([workoutSession, setPlans]).subscribe(results => {
       results[1].forEach(setPlan => {
-        let setResult = new SetResult(0, setPlan.reps, setPlan.restTime, results[0].id, setPlan.exerciseId);
+        let setResult = new SetResult(setPlan.order, 0, setPlan.reps, setPlan.restTime, results[0].id, setPlan.exerciseId);
         this.setResultService.addSetResult(setResult).subscribe();
       });
     });

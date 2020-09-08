@@ -3,19 +3,25 @@
     <app-set-plan
         *ngFor="let setPlan of setPlans"
         [setPlan]="setPlan"
+        (setPlanUpdateOrder)="updateSetPlanOrder($event.setPlanId, $event.order)"
         (setPlanDelete)="deleteSetPlan($event)"
     >
     </app-set-plan>
-    <h6>Add set</h6>
+    <h5>Add set</h5>
+    <span>Exercise: </span>
     <select #exerciseName>
         <option *ngFor="let exercise of exercises">
             {{ exercise.name }}
         </option>
     </select>
-    <div>Reps</div>
+    <br />
+    <span>Reps: </span>
     <input #reps/>
-    <div>Rest Time</div>
+    <br />
+    <span>Rest Time: </span>
     <input #restTime/>
+    <br />
     <button (click)="addSetPlan(exerciseName.value, reps.value, restTime.value)">Add set</button>
+    <br />
     <button (click)="deleteWorkoutPlan()">Delete workout plan</button>
 </div>

@@ -24,6 +24,10 @@ export class SetPlanService {
     return this.http.post<SetPlan>(this.setPlansUrl, setPlan, this.httpOptions);
   }
 
+  updateSetPlan(setPlan: SetPlan): Observable<SetPlan> {
+    return this.http.put<SetPlan>(this.setPlansUrl, setPlan, this.httpOptions);
+  }
+
   deleteSetPlan(setPlanId: number): Observable<SetPlan> {
     return this.http.delete<SetPlan>(`${this.setPlansUrl}/${setPlanId}`);
   }

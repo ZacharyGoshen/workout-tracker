@@ -69,6 +69,9 @@ namespace WorkoutTracker.Migrations
                     b.Property<int>("ExerciseId")
                         .HasColumnType("int");
 
+                    b.Property<int>("Order")
+                        .HasColumnType("int");
+
                     b.Property<int>("Reps")
                         .HasColumnType("int");
 

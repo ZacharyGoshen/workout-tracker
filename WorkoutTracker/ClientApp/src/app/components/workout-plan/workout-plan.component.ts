@@ -31,7 +31,10 @@ export class WorkoutPlanComponent implements OnInit {
 
   getSetPlans(): void {
     this.setPlanService.getSetPlansWithWorkoutPlanId(this.workoutPlan.id)
-      .subscribe(sp => this.setPlans = sp);
+      .subscribe(sp => {
+        let sortedSetPlans = sp.sort((a, b) => (a.order > b.order) ? 1 : -1);
+        this.setPlans = sortedSetPlans;
+      });
   }
 
   addSetPlan(exerciseName: string, reps: string, restTime: string): void {
@@ -39,11 +42,40 @@ export class WorkoutPlanComponent implements OnInit {
     let order = this.setPlans.length + 1;
     let setPlan = new SetPlan(order, parseInt(reps), parseInt(restTime), this.workoutPlan.id,
       exercise.id);
-    console.log(setPlan);
     this.setPlanService.addSetPlan(setPlan).subscribe(sp => this.setPlans.push(sp));
   }
 
+  updateSetPlanOrder(setPlanId: number, order: number): void {
+    let setPlan = this.setPlans.find(sp => sp.id == setPlanId);
+    let setPlansToUpdate = [];
+    let orderOffset = 0;
+    if (order > setPlan.order) {
+      setPlansToUpdate = this.setPlans.filter(sp => sp.order > setPlan.order && sp.order <= order);
+      orderOffset = -1;
+    } else {
+      setPlansToUpdate = this.setPlans.filter(sp => sp.order < setPlan.order && sp.order >= order);
+      orderOffset = 1;
+    }
+
+    setPlansToUpdate.forEach(sp => {
+      sp.order = sp.order + orderOffset;
+      this.setPlanService.updateSetPlan(sp).subscribe();
+    });
+
+    setPlan.order = order;
+    this.setPlanService.updateSetPlan(setPlan).subscribe();
+
+    this.setPlans = this.setPlans.sort((a, b) => (a.order > b.order) ? 1 : -1);
+  }
+
   deleteSetPlan(setPlanId: number): void {
+    let setPlanOrder = this.setPlans.find(sp => sp.id == setPlanId).order;
+    let setPlansToUpdate = this.setPlans.filter(sp => sp.order > setPlanOrder);
+    setPlansToUpdate.forEach(sp => {
+      sp.order = sp.order - 1;
+      this.setPlanService.updateSetPlan(sp).subscribe();
+    });
+
     this.setPlans = this.setPlans.filter(sp => sp.id != setPlanId);
     this.setPlanService.deleteSetPlan(setPlanId).subscribe();
   }

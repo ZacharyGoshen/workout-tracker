@@ -1,7 +1,18 @@
 <div>
-    <div *ngIf="exercise">{{ exercise.name }}</div>
-    <div>Set {{ setPlan.order }}</div>
-    <div>Reps: {{ setPlan.reps }}</div>
-    <div>Rest Time: {{ setPlan.restTime }}</div>
+    <span>Exercise: </span>
+    <span *ngIf="exercise">{{ exercise.name }}</span>
+    <br />
+    <span>Set: </span>
+    <input #setPlanOrder value="{{ setPlan.order }}" />
+    <button (click)="updateSetPlanOrder(setPlanOrder.value)">Update</button>
+    <br />
+    <span>Reps: </span>
+    <input #setPlanReps value="{{ setPlan.reps }}" />
+    <button (click)="updateSetPlanReps(setPlanReps.value)">Update</button>
+    <br />
+    <span>Rest Time: </span>
+    <input #setPlanRestTime value="{{ setPlan.restTime }}" />
+    <button (click)="updateSetPlanRestTime(setPlanRestTime.value)">Update</button>
+    <br />
     <button (click)="deleteSetPlan()">Delete set</button>
 </div>

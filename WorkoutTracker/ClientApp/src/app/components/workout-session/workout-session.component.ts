@@ -33,7 +33,10 @@ export class WorkoutSessionComponent implements OnInit {
 
   getSetResults(): void {
     this.setResultService.getSetResultsWithWorkoutSessionId(this.workoutSession.id)
-      .subscribe(sr => this.setResults = sr);
+      .subscribe(sr => {
+        let sortedSetResults = sr.sort((a, b) => (a.order > b.order) ? 1 : -1);
+        this.setResults = sortedSetResults;
+      });
   }
 
   dateToShortFormat(isoString: string): string {

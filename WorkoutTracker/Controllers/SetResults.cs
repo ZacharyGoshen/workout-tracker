@@ -32,6 +32,16 @@ namespace WorkoutTracker.Controllers
             return Json(setResult);
         }
 
+        [HttpPut]
+        [Route("setResults")]
+        public JsonResult Update([FromBody] SetResult setResult)
+        {
+            var context = new WorkoutTrackerContext();
+            context.Entry(context.SetResults.Find(setResult.Id)).CurrentValues.SetValues(setResult);
+            context.SaveChanges();
+            return Json(setResult);
+        }
+
         [HttpDelete]
         [Route("setResults/{id}")]
         public JsonResult Delete(int id)
