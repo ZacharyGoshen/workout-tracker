@@ -28,6 +28,16 @@ namespace WorkoutTracker.Controllers
             return Json(workoutPlan);
         }
 
+        [HttpPut]
+        [Route("workoutPlans")]
+        public JsonResult Update([FromBody] WorkoutPlan workoutPlan)
+        {
+            var context = new WorkoutTrackerContext();
+            context.Entry(context.WorkoutPlans.Find(workoutPlan.Id)).CurrentValues.SetValues(workoutPlan);
+            context.SaveChanges();
+            return Json(workoutPlan);
+        }
+
         [HttpPost]
         [Route("workoutPlans")]
         public JsonResult Create([FromBody] WorkoutPlan workoutPlan)

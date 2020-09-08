@@ -4,6 +4,7 @@ import { EventEmitter } from '@angular/core';
 import { SetPlan } from '../../models/set-plan';
 import { SetPlanService } from '../../services/set-plan.service';
 import { Exercise } from '../../models/exercise';
+import { WorkoutPlanService } from '../../services/workout-plan.service';
 
 @Component({
   selector: 'app-workout-plan',
@@ -19,10 +20,18 @@ export class WorkoutPlanComponent implements OnInit {
 
   setPlans: SetPlan[];
 
-  constructor(private setPlanService: SetPlanService) { }
+  constructor(
+    private workoutPlanService: WorkoutPlanService,
+    private setPlanService: SetPlanService
+  ) { }
 
   ngOnInit() {
     this.getSetPlans();
+  }
+
+  updateWorkoutPlanName(name: string): void {
+    this.workoutPlan.name = name;
+    this.workoutPlanService.updateWorkoutPlan(this.workoutPlan).subscribe();
   }
 
   deleteWorkoutPlan(): void {

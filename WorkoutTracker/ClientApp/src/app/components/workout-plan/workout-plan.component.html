@@ -1,8 +1,11 @@
 <div>
-    <h5>{{ workoutPlan.name }}</h5>
+    <span>Workout Name: </span>
+    <input #workoutPlanName value="{{ workoutPlan.name }}"/>
+    <button (click)="updateWorkoutPlanName(workoutPlanName.value)">Update</button>
     <app-set-plan
         *ngFor="let setPlan of setPlans"
         [setPlan]="setPlan"
+        [exercises]="exercises"
         (setPlanUpdateOrder)="updateSetPlanOrder($event.setPlanId, $event.order)"
         (setPlanDelete)="deleteSetPlan($event)"
     >

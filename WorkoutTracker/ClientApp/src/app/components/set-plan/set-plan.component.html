@@ -1,6 +1,14 @@
 <div>
     <span>Exercise: </span>
-    <span *ngIf="exercise">{{ exercise.name }}</span>
+    <select #exercise>
+        <option
+            *ngFor="let exercise of exercises"
+            [selected]="exercise.id == currentExercise.id"
+        >
+            {{ exercise.name }}
+        </option>
+    </select>
+    <button (click)="updateSetPlanExerciseId(exercise.value)">Update</button>
     <br />
     <span>Set: </span>
     <input #setPlanOrder value="{{ setPlan.order }}" />

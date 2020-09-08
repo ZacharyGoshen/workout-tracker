@@ -25,8 +25,11 @@ export class WorkoutPlanService {
   }
 
   addWorkoutPlan(workoutPlan: WorkoutPlan): Observable<WorkoutPlan> {
-    console.log(workoutPlan);
     return this.http.post<WorkoutPlan>(this.workoutPlansUrl, workoutPlan, this.httpOptions);
+  }
+
+  updateWorkoutPlan(workoutPlan: WorkoutPlan): Observable<WorkoutPlan> {
+    return this.http.put<WorkoutPlan>(this.workoutPlansUrl, workoutPlan, this.httpOptions);
   }
 
   deleteWorkoutPlan(workoutPlanId: number): Observable<WorkoutPlan> {

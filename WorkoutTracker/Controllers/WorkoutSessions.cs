@@ -29,6 +29,16 @@ namespace WorkoutTracker.Controllers
             return Json(workoutSession);
         }
 
+        [HttpPut]
+        [Route("workoutSessions")]
+        public JsonResult Update([FromBody] WorkoutSession workoutSession)
+        {
+            var context = new WorkoutTrackerContext();
+            context.Entry(context.WorkoutSessions.Find(workoutSession.Id)).CurrentValues.SetValues(workoutSession);
+            context.SaveChanges();
+            return Json(workoutSession);
+        }
+
         [HttpPost]
         [Route("workoutSessions")]
         public JsonResult Create([FromBody] WorkoutSession workoutSession)

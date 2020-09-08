@@ -13,11 +13,12 @@ import { SetPlanService } from '../../services/set-plan.service';
 export class SetPlanComponent implements OnInit {
 
   @Input() setPlan: SetPlan;
+  @Input() exercises: Exercise[];
 
   @Output() setPlanDelete: EventEmitter<number> = new EventEmitter();
   @Output() setPlanUpdateOrder: EventEmitter<{ setPlanId: number, order: number }> = new EventEmitter(); 
 
-  exercise: Exercise;
+  currentExercise: Exercise;
 
   constructor(
     private exerciseService: ExerciseService,
@@ -25,7 +26,12 @@ export class SetPlanComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getExercise();
+    this.currentExercise = this.exercises.find(e => this.setPlan.exerciseId == e.id);
+  }
+
+  updateSetPlanExerciseId(exerciseName: string): void {
+    this.setPlan.exerciseId = this.exercises.find(e => e.name == exerciseName).id;
+    this.setPlanService.updateSetPlan(this.setPlan).subscribe();
   }
 
   updateSetPlanOrder(order: string): void {
@@ -44,11 +50,6 @@ export class SetPlanComponent implements OnInit {
 
   deleteSetPlan() {
     this.setPlanDelete.emit(this.setPlan.id);
-  }
-
-  getExercise(): void {
-    this.exerciseService.getExerciseById(this.setPlan.exerciseId)
-      .subscribe(e => this.exercise = e);
   }
 
 }
