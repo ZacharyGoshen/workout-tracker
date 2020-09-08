@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace WorkoutTracker.Models
@@ -10,8 +11,6 @@ namespace WorkoutTracker.Models
         [Required]
         public string Date { get; set; }
 
-        [Required]
-        public int WorkoutPlanId { get; set; }
-        public WorkoutPlan WorkoutPlan { get; set; }
+        public ICollection<SetResult> SetResults { get; set; }
     }
 }

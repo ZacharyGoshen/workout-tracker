@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { WorkoutSession } from '../../models/workout-session';
-import { WorkoutPlan } from '../../models/workout-plan';
-import { WorkoutPlanService } from '../../services/workout-plan.service';
 import { DateService } from '../../services/date.service';
 import { EventEmitter } from '@angular/core';
+import { SetResult } from '../../models/set-result';
+import { SetResultService } from '../../services/set-result.service';
 
 @Component({
   selector: 'app-workout-session',
@@ -16,25 +16,24 @@ export class WorkoutSessionComponent implements OnInit {
 
   @Output() workoutSessionDelete: EventEmitter<number> = new EventEmitter();
 
-  workoutPlan: WorkoutPlan;
+  setResults: SetResult[];
 
   constructor(
-    private workoutPlanService: WorkoutPlanService,
-    private dateService: DateService
+    private dateService: DateService,
+    private setResultService: SetResultService
   ) { }
 
   ngOnInit() {
-    this.getWorkoutPlan();
-  }
-
-  getWorkoutPlan(): void {
-    this.workoutPlanService
-      .getWorkoutPlanById(this.workoutSession.workoutPlanId)
-      .subscribe(workoutPlan => this.workoutPlan = workoutPlan);
+    this.getSetResults();
   }
 
   deleteWorkoutSession(): void {
     this.workoutSessionDelete.emit(this.workoutSession.id);
+  }
+
+  getSetResults(): void {
+    this.setResultService.getSetResultsWithWorkoutSessionId(this.workoutSession.id)
+      .subscribe(sr => this.setResults = sr);
   }
 
   dateToShortFormat(isoString: string): string {

@@ -4,11 +4,9 @@ export class WorkoutSession {
 
   id: number;
   date: string;
-  workoutPlanId: number;
 
-  constructor(date: string, workoutPlanId: number) {
+  constructor(date: string) {
     this.date = date;
-    this.workoutPlanId = workoutPlanId;
   }
 
 }

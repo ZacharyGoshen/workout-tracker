@@ -9,5 +9,6 @@ namespace WorkoutTracker.Models
         public string Name { get; set; }
 
         public ICollection<SetPlan> SetPlans { get; set; }
+        public ICollection<SetResult> SetResults { get; set; }
     }
 }

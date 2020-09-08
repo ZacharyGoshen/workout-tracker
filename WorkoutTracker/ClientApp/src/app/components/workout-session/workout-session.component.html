@@ -1,9 +1,11 @@
-<div *ngIf="workoutPlan">
+<div>
     <div>
         {{ dateToShortFormat(workoutSession.date) }}
     </div>
-    <div>
-        {{ workoutPlan.name }}
-    </div>
+    <app-set-result
+        *ngFor="let setResult of setResults"
+        [setResult]="setResult"
+    >
+    </app-set-result>
     <button (click)="deleteWorkoutSession()">Delete workout session</button>
 </div>

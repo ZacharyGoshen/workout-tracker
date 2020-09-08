@@ -67,6 +67,30 @@
     <None Remove="obj\Debug\netcoreapp3.1\Razor\Pages\Error.cshtml.g.cs" />
     <None Remove="obj\Debug\netcoreapp3.1\Razor\Pages\_ViewImports.cshtml.g.cs" />
     <None Remove="obj\Debug\netcoreapp3.1\Razor\Pages\Error.cshtml.g.cs" />
+    <None Remove="obj\Debug\netcoreapp3.1\Razor\Pages\Error.cshtml.g.cs" />
+    <None Remove="obj\Debug\netcoreapp3.1\Razor\Pages\Error.cshtml.g.cs" />
+    <None Remove="obj\Debug\netcoreapp3.1\Razor\Pages\Error.cshtml.g.cs" />
+    <None Remove="obj\Debug\netcoreapp3.1\Razor\Pages\Error.cshtml.g.cs" />
+    <None Remove="obj\Debug\netcoreapp3.1\Razor\Pages\_ViewImports.cshtml.g.cs" />
+    <None Remove="obj\Debug\netcoreapp3.1\Razor\Pages\_ViewImports.cshtml.g.cs" />
+    <None Remove="obj\Debug\netcoreapp3.1\Razor\Pages\_ViewImports.cshtml.g.cs" />
+    <None Remove="obj\Debug\netcoreapp3.1\Razor\Pages\_ViewImports.cshtml.g.cs" />
+    <None Remove="obj\Debug\netcoreapp3.1\Razor\Pages\Error.cshtml.g.cs" />
+    <None Remove="obj\Debug\netcoreapp3.1\Razor\Pages\Error.cshtml.g.cs" />
+    <None Remove="obj\Debug\netcoreapp3.1\Razor\Pages\Error.cshtml.g.cs" />
+    <None Remove="obj\Debug\netcoreapp3.1\Razor\Pages\Error.cshtml.g.cs" />
+    <None Remove="obj\Debug\netcoreapp3.1\Razor\Pages\_ViewImports.cshtml.g.cs" />
+    <None Remove="obj\Debug\netcoreapp3.1\Razor\Pages\_ViewImports.cshtml.g.cs" />
+    <None Remove="obj\Debug\netcoreapp3.1\Razor\Pages\_ViewImports.cshtml.g.cs" />
+    <None Remove="obj\Debug\netcoreapp3.1\Razor\Pages\_ViewImports.cshtml.g.cs" />
+    <None Remove="obj\Debug\netcoreapp3.1\Razor\Pages\Error.cshtml.g.cs" />
+    <None Remove="obj\Debug\netcoreapp3.1\Razor\Pages\Error.cshtml.g.cs" />
+    <None Remove="obj\Debug\netcoreapp3.1\Razor\Pages\Error.cshtml.g.cs" />
+    <None Remove="obj\Debug\netcoreapp3.1\Razor\Pages\Error.cshtml.g.cs" />
+    <None Remove="obj\Debug\netcoreapp3.1\Razor\Pages\_ViewImports.cshtml.g.cs" />
+    <None Remove="obj\Debug\netcoreapp3.1\Razor\Pages\_ViewImports.cshtml.g.cs" />
+    <None Remove="obj\Debug\netcoreapp3.1\Razor\Pages\_ViewImports.cshtml.g.cs" />
+    <None Remove="obj\Debug\netcoreapp3.1\Razor\Pages\_ViewImports.cshtml.g.cs" />
   </ItemGroup>
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
     <!-- Ensure Node.js is installed -->
