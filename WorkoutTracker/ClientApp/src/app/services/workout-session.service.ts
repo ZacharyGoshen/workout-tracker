@@ -24,6 +24,10 @@ export class WorkoutSessionService {
     return this.http.post<WorkoutSession>(this.workoutSessionsUrl, workoutSession, this.httpOptions);
   }
 
+  updateWorkoutSession(workoutSession: WorkoutSession): Observable<WorkoutSession> {
+    return this.http.put<WorkoutSession>(this.workoutSessionsUrl, workoutSession, this.httpOptions);
+  }
+
   deleteWorkoutSession(workoutSessionId: number): Observable<WorkoutSession> {
     let url = `${this.workoutSessionsUrl}/${workoutSessionId}`;
     return this.http.delete<WorkoutSession>(url);

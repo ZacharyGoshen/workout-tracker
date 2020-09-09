@@ -23,4 +23,12 @@ export class SetResultService {
   addSetResult(setResult: SetResult): Observable<SetResult> {
     return this.http.post<SetResult>(this.setResultsUrl, setResult, this.httpOptions);
   }
+
+  updateSetResult(setResult: SetResult): Observable<SetResult> {
+    return this.http.put<SetResult>(this.setResultsUrl, setResult, this.httpOptions);
+  }
+
+  deleteSetResult(setResultId: number): Observable<SetResult> {
+    return this.http.delete<SetResult>(`${this.setResultsUrl}/${setResultId}`);
+  }
 }

@@ -3,6 +3,7 @@
     <app-workout-session
         *ngFor="let workoutSession of workoutSessions"
         [workoutSession]="workoutSession"
+        [exercises]="exercises"
         (workoutSessionDelete)="deleteWorkoutSession($event)"
     >
     </app-workout-session>

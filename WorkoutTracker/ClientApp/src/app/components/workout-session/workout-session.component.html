@@ -1,10 +1,13 @@
 <div>
-    <div>
-        {{ dateToShortFormat(workoutSession.date) }}
-    </div>
+    <span>Date: </span>
+    <input #workoutSessionDate [value]="workoutSession.date" type="date"/>
+    <button (click)="updateWorkoutSessionDate(workoutSessionDate.value)">Update</button>
     <app-set-result
         *ngFor="let setResult of setResults"
         [setResult]="setResult"
+        [exercises]="exercises"
+        (setResultUpdateOrder)="updateSetResultOrder($event.setResultId, $event.order)"
+        (setResultDelete)="deleteSetResult($event)"
     >
     </app-set-result>
     <button (click)="deleteWorkoutSession()">Delete workout session</button>

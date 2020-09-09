@@ -1,7 +1,28 @@
 <div>
-    <div *ngIf="exercise">{{ exercise.name }}</div>
-    <div>Set Number: {{ setResult.order }}</div>
-    <div>Weight: {{ setResult.weight }}</div>
-    <div>Reps: {{ setResult.reps }}</div>
-    <div>Rest Time: {{ setResult.restTime }}</div>
+    <span>Exercise: </span>
+    <select #exerciseName>
+        <option *ngFor="let exercise of exercises"
+                [selected]="exercise.id == currentExercise.id">
+            {{ exercise.name }}
+        </option>
+    </select>
+    <button (click)="updateSetResultExerciseId(exerciseName.value)">Update</button>
+    <br />
+    <span>Set: </span>
+    <input #setResultOrder value="{{ setResult.order }}"/>
+    <button (click)="updateSetResultOrder(setResultOrder.value)">Update</button>
+    <br />
+    <span>Weight: </span>
+    <input #setResultWeight value="{{ setResult.weight }}"/>
+    <button (click)="updateSetResultWeight(setResultWeight.value)">Update</button>
+    <br />
+    <span>Reps: </span>
+    <input #setResultReps value="{{ setResult.reps }}"/>
+    <button (click)="updateSetResultReps(setResultReps.value)">Update</button>
+    <br />
+    <span>Rest Time: </span>
+    <input #setResultRestTime value="{{ setResult.restTime }}"/>
+    <button (click)="updateSetResultRestTime(setResultRestTime.value)">Update</button>
+    <br />
+    <button (click)="deleteSetResult()">Delete set</button>
 </div>

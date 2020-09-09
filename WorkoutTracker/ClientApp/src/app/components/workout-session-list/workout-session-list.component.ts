@@ -8,6 +8,8 @@ import { SetPlanService } from '../../services/set-plan.service';
 import { SetResult } from '../../models/set-result';
 import { forkJoin } from 'rxjs';
 import { WorkoutSessionComponent } from '../workout-session/workout-session.component';
+import { Exercise } from '../../models/exercise';
+import { ExerciseService } from '../../services/exercise.service';
 
 @Component({
   selector: 'app-workout-session-list',
@@ -18,10 +20,12 @@ export class WorkoutSessionListComponent implements OnInit {
 
   workoutSessions: WorkoutSession[];
   workoutPlans: WorkoutPlan[];
+  exercises: Exercise[];
 
   constructor(
     private workoutSessionService: WorkoutSessionService,
     private workoutPlanService: WorkoutPlanService,
+    private exerciseService: ExerciseService,
     private setPlanService: SetPlanService,
     private setResultService: SetResultService
   ) { }
@@ -29,6 +33,7 @@ export class WorkoutSessionListComponent implements OnInit {
   ngOnInit() {
     this.getWorkoutSessions();
     this.getWorkoutPlans();
+    this.getExercises();
   }
 
   getWorkoutSessions(): void {
@@ -60,6 +65,11 @@ export class WorkoutSessionListComponent implements OnInit {
   getWorkoutPlans(): void {
     this.workoutPlanService.getWorkoutPlans()
       .subscribe(workoutPlans => this.workoutPlans = workoutPlans);
+  }
+
+  getExercises(): void {
+    this.exerciseService.getExercises()
+      .subscribe(e => this.exercises = e);
   }
 
 }
