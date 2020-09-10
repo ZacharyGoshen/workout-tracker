@@ -19,6 +19,7 @@ export class WorkoutPlanComponent implements OnInit {
   @Output() workoutPlanDelete: EventEmitter<number> = new EventEmitter();
 
   setPlans: SetPlan[];
+  isCollapsed = true;
 
   constructor(
     private workoutPlanService: WorkoutPlanService,

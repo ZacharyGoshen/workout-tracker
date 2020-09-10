@@ -1,5 +1,32 @@
-<div>
-    <a href="app/workout-plans">Workout Plans</a>
-    <a href="app/workout-sessions">Workout Sessions</a>
-    <a href="app/exercises">Exercises</a>
-</div>
+<nav class="bg-dark fixed-top navbar navbar-dark navbar-expand-lg">
+    <a class="navbar-brand">Workout Tracker</a>
+    <button
+        [attr.aria-expanded]="!isCollapsed"
+        (click)="isCollapsed = !isCollapsed"
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarContent"
+        aria-controls="navbarContent"
+        aria-label="Toggle navigation"
+    >
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div
+        [ngbCollapse]="isCollapsed"
+        id="navbarContent"
+        class="collapse navbar-collapse"
+    >
+        <ul class="mr-auto navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="app/workout-plans">Workout Plans</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="app/workout-sessions">Workout Sessions</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="app/exercises">Exercises</a>
+            </li>
+        </ul>
+    </div>
+</nav>

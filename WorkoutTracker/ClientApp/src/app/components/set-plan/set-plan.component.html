@@ -1,26 +1,26 @@
-<div>
-    <span>Exercise: </span>
-    <select #exerciseName>
-        <option
-            *ngFor="let exercise of exercises"
-            [selected]="exercise.id == currentExercise.id"
-        >
+<td>
+    <input #setPlanOrder (change)="updateSetPlanOrder(setPlanOrder.value)" value="{{ setPlan.order }}" class="form-control" />
+</td>
+<td>
+    <select #exerciseName (change)="updateSetPlanExerciseId(exerciseName.value)" class="form-control">
+        <option *ngFor="let exercise of exercises"
+                [selected]="exercise.id == currentExercise.id">
             {{ exercise.name }}
         </option>
     </select>
-    <button (click)="updateSetPlanExerciseId(exerciseName.value)">Update</button>
-    <br />
-    <span>Set: </span>
-    <input #setPlanOrder value="{{ setPlan.order }}" />
-    <button (click)="updateSetPlanOrder(setPlanOrder.value)">Update</button>
-    <br />
-    <span>Reps: </span>
-    <input #setPlanReps value="{{ setPlan.reps }}" />
-    <button (click)="updateSetPlanReps(setPlanReps.value)">Update</button>
-    <br />
-    <span>Rest Time: </span>
-    <input #setPlanRestTime value="{{ setPlan.restTime }}" />
-    <button (click)="updateSetPlanRestTime(setPlanRestTime.value)">Update</button>
-    <br />
-    <button (click)="deleteSetPlan()">Delete set</button>
-</div>
+</td>
+<td>
+    <input #setPlanReps (change)="updateSetPlanReps(setPlanReps.value)" value="{{ setPlan.reps }}" class="form-control" />
+</td>
+<td>
+    <input #setPlanRestTime (change)="updateSetPlanRestTime(setPlanRestTime.value)" value="{{ setPlan.restTime }}" class="form-control" />
+</td>
+<td>
+    <button
+        (click)="deleteSetPlan()"
+        class="btn btn-dark text-nowrap"
+    >
+    Delete set
+    </button>
+</td>
+

@@ -6,7 +6,7 @@ import { EventEmitter } from '@angular/core';
 import { SetPlanService } from '../../services/set-plan.service';
 
 @Component({
-  selector: 'app-set-plan',
+  selector: '[app-set-plan]',
   templateUrl: './set-plan.component.html',
   styleUrls: ['./set-plan.component.css']
 })

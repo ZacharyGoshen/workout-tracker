@@ -28,6 +28,10 @@ export class ExerciseService {
     return this.http.post<Exercise>(this.exercisesUrl, exercise, this.httpOptions);
   }
 
+  updateExercise(exercise: Exercise): Observable<Exercise> {
+    return this.http.put<Exercise>(this.exercisesUrl, exercise, this.httpOptions);
+  }
+
   deleteExercise(exerciseId: number): Observable<Exercise> {
     let url = `${this.exercisesUrl}/${exerciseId}`;
     return this.http.delete<Exercise>(url);

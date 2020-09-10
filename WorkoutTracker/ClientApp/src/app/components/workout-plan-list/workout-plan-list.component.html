@@ -1,5 +1,5 @@
 <div>
-    <h2>My Workout Plans</h2>
+    <h2>Workout Plans</h2>
     <app-workout-plan
         *ngFor="let workoutPlan of workoutPlans"
         [exercises]="exercises"
@@ -7,11 +7,13 @@
         (workoutPlanDelete)="deleteWorkoutPlan($event)"
     >
     </app-workout-plan>
-    <h4>Add new workout plan</h4>
-    <span>Name: </span>
-    <input #workoutPlanName/>
-    <br />
-    <button (click)="addWorkoutPlan(workoutPlanName.value)">
-        Add workout plan
-    </button>
+    <h4>Create new workout plan</h4>
+    <div class="d-flex flew-row">
+        <div class="input-group input-group-lg mr-2">
+            <input #workoutPlanName class="form-control" placeholder="Name" />
+        </div>
+        <button (click)="addWorkoutPlan(workoutPlanName.value)" class="btn btn-dark text-nowrap">
+            Add workout plan
+        </button>
+    </div>
 </div>

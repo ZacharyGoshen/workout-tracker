@@ -1,4 +1,7 @@
 <div>
-    <div>{{ exercise.name }}</div>
+    <span>Name: </span>
+    <input #name value="{{ exercise.name }}"/>
+    <button (click)="updateExerciseName(name.value)">Update</button>
+    <br />
     <button (click)="deleteExercise()">Delete exercise</button>
 </div>

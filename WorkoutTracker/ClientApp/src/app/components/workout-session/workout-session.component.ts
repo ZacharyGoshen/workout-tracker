@@ -6,6 +6,7 @@ import { SetResult } from '../../models/set-result';
 import { SetResultService } from '../../services/set-result.service';
 import { WorkoutSessionService } from '../../services/workout-session.service';
 import { Exercise } from '../../models/exercise';
+import { SetPlan } from '../../models/set-plan';
 
 @Component({
   selector: 'app-workout-session',
@@ -46,6 +47,20 @@ export class WorkoutSessionComponent implements OnInit {
         let sortedSetResults = sr.sort((a, b) => (a.order > b.order) ? 1 : -1);
         this.setResults = sortedSetResults;
       });
+  }
+
+  addSetResult(exerciseName: string, weight: string, reps: string, restTime: string): void {
+    let exercise = this.exercises.find(e => e.name == exerciseName);
+    let order = this.setResults.length + 1;
+    let setResult = new SetResult(order, parseInt(weight), parseInt(reps),
+      parseInt(restTime), this.workoutSession.id, exercise.id);
+    this.setResultService.addSetResult(setResult).subscribe(sr => this.setResults.push(sr));
+  }
+
+  addSetResultFromSetPlan(setPlan: SetPlan): void {
+    let setResult = new SetResult(setPlan.order, 0, setPlan.reps,
+      setPlan.restTime, this.workoutSession.id, setPlan.exerciseId);
+    this.setResultService.addSetResult(setResult).subscribe(sr => this.setResults.push(sr));
   }
 
   updateSetResultOrder(setResultId: number, order: number): void {

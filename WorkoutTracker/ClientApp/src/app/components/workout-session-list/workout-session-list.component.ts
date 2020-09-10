@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { WorkoutSessionService } from '../../services/workout-session.service';
 import { WorkoutSession } from '../../models/workout-session';
 import { WorkoutPlan } from '../../models/workout-plan';
@@ -17,6 +17,8 @@ import { ExerciseService } from '../../services/exercise.service';
   styleUrls: ['./workout-session-list.component.css']
 })
 export class WorkoutSessionListComponent implements OnInit {
+
+  @ViewChildren(WorkoutSessionComponent) workoutSessionComponents: QueryList<WorkoutSessionComponent>;
 
   workoutSessions: WorkoutSession[];
   workoutPlans: WorkoutPlan[];
@@ -44,15 +46,15 @@ export class WorkoutSessionListComponent implements OnInit {
   addWorkoutSession(workoutSessionDate: string, workoutPlanName: string): void {
     let workoutPlan = this.workoutPlans.find(wp => wp.name == workoutPlanName);
 
-    let workoutSession = this.workoutSessionService.addWorkoutSession(new WorkoutSession(workoutSessionDate));
-    let setPlans = this.setPlanService.getSetPlansWithWorkoutPlanId(workoutPlan.id);
-
-    forkJoin([workoutSession, setPlans]).subscribe(results => {
-      results[1].forEach(setPlan => {
-        let setResult = new SetResult(setPlan.order, 0, setPlan.reps, setPlan.restTime, results[0].id, setPlan.exerciseId);
-        this.setResultService.addSetResult(setResult).subscribe();
+    this.workoutSessionService.addWorkoutSession(new WorkoutSession(workoutSessionDate))
+      .subscribe(ws => {
+        this.workoutSessions.push(ws);
+        this.setPlanService.getSetPlansWithWorkoutPlanId(workoutPlan.id)
+          .subscribe(setPlans => {
+            let workoutSessionComponent = this.workoutSessionComponents.last;
+            setPlans.forEach(setPlan => workoutSessionComponent.addSetResultFromSetPlan(setPlan));
+          })
       });
-    });
   }
 
   deleteWorkoutSession(workoutSessionId: number): void {

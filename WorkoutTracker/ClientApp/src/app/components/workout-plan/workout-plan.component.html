@@ -1,30 +1,100 @@
 <div>
-    <span>Workout Name: </span>
-    <input #workoutPlanName value="{{ workoutPlan.name }}"/>
-    <button (click)="updateWorkoutPlanName(workoutPlanName.value)">Update</button>
-    <app-set-plan
-        *ngFor="let setPlan of setPlans"
-        [setPlan]="setPlan"
-        [exercises]="exercises"
-        (setPlanUpdateOrder)="updateSetPlanOrder($event.setPlanId, $event.order)"
-        (setPlanDelete)="deleteSetPlan($event)"
+    <div class="d-flex flex-row mb-2">
+        <div class="input-group input-group-lg mr-2">
+            <input
+                #workoutPlanName
+                (change)="updateWorkoutPlanName(workoutPlanName.value)"
+                value="{{ workoutPlan.name }}"
+                class="form-control"
+            />
+        </div>
+        <button
+            [attr.aria-expanded]="!isCollapsed"
+            (click)="isCollapsed = !isCollapsed"
+            class="btn btn-dark mr-2"
+            type="button"
+            data-toggle="collapse"
+            data-target="#workoutPlan"
+            aria-controls="workoutPlan"
+        >
+            <svg
+                *ngIf="isCollapsed"
+                width="1em"
+                height="1em"
+                viewBox="0 0 16 16"
+                class="bi bi-caret-down-fill"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg">
+                <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+            </svg>
+            <svg
+                *ngIf="!isCollapsed"
+                width="1em"
+                height="1em"
+                viewBox="0 0 16 16"
+                class="bi bi-caret-up-fill"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <path d="M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />
+            </svg>
+        </button>
+        <button (click)="deleteWorkoutPlan()" class="btn btn-dark text-nowrap">Delete workout plan</button>
+    </div>
+    <div
+        [ngbCollapse]="isCollapsed"
+        id="workoutPlan" class="collapse
+        ml-1"
     >
-    </app-set-plan>
-    <h5>Add set</h5>
-    <span>Exercise: </span>
-    <select #exerciseName>
-        <option *ngFor="let exercise of exercises">
-            {{ exercise.name }}
-        </option>
-    </select>
-    <br />
-    <span>Reps: </span>
-    <input #reps/>
-    <br />
-    <span>Rest Time: </span>
-    <input #restTime/>
-    <br />
-    <button (click)="addSetPlan(exerciseName.value, reps.value, restTime.value)">Add set</button>
-    <br />
-    <button (click)="deleteWorkoutPlan()">Delete workout plan</button>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Set #</th>
+                    <th scope="col">Exercise</th>
+                    <th scope="col">Reps</th>
+                    <th scope="col">Rest Time</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr
+                    app-set-plan
+                    *ngFor="let setPlan of setPlans"
+                    [setPlan]="setPlan"
+                    [exercises]="exercises"
+                    (setPlanUpdateOrder)="updateSetPlanOrder($event.setPlanId, $event.order)"
+                    (setPlanDelete)="deleteSetPlan($event)">
+                </tr>
+                <tr>
+                    <td class="align-middle">
+                        <div *ngIf="setPlans" class="pl-2">
+                            {{ setPlans.length + 1 }}
+                        </div>
+                    </td>
+                    <td>
+                        <select #exerciseName class="form-control">
+                            <option disabled selected> -- Exercise -- </option>
+                            <option *ngFor="let exercise of exercises">
+                                {{ exercise.name }}
+                            </option>
+                        </select>
+                    </td>
+                    <td>
+                        <input #reps class="form-control" placeholder="Reps" />
+                    </td>
+                    <td>
+                        <input #restTime class="form-control" placeholder="Rest Time" />
+                    </td>
+                    <td>
+                        <button
+                            (click)="addSetPlan(exerciseName.value, reps.value, restTime.value)"
+                            class="btn btn-dark text-nowrap"
+                        >
+                            Add set
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

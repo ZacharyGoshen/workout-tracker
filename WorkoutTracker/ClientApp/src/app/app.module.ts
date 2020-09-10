@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { WorkoutSessionListComponent } from './components/workout-session-list/workout-session-list.component';
@@ -37,7 +38,8 @@ import { SetResultComponent } from './components/set-result/set-result.component
       { path: 'app/exercises', component: ExerciseListComponent, pathMatch: 'full' },
       { path: 'app/workout-plans', component: WorkoutPlanListComponent, pathMatch: 'full' },
       { path: 'app/workout-sessions', component: WorkoutSessionListComponent, pathMatch: 'full' },
-    ])
+    ]),
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

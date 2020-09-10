@@ -1,14 +1,31 @@
 <div>
     <span>Date: </span>
-    <input #workoutSessionDate [value]="workoutSession.date" type="date"/>
+    <input #workoutSessionDate [value]="workoutSession.date" type="date" />
     <button (click)="updateWorkoutSessionDate(workoutSessionDate.value)">Update</button>
-    <app-set-result
-        *ngFor="let setResult of setResults"
-        [setResult]="setResult"
-        [exercises]="exercises"
-        (setResultUpdateOrder)="updateSetResultOrder($event.setResultId, $event.order)"
-        (setResultDelete)="deleteSetResult($event)"
-    >
+    <app-set-result *ngFor="let setResult of setResults"
+                    [setResult]="setResult"
+                    [exercises]="exercises"
+                    (setResultUpdateOrder)="updateSetResultOrder($event.setResultId, $event.order)"
+                    (setResultDelete)="deleteSetResult($event)">
     </app-set-result>
+    <h5>Add set</h5>
+    <span>Exercise: </span>
+    <select #exerciseName>
+        <option *ngFor="let exercise of exercises">
+            {{ exercise.name }}
+        </option>
+    </select>
+    <br />
+    <span>Weight: </span>
+    <input #weight />
+    <br />
+    <span>Reps: </span>
+    <input #reps />
+    <br />
+    <span>Rest Time: </span>
+    <input #restTime />
+    <br />
+    <button (click)="addSetResult(exerciseName.value, weight.value, reps.value, restTime.value)">Add set</button>
+    <br />
     <button (click)="deleteWorkoutSession()">Delete workout session</button>
 </div>
