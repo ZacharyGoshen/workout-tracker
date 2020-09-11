@@ -1,11 +1,10 @@
 ﻿<Properties StartupConfiguration="{C51E2E51-15C3-45FE-B9A6-6106F1B57330}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="WorkoutTracker/ClientApp/src/app/components/navigation-bar/navigation-bar.component.html">
+  <MonoDevelop.Ide.Workbench ActiveDocument="WorkoutTracker/ClientApp/src/app/components/set-plan/set-plan.component.html">
     <Files>
-      <File FileName="WorkoutTracker/ClientApp/src/app/components/workout-plan/workout-plan.component.html" Line="49" Column="40" />
-      <File FileName="WorkoutTracker/ClientApp/src/app/components/workout-plan-list/workout-plan-list.component.html" Line="20" Column="1" />
-      <File FileName="WorkoutTracker/ClientApp/src/app/components/set-plan/set-plan.component.html" Line="21" Column="28" />
-      <File FileName="WorkoutTracker/ClientApp/src/app/components/navigation-bar/navigation-bar.component.ts" Line="1" Column="1" />
-      <File FileName="WorkoutTracker/ClientApp/src/app/components/navigation-bar/navigation-bar.component.html" Line="2" Column="38" />
+      <File FileName="WorkoutTracker/ClientApp/src/app/components/workout-plan/workout-plan.component.ts" Line="136" Column="37" />
+      <File FileName="WorkoutTracker/ClientApp/src/app/components/workout-plan/workout-plan.component.html" Line="104" Column="129" />
+      <File FileName="WorkoutTracker/ClientApp/src/app/components/set-plan/set-plan.component.ts" Line="1" Column="1" />
+      <File FileName="WorkoutTracker/ClientApp/src/app/components/set-plan/set-plan.component.html" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -16,16 +15,23 @@
                 <Node name="src" expanded="True">
                   <Node name="app" expanded="True">
                     <Node name="components" expanded="True">
-                      <Node name="navigation-bar" expanded="True">
-                        <Node name="navigation-bar.component.html" selected="True" />
+                      <Node name="exercise" expanded="True" />
+                      <Node name="exercise-list" expanded="True" />
+                      <Node name="exercise-set-result" expanded="True" />
+                      <Node name="set-plan" expanded="True">
+                        <Node name="set-plan.component.html" selected="True" />
                       </Node>
-                      <Node name="set-plan" expanded="True" />
                       <Node name="workout-plan" expanded="True" />
                       <Node name="workout-plan-list" expanded="True" />
+                      <Node name="workout-session" expanded="True" />
                     </Node>
+                    <Node name="models" expanded="True" />
+                    <Node name="services" expanded="True" />
                   </Node>
                 </Node>
               </Node>
+              <Node name="Controllers" expanded="True" />
+              <Node name="Models" expanded="True" />
             </Node>
           </Node>
         </State>

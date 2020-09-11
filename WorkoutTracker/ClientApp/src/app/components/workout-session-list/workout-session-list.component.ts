@@ -46,7 +46,7 @@ export class WorkoutSessionListComponent implements OnInit {
   addWorkoutSession(workoutSessionDate: string, workoutPlanName: string): void {
     let workoutPlan = this.workoutPlans.find(wp => wp.name == workoutPlanName);
 
-    this.workoutSessionService.addWorkoutSession(new WorkoutSession(workoutSessionDate))
+    this.workoutSessionService.addWorkoutSession(new WorkoutSession(workoutPlanName, workoutSessionDate))
       .subscribe(ws => {
         this.workoutSessions.push(ws);
         this.setPlanService.getSetPlansWithWorkoutPlanId(workoutPlan.id)

@@ -20,6 +20,10 @@ export class SetResultService {
     return this.http.get<SetResult[]>(`${this.setResultsUrl}?workoutSessionId=${workoutSessionId}`);
   }
 
+  getSetResultsWithExerciseId(exerciseId: number): Observable<SetResult[]> {
+    return this.http.get<SetResult[]>(`${this.setResultsUrl}?exerciseId=${exerciseId}`);
+  }
+
   addSetResult(setResult: SetResult): Observable<SetResult> {
     return this.http.post<SetResult>(this.setResultsUrl, setResult, this.httpOptions);
   }

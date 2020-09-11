@@ -4,6 +4,7 @@ import { Exercise } from '../../models/exercise';
 import { ExerciseService } from '../../services/exercise.service';
 import { EventEmitter } from '@angular/core';
 import { SetPlanService } from '../../services/set-plan.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: '[app-set-plan]',
@@ -16,7 +17,10 @@ export class SetPlanComponent implements OnInit {
   @Input() exercises: Exercise[];
 
   @Output() setPlanDelete: EventEmitter<number> = new EventEmitter();
-  @Output() setPlanUpdateOrder: EventEmitter<{ setPlanId: number, order: number }> = new EventEmitter(); 
+  @Output() setPlanUpdateOrder: EventEmitter<{ setPlanId: number, order: number }> = new EventEmitter();
+
+  repsTargetLow = new FormControl();
+  repsTargetHigh = new FormControl();
 
   currentExercise: Exercise;
 
@@ -27,6 +31,7 @@ export class SetPlanComponent implements OnInit {
 
   ngOnInit() {
     this.currentExercise = this.exercises.find(e => this.setPlan.exerciseId == e.id);
+    this.toggleToFailure(this.setPlan.toFailure);
   }
 
   updateSetPlanExerciseId(exerciseName: string): void {
@@ -38,8 +43,17 @@ export class SetPlanComponent implements OnInit {
     this.setPlanUpdateOrder.emit({ setPlanId: this.setPlan.id, order: parseInt(order) });
   }
 
-  updateSetPlanReps(reps: string): void {
-    this.setPlan.reps = parseInt(reps);
+  updateSetPlanRepsTargetLow(repsTargetLow: string): void {
+    this.setPlan.repsTargetLow = parseInt(repsTargetLow);
+    if (this.setPlan.repsTargetHigh < this.setPlan.repsTargetLow) {
+      this.setPlan.repsTargetHigh = this.setPlan.repsTargetLow;
+    }
+    this.setPlanService.updateSetPlan(this.setPlan).subscribe();
+  }
+
+  updateSetPlanToFailure(toFailure: boolean): void {
+    this.setPlan.toFailure = toFailure;
+    this.toggleToFailure(toFailure);
     this.setPlanService.updateSetPlan(this.setPlan).subscribe();
   }
 
@@ -50,6 +64,16 @@ export class SetPlanComponent implements OnInit {
 
   deleteSetPlan() {
     this.setPlanDelete.emit(this.setPlan.id);
+  }
+
+  toggleToFailure(toFailure: boolean) {
+    if (toFailure) {
+      this.repsTargetLow.disable();
+      this.repsTargetHigh.disable();
+    } else {
+      this.repsTargetLow.enable();
+      this.repsTargetHigh.enable();
+    }
   }
 
 }

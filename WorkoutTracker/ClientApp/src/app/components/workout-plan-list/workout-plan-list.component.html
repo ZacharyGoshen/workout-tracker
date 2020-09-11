@@ -9,9 +9,7 @@
     </app-workout-plan>
     <h4>Create new workout plan</h4>
     <div class="d-flex flew-row">
-        <div class="input-group input-group-lg mr-2">
-            <input #workoutPlanName class="form-control" placeholder="Name" />
-        </div>
+        <input #workoutPlanName class="form-control mr-2" placeholder="Name" />
         <button (click)="addWorkoutPlan(workoutPlanName.value)" class="btn btn-dark text-nowrap">
             Add workout plan
         </button>

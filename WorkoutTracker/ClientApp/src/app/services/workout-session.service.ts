@@ -16,6 +16,10 @@ export class WorkoutSessionService {
 
   constructor(private http: HttpClient) { }
 
+  getWorkoutSession(id: number): Observable<WorkoutSession> {
+    return this.http.get<WorkoutSession>(`${this.workoutSessionsUrl}/${id}`);
+  }
+
   getWorkoutSessions(): Observable<WorkoutSession[]> {
     return this.http.get<WorkoutSession[]>(this.workoutSessionsUrl);
   }

@@ -1,12 +1,12 @@
 <div>
-    <h2>My Exercises</h2>
-    <app-exercise
-        *ngFor="let exercise of exercises"
-        [exercise]="exercise"
-        (exerciseDelete)="deleteExercise($event)"
-    >
+    <h2>Exercises</h2>
+    <app-exercise *ngFor="let exercise of exercises"
+                  [exercise]="exercise"
+                  (exerciseDelete)="deleteExercise($event)">
     </app-exercise>
-    <h4>Add new exercise</h4>
-    <input #exerciseName/>
-    <button (click)="addExercise(exerciseName.value)">Add exercise</button>
+    <h4>Create new exercise</h4>
+    <div class="d-flex flew-row">
+        <input #exerciseName class="form-control mr-2" placeholder="Name" />
+        <button (click)="addExercise(exerciseName.value)" class="btn btn-dark text-nowrap">Add exercise</button>
+    </div>
 </div>

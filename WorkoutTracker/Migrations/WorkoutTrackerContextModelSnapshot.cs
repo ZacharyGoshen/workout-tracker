@@ -22,6 +22,9 @@ namespace WorkoutTracker.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
                     b.Property<string>("Name")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
@@ -39,14 +42,23 @@ namespace WorkoutTracker.Migrations
                     b.Property<int>("ExerciseId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Notes")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
                     b.Property<int>("Order")
                         .HasColumnType("int");
 
-                    b.Property<int>("Reps")
+                    b.Property<int>("RepsTargetHigh")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RepsTargetLow")
                         .HasColumnType("int");
 
                     b.Property<int>("RestTime")
                         .HasColumnType("int");
+
+                    b.Property<bool>("ToFailure")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<int>("WorkoutPlanId")
                         .HasColumnType("int");
@@ -69,14 +81,26 @@ namespace WorkoutTracker.Migrations
                     b.Property<int>("ExerciseId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Notes")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
                     b.Property<int>("Order")
                         .HasColumnType("int");
 
-                    b.Property<int>("Reps")
+                    b.Property<int>("RepsActual")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RepsTargetHigh")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RepsTargetLow")
                         .HasColumnType("int");
 
                     b.Property<int>("RestTime")
                         .HasColumnType("int");
+
+                    b.Property<bool>("ToFailure")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<int>("Weight")
                         .HasColumnType("int");
@@ -115,6 +139,9 @@ namespace WorkoutTracker.Migrations
 
                     b.Property<string>("Date")
                         .IsRequired()
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Name")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("Id");

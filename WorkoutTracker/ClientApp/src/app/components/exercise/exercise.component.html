@@ -1,7 +1,89 @@
 <div>
-    <span>Name: </span>
-    <input #name value="{{ exercise.name }}"/>
-    <button (click)="updateExerciseName(name.value)">Update</button>
-    <br />
-    <button (click)="deleteExercise()">Delete exercise</button>
+    <div class="d-flex flex-row mb-2">
+        <input #name (change)="updateExerciseName(name.value)" class="form-control mr-2" value="{{ exercise.name }}" />
+        <button
+            [attr.aria-expanded]="!isCollapsed"
+            (click)="isCollapsed = !isCollapsed"
+            class="btn btn-dark mr-2"
+            type="button"
+            data-toggle="collapse"
+            data-target="#exercise"
+            aria-controls="exercise"
+        >
+            <svg
+                *ngIf="isCollapsed"
+                width="1em"
+                height="1em"
+                viewBox="0 0 16 16"
+                class="bi bi-caret-down-fill"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg">
+                <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+            </svg>
+            <svg
+                *ngIf="!isCollapsed"
+                width="1em"
+                height="1em"
+                viewBox="0 0 16 16"
+                class="bi bi-caret-up-fill"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <path d="M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />
+            </svg>
+        </button>
+        <button (click)="deleteExercise()" class="btn btn-dark text-nowrap">Delete exercise</button>
+    </div>
+    <div
+        [ngbCollapse]="isCollapsed"
+        id="exercise"
+        class="collapse ml-1"
+    >
+        <div class="align-items-center d-flex flex-row mb-2">
+            <div class="mr-2">Filter: </div>
+            <input
+                #workoutSessionNameFilter
+                (keyup)="filterSetResultsByWorkoutSessionName(workoutSessionNameFilter.value)"
+                class="form-control mr-2"
+                placeholder="Session Name"
+            />
+            <div class="input-group mr-2">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Date Start</span>
+                </div>
+                <input
+                    #dateStartFilter
+                    (change)="filterSetResultsByDateStart(dateStartFilter.value)"
+                    class="form-control"
+                    type="date"
+                />
+            </div>
+            <div class="input-group mr-2">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Date End</span>
+                </div>
+                <input
+                    #dateEndFilter
+                    (change)="filterSetResultsByDateEnd(dateEndFilter.value)"
+                    class="form-control"
+                    type="date"
+                />
+            </div>
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td>Session Name</td>
+                    <td>Date</td>
+                    <td>Set #</td>
+                    <td>Weight</td>
+                    <td>Reps</td>
+                    <td>Rest Time</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr app-exercise-set-result *ngFor="let setResult of setResults" [setResult]="setResult"></tr>
+            </tbody>
+        </table>
+    </div>
 </div>

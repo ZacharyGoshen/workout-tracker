@@ -7,6 +7,7 @@ namespace WorkoutTracker.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public string Description { get; set; }
 
         public ICollection<SetPlan> SetPlans { get; set; }
         public ICollection<SetResult> SetResults { get; set; }

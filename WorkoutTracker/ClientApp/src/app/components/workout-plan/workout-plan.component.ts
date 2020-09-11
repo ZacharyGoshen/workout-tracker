@@ -5,6 +5,7 @@ import { SetPlan } from '../../models/set-plan';
 import { SetPlanService } from '../../services/set-plan.service';
 import { Exercise } from '../../models/exercise';
 import { WorkoutPlanService } from '../../services/workout-plan.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-workout-plan',
@@ -18,8 +19,15 @@ export class WorkoutPlanComponent implements OnInit {
 
   @Output() workoutPlanDelete: EventEmitter<number> = new EventEmitter();
 
+  newSetPlanExerciseName = new FormControl(null);
+  newSetPlanRepsTargetLow = new FormControl('');
+  newSetPlanRepsTargetHigh = new FormControl('');
+  newSetPlanToFailure = new FormControl(false);
+  newSetPlanRestTime = new FormControl('');
+
   setPlans: SetPlan[];
   isCollapsed = true;
+  toFailureChecked = false;
 
   constructor(
     private workoutPlanService: WorkoutPlanService,
@@ -28,6 +36,7 @@ export class WorkoutPlanComponent implements OnInit {
 
   ngOnInit() {
     this.getSetPlans();
+    this.newSetPlanExerciseName.setValue('null');
   }
 
   updateWorkoutPlanName(name: string): void {
@@ -47,12 +56,34 @@ export class WorkoutPlanComponent implements OnInit {
       });
   }
 
-  addSetPlan(exerciseName: string, reps: string, restTime: string): void {
+  addSetPlan(exerciseName: string, repsTargetLow: string, repsTargetHigh: string, toFailure: boolean, restTime: string): void {
     let exercise = this.exercises.find(e => e.name == exerciseName);
+    if (!exercise) {
+      return;
+    }
+
     let order = this.setPlans.length + 1;
-    let setPlan = new SetPlan(order, parseInt(reps), parseInt(restTime), this.workoutPlan.id,
-      exercise.id);
-    this.setPlanService.addSetPlan(setPlan).subscribe(sp => this.setPlans.push(sp));
+
+    if (!repsTargetLow && !repsTargetHigh) {
+      repsTargetLow = '0';
+      repsTargetHigh = '0';
+    } else if (repsTargetLow && !repsTargetHigh) {
+      repsTargetHigh = repsTargetLow;
+    } else if (repsTargetHigh && !repsTargetLow) {
+      repsTargetLow = repsTargetHigh;
+    }
+
+    if (!restTime) restTime = '0';
+
+    let setPlan = new SetPlan(order, parseInt(repsTargetLow),
+      parseInt(repsTargetHigh), toFailure, parseInt(restTime),
+      this.workoutPlan.id, exercise.id);
+
+    this.setPlanService.addSetPlan(setPlan).subscribe(sp => {
+      this.setPlans.push(sp);
+      this.clearNewSetPlanForm();
+    });
+
   }
 
   updateSetPlanOrder(setPlanId: number, order: number): void {
@@ -88,5 +119,25 @@ export class WorkoutPlanComponent implements OnInit {
 
     this.setPlans = this.setPlans.filter(sp => sp.id != setPlanId);
     this.setPlanService.deleteSetPlan(setPlanId).subscribe();
+  }
+
+  clearNewSetPlanForm(): void {
+    this.newSetPlanExerciseName.setValue(null);
+    this.newSetPlanRepsTargetLow.setValue('');
+    this.newSetPlanRepsTargetHigh.setValue('');
+    this.newSetPlanRestTime.setValue('');
+  }
+
+  toggleNewSetToFailure(toFailure: boolean): void {
+    if (toFailure) {
+      this.newSetPlanRepsTargetLow.setValue('');
+      this.newSetPlanRepsTargetLow.disable();
+
+      this.newSetPlanRepsTargetHigh.setValue('');
+      this.newSetPlanRepsTargetHigh.disable();
+    } else {
+      this.newSetPlanRepsTargetLow.enable();
+      this.newSetPlanRepsTargetHigh.enable();
+    }
   }
 }

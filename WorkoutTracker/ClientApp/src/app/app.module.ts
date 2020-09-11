@@ -15,6 +15,7 @@ import { ExerciseListComponent } from './components/exercise-list/exercise-list.
 import { ExerciseComponent } from './components/exercise/exercise.component';
 import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
 import { SetResultComponent } from './components/set-result/set-result.component';
+import { ExerciseSetResultComponent } from './components/exercise-set-result/exercise-set-result.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { SetResultComponent } from './components/set-result/set-result.component
     ExerciseComponent,
     NavigationBarComponent,
     SetResultComponent,
+    ExerciseSetResultComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

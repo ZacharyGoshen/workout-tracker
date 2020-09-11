@@ -1,28 +1,23 @@
-<div>
-    <span>Exercise: </span>
-    <select #exerciseName>
+<td>
+    <input #setResultOrder (change)="updateSetResultOrder(setResultOrder.value)" value="{{ setResult.order }}" class="form-control" />
+</td>
+<td>
+    <select #exerciseName (change)="updateSetResultExerciseId(exerciseName.value)" class="form-control">
         <option *ngFor="let exercise of exercises"
                 [selected]="exercise.id == currentExercise.id">
             {{ exercise.name }}
         </option>
     </select>
-    <button (click)="updateSetResultExerciseId(exerciseName.value)">Update</button>
-    <br />
-    <span>Set: </span>
-    <input #setResultOrder value="{{ setResult.order }}"/>
-    <button (click)="updateSetResultOrder(setResultOrder.value)">Update</button>
-    <br />
-    <span>Weight: </span>
-    <input #setResultWeight value="{{ setResult.weight }}"/>
-    <button (click)="updateSetResultWeight(setResultWeight.value)">Update</button>
-    <br />
-    <span>Reps: </span>
-    <input #setResultReps value="{{ setResult.reps }}"/>
-    <button (click)="updateSetResultReps(setResultReps.value)">Update</button>
-    <br />
-    <span>Rest Time: </span>
-    <input #setResultRestTime value="{{ setResult.restTime }}"/>
-    <button (click)="updateSetResultRestTime(setResultRestTime.value)">Update</button>
-    <br />
-    <button (click)="deleteSetResult()">Delete set</button>
-</div>
+</td>
+<td>
+    <input #setResultWeight (change)="updateSetResultWeight(setResultWeight.value)" value="{{ setResult.weight }}" class="form-control" />
+</td>
+<td>
+    <input #setResultReps (change)="updateSetResultReps(setResultReps.value)" value="{{ setResult.reps }}" class="form-control" />
+</td>
+<td>
+    <input #setResultRestTime (change)="updateSetResultRestTime(setResultRestTime.value)" value="{{ setResult.restTime }}" class="form-control" />
+</td>
+<td>
+    <button (click)="deleteSetResult()" class="btn btn-dark text-nowrap">Delete set</button>
+</td>

@@ -1,0 +1,14 @@
+<td [hidden]="hidden">
+    <div *ngIf="workoutSession">
+        {{ workoutSession.name }}
+    </div>
+</td>
+<td [hidden]="hidden">
+    <div *ngIf="workoutSession">
+        {{ dateService.toShortFormat(workoutSession.date) }}
+    </div>
+</td>
+<td [hidden]="hidden">{{ setResult.order }}</td>
+<td [hidden]="hidden">{{ setResult.weight }}</td>
+<td [hidden]="hidden">{{ setResult.reps }}</td>
+<td [hidden]="hidden">{{ setResult.restTime }}</td>

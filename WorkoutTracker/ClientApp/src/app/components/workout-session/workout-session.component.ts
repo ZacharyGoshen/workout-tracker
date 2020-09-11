@@ -21,6 +21,7 @@ export class WorkoutSessionComponent implements OnInit {
   @Output() workoutSessionDelete: EventEmitter<number> = new EventEmitter();
 
   setResults: SetResult[];
+  isCollapsed = true;
 
   constructor(
     private dateService: DateService,
@@ -30,6 +31,11 @@ export class WorkoutSessionComponent implements OnInit {
 
   ngOnInit() {
     this.getSetResults();
+  }
+
+  updateWorkoutSessionName(name: string): void {
+    this.workoutSession.name = name;
+    this.workoutSessionService.updateWorkoutSession(this.workoutSession).subscribe();
   }
 
   updateWorkoutSessionDate(date: string): void {
@@ -60,7 +66,10 @@ export class WorkoutSessionComponent implements OnInit {
   addSetResultFromSetPlan(setPlan: SetPlan): void {
     let setResult = new SetResult(setPlan.order, 0, setPlan.reps,
       setPlan.restTime, this.workoutSession.id, setPlan.exerciseId);
-    this.setResultService.addSetResult(setResult).subscribe(sr => this.setResults.push(sr));
+    this.setResultService.addSetResult(setResult).subscribe(sr => {
+      this.setResults.push(sr);
+      this.setResults = this.setResults.sort((a, b) => (a.order > b.order) ? 1 : -1);
+    });
   }
 
   updateSetResultOrder(setResultId: number, order: number): void {

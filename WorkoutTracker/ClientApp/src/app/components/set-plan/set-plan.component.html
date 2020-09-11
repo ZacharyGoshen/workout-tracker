@@ -10,17 +10,39 @@
     </select>
 </td>
 <td>
-    <input #setPlanReps (change)="updateSetPlanReps(setPlanReps.value)" value="{{ setPlan.reps }}" class="form-control" />
+    <div class="align-items-center d-flex flex-row">
+        <input #setPlanRepsTargetLow [formControl]="repsTargetLow" (change)="updateSetPlanRepsTargetLow(setPlanRepsTargetLow.value)" value="{{ setPlan.repsTargetLow }}" class="form-control mr-2" />
+        <span class="mr-2">
+            <b>-</b>
+        </span>
+        <input #setPlanRepsTargetHigh [formControl]="repsTargetHigh" (change)="updateSetPlanRepsTargetHigh(setPlanRepsTargetHigh.value)" value="{{ setPlan.repsTargetHigh }}" class="form-control mr-2" />
+        <div class="form-check">
+            <input
+                #setPlanToFailure
+                [checked]="setPlan.toFailure"
+                (change)="updateSetPlanToFailure(setPlanToFailure.checked)"
+                type="checkbox" id="toFailureCheckbox"
+                class="form-check-input"
+            >
+            <label class="form-check-label text-nowrap" for="toFailureCheckbox">To Failure</label>
+        </div>
+    </div>
 </td>
 <td>
     <input #setPlanRestTime (change)="updateSetPlanRestTime(setPlanRestTime.value)" value="{{ setPlan.restTime }}" class="form-control" />
 </td>
 <td>
-    <button
-        (click)="deleteSetPlan()"
-        class="btn btn-dark text-nowrap"
-    >
-    Delete set
-    </button>
+    <div class="d-flex flex-row">
+        <button class="btn btn-dark mr-2 text-nowrap">
+            Notes
+        </button>
+        <button class="btn btn-dark mr-2 text-nowrap">
+            Copy set
+        </button>
+        <button (click)="deleteSetPlan()"
+                class="btn btn-dark text-nowrap">
+            Delete set
+        </button>
+    </div>
 </td>
 

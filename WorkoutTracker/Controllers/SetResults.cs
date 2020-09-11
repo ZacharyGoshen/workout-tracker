@@ -12,14 +12,29 @@ namespace WorkoutTracker.Controllers
     {
         [HttpGet]
         [Route("setResults")]
-        public JsonResult GetAllWithWorkoutSessionId()
+        public JsonResult Get()
         {
             var workoutSessionId = HttpContext.Request.Query["workoutSessionId"].ToString();
+            var exerciseId = HttpContext.Request.Query["exerciseId"].ToString();
 
             var context = new WorkoutTrackerContext();
-            var setResults = context.SetResults
-                .Where(sr => sr.WorkoutSessionId == Int32.Parse(workoutSessionId));
-            return Json(setResults);
+            if (workoutSessionId != "")
+            {
+                var setResults = context.SetResults
+                    .Where(sr => sr.WorkoutSessionId == Int32.Parse(workoutSessionId));
+                return Json(setResults);
+            }
+            else if (exerciseId != "")
+            {
+                var setResults = context.SetResults
+                    .Where(sr => sr.ExerciseId == Int32.Parse(exerciseId));
+                return Json(setResults);
+            }
+            else
+            {
+                var setResults = context.SetResults.ToList();
+                return Json(setResults);
+            }
         }
 
         [HttpPost]

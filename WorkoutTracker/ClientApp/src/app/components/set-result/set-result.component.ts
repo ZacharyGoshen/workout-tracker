@@ -6,7 +6,7 @@ import { SetResultService } from '../../services/set-result.service';
 import { EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'app-set-result',
+  selector: '[app-set-result]',
   templateUrl: './set-result.component.html',
   styleUrls: ['./set-result.component.css']
 })

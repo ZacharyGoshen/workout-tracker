@@ -5,8 +5,12 @@ namespace WorkoutTracker.Models
     {
         public int Id { get; set; }
         public int Order { get; set; }
+        public string Notes { get; set; }
         public int Weight { get; set; }
-        public int Reps { get; set; }
+        public int RepsActual { get; set; }
+        public int RepsTargetLow { get; set; }
+        public int RepsTargetHigh { get; set; }
+        public bool ToFailure { get; set; }
         public int RestTime { get; set; }
 
         public int WorkoutSessionId { get; set; }
