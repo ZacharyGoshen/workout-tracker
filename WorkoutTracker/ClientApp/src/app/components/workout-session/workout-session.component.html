@@ -57,7 +57,8 @@
                     <th>Set #</th>
                     <th>Exercise</th>
                     <th>Weight</th>
-                    <th>Reps</th>
+                    <th>Reps Completed</th>
+                    <th>Reps Attempted</th>
                     <th>Rest Time</th>
                     <th></th>
                 </tr>
@@ -68,6 +69,7 @@
                     *ngFor="let setResult of setResults"
                     [setResult]="setResult"
                     [exercises]="exercises"
+                    (setResultDuplicate)="duplicateSetResult($event)"
                     (setResultUpdateOrder)="updateSetResultOrder($event.setResultId, $event.order)"
                     (setResultDelete)="deleteSetResult($event)"
                 >
@@ -79,24 +81,41 @@
                         </div>
                     </td>
                     <td>
-                        <select #exerciseName class="form-control">
-                            <option disabled selected> -- Exercise -- </option>
+                        <select #exerciseName [formControl]="newSetResultExerciseName" class="form-control">
+                            <option value="null" disabled selected> -- Exercise -- </option>
                             <option *ngFor="let exercise of exercises">
                                 {{ exercise.name }}
                             </option>
                         </select>
                     </td>
                     <td>
-                        <input #weight class="form-control" placeholder="Weight"/>
+                        <input #weight [formControl]="newSetResultWeight" class="form-control" placeholder="Weight"/>
                     </td>
                     <td>
-                        <input #reps class="form-control" placeholder="Reps"/>
+                        <input #repsActual [formControl]="newSetResultRepsActual" class="form-control" placeholder="Reps Completed"/>
+                    </td>
+                    <td>
+                        <div class="align-items-center d-flex flex-row">
+                            <input #repsTargetLow [formControl]="newSetResultRepsTargetLow" class="form-control mr-2" placeholder="Rep Range Low" />
+                            <span class="mr-2">
+                                <b>-</b>
+                            </span>
+                            <input #repsTargetHigh [formControl]="newSetResultRepsTargetHigh" class="form-control mr-2" placeholder="Rep Range High" />
+                            <div class="form-check">
+                                <input #toFailure
+                                       (change)=toggleNewSetToFailure(toFailure.checked)
+                                       [formControl]="newSetResultToFailure"
+                                       class="form-check-input"
+                                       type="checkbox">
+                                <label class="form-check-label text-nowrap">To Failure</label>
+                            </div>
+                        </div>
                     </td>
                     <td>
                         <input #restTime class="form-control" placeholder="Rest Time"/>
                     </td>
                     <td>
-                        <button (click)="addSetResult(exerciseName.value, weight.value, reps.value, restTime.value)" class="btn btn-dark">Add set</button>
+                        <button (click)="addSetResult(exerciseName.value, weight.value, repsActual.value, repsTargetLow.value, repsTargetHigh.value, toFailure.checked, restTime.value)" class="btn btn-dark text-nowrap">Add set</button>
                     </td>
                 </tr>
             </tbody>

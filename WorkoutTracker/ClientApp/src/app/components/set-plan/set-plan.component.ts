@@ -18,6 +18,7 @@ export class SetPlanComponent implements OnInit {
 
   @Output() setPlanDelete: EventEmitter<number> = new EventEmitter();
   @Output() setPlanUpdateOrder: EventEmitter<{ setPlanId: number, order: number }> = new EventEmitter();
+  @Output() setPlanDuplicate: EventEmitter<SetPlan> = new EventEmitter();
 
   repsTargetLow = new FormControl();
   repsTargetHigh = new FormControl();
@@ -34,6 +35,10 @@ export class SetPlanComponent implements OnInit {
     this.toggleToFailure(this.setPlan.toFailure);
   }
 
+  duplicateSetPlan(): void {
+    this.setPlanDuplicate.emit(this.setPlan);
+  }
+
   updateSetPlanExerciseId(exerciseName: string): void {
     this.setPlan.exerciseId = this.exercises.find(e => e.name == exerciseName).id;
     this.setPlanService.updateSetPlan(this.setPlan).subscribe();
@@ -47,6 +52,14 @@ export class SetPlanComponent implements OnInit {
     this.setPlan.repsTargetLow = parseInt(repsTargetLow);
     if (this.setPlan.repsTargetHigh < this.setPlan.repsTargetLow) {
       this.setPlan.repsTargetHigh = this.setPlan.repsTargetLow;
+    }
+    this.setPlanService.updateSetPlan(this.setPlan).subscribe();
+  }
+
+  updateSetPlanRepsTargetHigh(repsTargetHigh: string): void {
+    this.setPlan.repsTargetHigh= parseInt(repsTargetHigh);
+    if (this.setPlan.repsTargetLow > this.setPlan.repsTargetHigh) {
+      this.setPlan.repsTargetLow = this.setPlan.repsTargetHigh;
     }
     this.setPlanService.updateSetPlan(this.setPlan).subscribe();
   }

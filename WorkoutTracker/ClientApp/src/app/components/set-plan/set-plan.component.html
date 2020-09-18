@@ -33,15 +33,12 @@
 </td>
 <td>
     <div class="d-flex flex-row">
-        <button class="btn btn-dark mr-2 text-nowrap">
-            Notes
-        </button>
-        <button class="btn btn-dark mr-2 text-nowrap">
-            Copy set
+        <button (click)="duplicateSetPlan()" class="btn btn-dark mr-2 text-nowrap">
+            Duplicate
         </button>
         <button (click)="deleteSetPlan()"
                 class="btn btn-dark text-nowrap">
-            Delete set
+            Delete
         </button>
     </div>
 </td>

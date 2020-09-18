@@ -13,11 +13,35 @@
     <input #setResultWeight (change)="updateSetResultWeight(setResultWeight.value)" value="{{ setResult.weight }}" class="form-control" />
 </td>
 <td>
-    <input #setResultReps (change)="updateSetResultReps(setResultReps.value)" value="{{ setResult.reps }}" class="form-control" />
+    <input #setResultRepsActual (change)="updateSetResultRepsActual(setResultRepsActual.value)" value="{{ setResult.repsActual }}" class="form-control" />
+</td>
+<td>
+    <div class="align-items-center d-flex flex-row">
+        <input #setResultRepsTargetLow [formControl]="repsTargetLow" (change)="updateSetResultRepsTargetLow(setResultRepsTargetLow.value)" value="{{ setResult.repsTargetLow }}" class="form-control mr-2" />
+        <span class="mr-2">
+            <b>-</b>
+        </span>
+        <input #setResultRepsTargetHigh [formControl]="repsTargetHigh" (change)="updateSetResultRepsTargetHigh(setResultRepsTargetHigh.value)" value="{{ setResult.repsTargetHigh }}" class="form-control mr-2" />
+        <div class="form-check">
+            <input #setResultToFailure
+                   [checked]="setResult.toFailure"
+                   (change)="updateSetResultToFailure(setResultToFailure.checked)"
+                   type="checkbox" id="toFailureCheckbox"
+                   class="form-check-input">
+            <label class="form-check-label text-nowrap" for="toFailureCheckbox">To Failure</label>
+        </div>
+    </div>
 </td>
 <td>
     <input #setResultRestTime (change)="updateSetResultRestTime(setResultRestTime.value)" value="{{ setResult.restTime }}" class="form-control" />
 </td>
 <td>
-    <button (click)="deleteSetResult()" class="btn btn-dark text-nowrap">Delete set</button>
+    <div class="d-flex flex-row">
+        <button (click)="duplicateSetResult()" class="btn btn-dark mr-2 text-nowrap">
+            Duplicate
+        </button>
+        <button (click)="deleteSetResult()" class="btn btn-dark text-nowrap">
+            Delete
+        </button>
+    </div>
 </td>

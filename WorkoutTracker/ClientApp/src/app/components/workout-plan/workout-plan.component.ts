@@ -5,7 +5,7 @@ import { SetPlan } from '../../models/set-plan';
 import { SetPlanService } from '../../services/set-plan.service';
 import { Exercise } from '../../models/exercise';
 import { WorkoutPlanService } from '../../services/workout-plan.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-workout-plan',
@@ -86,6 +86,13 @@ export class WorkoutPlanComponent implements OnInit {
 
   }
 
+  duplicateSetPlan(setPlan: SetPlan) {
+    let duplicate = { ...setPlan };
+    delete duplicate.id;
+    duplicate.order = this.setPlans.length + 1;
+    this.setPlanService.addSetPlan(duplicate).subscribe(sp => this.setPlans.push(sp));
+  }
+
   updateSetPlanOrder(setPlanId: number, order: number): void {
     let setPlan = this.setPlans.find(sp => sp.id == setPlanId);
     let setPlansToUpdate = [];
@@ -125,6 +132,7 @@ export class WorkoutPlanComponent implements OnInit {
     this.newSetPlanExerciseName.setValue(null);
     this.newSetPlanRepsTargetLow.setValue('');
     this.newSetPlanRepsTargetHigh.setValue('');
+    this.newSetPlanToFailure.setValue(false);
     this.newSetPlanRestTime.setValue('');
   }
 

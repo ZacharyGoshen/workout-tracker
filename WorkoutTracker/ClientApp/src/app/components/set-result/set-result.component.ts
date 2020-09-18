@@ -4,6 +4,7 @@ import { ExerciseService } from '../../services/exercise.service';
 import { Exercise } from '../../models/exercise';
 import { SetResultService } from '../../services/set-result.service';
 import { EventEmitter } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: '[app-set-result]',
@@ -17,6 +18,10 @@ export class SetResultComponent implements OnInit {
 
   @Output() setResultUpdateOrder: EventEmitter<{ setResultId: number, order: number }> = new EventEmitter();
   @Output() setResultDelete: EventEmitter<number> = new EventEmitter();
+  @Output() setResultDuplicate: EventEmitter<SetPlan> = new EventEmitter();
+
+  repsTargetLow = new FormControl();
+  repsTargetHigh = new FormControl();
 
   currentExercise: Exercise;
 
@@ -24,6 +29,11 @@ export class SetResultComponent implements OnInit {
 
   ngOnInit() {
     this.currentExercise = this.exercises.find(e => e.id == this.setResult.exerciseId);
+    this.toggleToFailure(this.setResult.toFailure);
+  }
+
+  duplicateSetResult(): void {
+    this.setResultDuplicate.emit(this.setResult);
   }
 
   updateSetResultExerciseId(exerciseName: string): void {
@@ -40,8 +50,30 @@ export class SetResultComponent implements OnInit {
     this.setResultService.updateSetResult(this.setResult).subscribe();
   }
 
-  updateSetResultReps(reps: string): void {
-    this.setResult.reps = parseInt(reps);
+  updateSetResultRepsActual(repsActual: string): void {
+    this.setResult.repsActual = parseInt(repsActual);
+    this.setResultService.updateSetResult(this.setResult).subscribe();
+  }
+
+  updateSetResultRepsTargetLow(repsTargetLow: string): void {
+    this.setResult.repsTargetLow = parseInt(repsTargetLow);
+    if (this.setResult.repsTargetHigh < this.setResult.repsTargetLow) {
+      this.setResult.repsTargetHigh = this.setResult.repsTargetLow;
+    }
+    this.setResultService.updateSetResult(this.setResult).subscribe();
+  }
+
+  updateSetResultRepsTargetHigh(repsTargetHigh: string): void {
+    this.setResult.repsTargetHigh = parseInt(repsTargetHigh);
+    if (this.setResult.repsTargetLow > this.setResult.repsTargetHigh) {
+      this.setResult.repsTargetLow = this.setResult.repsTargetHigh;
+    }
+    this.setResultService.updateSetResult(this.setResult).subscribe();
+  }
+
+  updateSetResultToFailure(toFailure: boolean): void {
+    this.setResult.toFailure = toFailure;
+    this.toggleToFailure(toFailure);
     this.setResultService.updateSetResult(this.setResult).subscribe();
   }
 
@@ -52,6 +84,16 @@ export class SetResultComponent implements OnInit {
 
   deleteSetResult(): void {
     this.setResultDelete.emit(this.setResult.id);
+  }
+
+  toggleToFailure(toFailure: boolean) {
+    if (toFailure) {
+      this.repsTargetLow.disable();
+      this.repsTargetHigh.disable();
+    } else {
+      this.repsTargetLow.enable();
+      this.repsTargetHigh.enable();
+    }
   }
 
 }

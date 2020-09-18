@@ -7,6 +7,7 @@ import { SetResultService } from '../../services/set-result.service';
 import { WorkoutSessionService } from '../../services/workout-session.service';
 import { Exercise } from '../../models/exercise';
 import { SetPlan } from '../../models/set-plan';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-workout-session',
@@ -19,6 +20,14 @@ export class WorkoutSessionComponent implements OnInit {
   @Input() exercises: Exercise[];
 
   @Output() workoutSessionDelete: EventEmitter<number> = new EventEmitter();
+
+  newSetResultExerciseName = new FormControl(null);
+  newSetResultWeight = new FormControl('');
+  newSetResultRepsActual = new FormControl('');
+  newSetResultRepsTargetLow = new FormControl('');
+  newSetResultRepsTargetHigh = new FormControl('');
+  newSetResultToFailure = new FormControl(false);
+  newSetResultRestTime = new FormControl('');
 
   setResults: SetResult[];
   isCollapsed = true;
@@ -55,21 +64,35 @@ export class WorkoutSessionComponent implements OnInit {
       });
   }
 
-  addSetResult(exerciseName: string, weight: string, reps: string, restTime: string): void {
+  addSetResult(exerciseName: string, weight: string, repsActual: string,
+    repsTargetLow: string, repsTargetHigh: string, toFailure: boolean,
+    restTime: string): void {
     let exercise = this.exercises.find(e => e.name == exerciseName);
     let order = this.setResults.length + 1;
-    let setResult = new SetResult(order, parseInt(weight), parseInt(reps),
+    let setResult = new SetResult(order, parseInt(weight), parseInt(repsActual),
+      parseInt(repsTargetLow), parseInt(repsTargetHigh), toFailure,
       parseInt(restTime), this.workoutSession.id, exercise.id);
-    this.setResultService.addSetResult(setResult).subscribe(sr => this.setResults.push(sr));
+    this.setResultService.addSetResult(setResult).subscribe(sr => {
+      this.setResults.push(sr);
+      this.clearNewSetResultForm();
+    });
   }
 
   addSetResultFromSetPlan(setPlan: SetPlan): void {
-    let setResult = new SetResult(setPlan.order, 0, setPlan.reps,
-      setPlan.restTime, this.workoutSession.id, setPlan.exerciseId);
+    let setResult = new SetResult(setPlan.order, 0, 0, setPlan.repsTargetLow,
+      setPlan.repsTargetHigh, setPlan.toFailure, setPlan.restTime,
+      this.workoutSession.id, setPlan.exerciseId);
     this.setResultService.addSetResult(setResult).subscribe(sr => {
       this.setResults.push(sr);
       this.setResults = this.setResults.sort((a, b) => (a.order > b.order) ? 1 : -1);
     });
+  }
+
+  duplicateSetResult(setResult: SetResult): void {
+    let duplicate = { ...setResult };
+    delete duplicate.id;
+    duplicate.order = this.setResults.length + 1;
+    this.setResultService.addSetResult(duplicate).subscribe(sr => this.setResults.push(sr));
   }
 
   updateSetResultOrder(setResultId: number, order: number): void {
@@ -105,6 +128,29 @@ export class WorkoutSessionComponent implements OnInit {
 
     this.setResults = this.setResults.filter(sr => sr.id != setResultId);
     this.setResultService.deleteSetResult(setResultId).subscribe();
+  }
+
+  clearNewSetResultForm(): void {
+    this.newSetResultExerciseName.setValue(null);
+    this.newSetResultWeight.setValue('');
+    this.newSetResultRepsActual.setValue('');
+    this.newSetResultRepsTargetLow.setValue('');
+    this.newSetResultRepsTargetHigh.setValue('');
+    this.newSetResultToFailure.setValue(false);
+    this.newSetResultRestTime.setValue('');
+  }
+
+  toggleNewSetToFailure(toFailure: boolean): void {
+    if (toFailure) {
+      this.newSetResultRepsTargetLow.setValue('');
+      this.newSetResultRepsTargetLow.disable();
+
+      this.newSetResultRepsTargetHigh.setValue('');
+      this.newSetResultRepsTargetHigh.disable();
+    } else {
+      this.newSetResultRepsTargetLow.enable();
+      this.newSetResultRepsTargetHigh.enable();
+    }
   }
 
   dateToShortFormat(isoString: string): string {

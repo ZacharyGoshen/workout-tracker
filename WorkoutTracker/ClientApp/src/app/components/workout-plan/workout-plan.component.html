@@ -60,6 +60,7 @@
                     *ngFor="let setPlan of setPlans"
                     [setPlan]="setPlan"
                     [exercises]="exercises"
+                    (setPlanDuplicate)="duplicateSetPlan($event)"
                     (setPlanUpdateOrder)="updateSetPlanOrder($event.setPlanId, $event.order)"
                     (setPlanDelete)="deleteSetPlan($event)">
                 </tr>
