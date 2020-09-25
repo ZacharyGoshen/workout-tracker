@@ -1,0 +1,64 @@
+.set-result {
+    border-bottom: solid 2px;
+}
+.set-result-delete-button {
+    margin-right: 10px;
+}
+.set-result-duplicate-button {
+    margin-right: 10px;
+}
+.set-result-exercise {
+    max-width: 300px;
+    min-width: 300px;
+}
+.set-result-reps-actual {
+    max-width: 50px;
+    min-width: 50px;
+}
+.set-result-rest-time {
+    max-width: 75px;
+    min-width: 75px;
+}
+.set-result-set-number {
+    max-width: 50px;
+    min-width: 50px;
+}
+.set-result-target-reps-low {
+    margin-right: 10px;
+    max-width: 50px;
+    min-width: 50px;
+}
+.set-result-target-reps-high {
+    margin-left: 10px;
+    margin-right: 10px;
+    max-width: 50px;
+    min-width: 50px;
+}
+.set-result-weight {
+    max-width: 75px;
+    min-width: 75px;
+}
+.set-result-exercise-cell {
+    border-right: solid 2px;
+    padding: 10px 0px;
+}
+.set-result-reps-actual-cell {
+    border-right: solid 2px;
+    padding: 10px 0px;
+}
+.set-result-rest-time-cell {
+    border-right: solid 2px;
+    padding: 10px 0px;
+}
+.set-result-set-number-cell {
+    border-right: solid 2px;
+    padding: 10px 0px;
+}
+.set-result-target-reps-cell {
+    border-right: solid 2px;
+    padding: 10px 0px;
+}
+.set-result-weight-cell {
+    border-right: solid 2px;
+    padding: 10px 0px;
+}

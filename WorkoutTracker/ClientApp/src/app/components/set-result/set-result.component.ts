@@ -8,9 +8,9 @@ import { FormControl } from '@angular/forms';
 import { SetPlan } from '../../models/set-plan';
 
 @Component({
-  selector: '[app-set-result]',
+  selector: 'app-set-result',
   templateUrl: './set-result.component.html',
-  styleUrls: ['./set-result.component.css']
+  styleUrls: ['./set-result.component.css', './../workout-session-list/workout-session-list.component.css']
 })
 export class SetResultComponent implements OnInit {
 

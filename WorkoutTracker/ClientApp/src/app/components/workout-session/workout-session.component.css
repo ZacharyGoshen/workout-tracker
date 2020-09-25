@@ -1,0 +1,27 @@
+.set-result-create-button {
+    margin-right: 10px;
+}
+.set-result-create-row {
+    border-bottom: solid 2px;
+}
+.workout-session {
+    margin-left: 20px;
+}
+.workout-session-date {
+    margin-right: 10px;
+    max-width: 170px;
+    min-width: 170px;
+}
+.workout-session-delete-button {
+    margin-right: 10px;
+}
+.workout-session-header {
+    border-bottom: solid 2px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+.workout-session-name {
+    margin-right: 10px;
+    max-width: 500px;
+    min-width: 500px;
+}

@@ -13,11 +13,11 @@
         </div>
         <div class="border-light-gray set-plan-target-reps-cell workout-plan-target-reps-column">
             <div class="align-items-center d-flex flex-row">
-                <input #setPlanRepsTargetLow [formControl]="repsTargetLow" (change)="updateSetPlanRepsTargetLow(setPlanRepsTargetLow.value)" value="{{ setPlan.repsTargetLow }}" class="form-control set-plan-target-reps-low text-center width-50px" />
+                <input #setPlanRepsTargetLow [formControl]="repsTargetLow" (change)="updateSetPlanRepsTargetLow(setPlanRepsTargetLow.value)" value="{{ setPlan.repsTargetLow }}" class="form-control set-plan-target-reps-low text-center" />
                 <span>
                     <b>-</b>
                 </span>
-                <input #setPlanRepsTargetHigh [formControl]="repsTargetHigh" (change)="updateSetPlanRepsTargetHigh(setPlanRepsTargetHigh.value)" value="{{ setPlan.repsTargetHigh }}" class="form-control set-plan-target-reps-high text-center width-50px" />
+                <input #setPlanRepsTargetHigh [formControl]="repsTargetHigh" (change)="updateSetPlanRepsTargetHigh(setPlanRepsTargetHigh.value)" value="{{ setPlan.repsTargetHigh }}" class="form-control set-plan-target-reps-high text-center" />
                 <div class="form-check">
                     <input #setPlanToFailure
                            [checked]="setPlan.toFailure"

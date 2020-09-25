@@ -24,19 +24,20 @@
     min-width: 246px;
 }
 #workoutPlanCreateName {
+    margin-right: 10px;
     max-width: 500px;
     min-width: 500px;
 }
 #workoutPlanCreateRow {
     padding: 20px 10px 0px 20px;
 }
-#workoutPlanList {
-    padding: 102px 0px 10px 0px;
-}
 #workoutPlanExerciseHeader {
     border-right: solid 2px;
     padding-bottom: 10px;
     padding-top: 10px;
+}
+#workoutPlanList {
+    padding: 104px 0px 10px 0px;
 }
 #workoutPlanRestTimeHeader {
     border-right: solid 2px;

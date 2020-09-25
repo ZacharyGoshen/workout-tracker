@@ -10,6 +10,7 @@ import { forkJoin } from 'rxjs';
 import { WorkoutSessionComponent } from '../workout-session/workout-session.component';
 import { Exercise } from '../../models/exercise';
 import { ExerciseService } from '../../services/exercise.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-workout-session-list',
@@ -19,6 +20,9 @@ import { ExerciseService } from '../../services/exercise.service';
 export class WorkoutSessionListComponent implements OnInit {
 
   @ViewChildren(WorkoutSessionComponent) workoutSessionComponents: QueryList<WorkoutSessionComponent>;
+
+  newWorkoutSessionName = new FormControl(null);
+  newWorkoutSessionDate = new FormControl('');
 
   workoutSessions: WorkoutSession[];
   workoutPlans: WorkoutPlan[];
@@ -54,6 +58,8 @@ export class WorkoutSessionListComponent implements OnInit {
             let workoutSessionComponent = this.workoutSessionComponents.last;
             setPlans.forEach(setPlan => workoutSessionComponent.addSetResultFromSetPlan(setPlan));
           })
+        this.newWorkoutSessionName.setValue(null);
+        this.newWorkoutSessionDate.setValue('');
       });
   }
 

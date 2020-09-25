@@ -1,124 +1,114 @@
-<div>
-    <div class="d-flex flex-row mb-2">
-        <input
-            #workoutSessionDate
-            [value]="workoutSession.date"
-            (change)="updateWorkoutSessionDate(workoutSessionDate.value)"
-            class="form-control mr-2"
-            type="date"
-        />
-        <input
-            #workoutSessionName
-            [value]="workoutSession.name"
-            (change)="updateWorkoutSessionName(workoutSessionName.value)"
-            class="form-control mr-2"
-        />
-        <button
-            [attr.aria-expanded]="!isCollapsed"
-            (click)="isCollapsed = !isCollapsed"
-            class="btn btn-dark mr-2"
-            type="button"
-            data-toggle="collapse"
-            data-target="#workoutSession"
-            aria-controls="workoutSession"
-        >
-            <svg
-                *ngIf="isCollapsed"
-                width="1em"
-                height="1em"
-                viewBox="0 0 16 16"
-                class="bi bi-caret-down-fill"
-                fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg">
-                <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
-            </svg>
-            <svg
-                *ngIf="!isCollapsed"
-                width="1em"
-                height="1em"
-                viewBox="0 0 16 16"
-                class="bi bi-caret-up-fill"
-                fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg"
+<div class="workout-session">
+    <div class="align-items-center border-light-gray d-flex flex-row justify-content-between workout-session-header">
+        <div class="align-items-center d-flex flex-row">
+            <input
+                #workoutSessionName
+                [value]="workoutSession.name"
+                (change)="updateWorkoutSessionName(workoutSessionName.value)"
+                class="form-control workout-session-name"
+            />
+            <input
+                #workoutSessionDate
+                [value]="workoutSession.date"
+                (change)="updateWorkoutSessionDate(workoutSessionDate.value)"
+                class="form-control workout-session-date"
+                type="date"
+            />
+            <div
+                [attr.aria-expanded]="!isCollapsed"
+                (click)="isCollapsed = !isCollapsed"
+                data-toggle="collapse"
+                data-target="#workoutSession"
+                aria-condivols="workoutSession"
             >
-                <path d="M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />
+                <svg *ngIf="isCollapsed"
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-caret-down-fill hover-cursor-pointer"
+                        fill="currentColor"
+                >
+                    <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                </svg>
+                <svg *ngIf="!isCollapsed"
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-caret-up-fill hover-cursor-pointer"
+                        fill="currentColor"
+                >
+                    <path d="M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />
+                </svg>
+            </div>
+        </div>
+        <div (click)="deleteWorkoutSession()" class="workout-session-delete-button">
+            <svg width="25px" height="25px" viewBox="0 0 16 16" class="bi bi-x hover-cursor-pointer hover-text-red text-light-gray" fill="currentColor">
+                <path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
             </svg>
-        </button>
-        <button (click)="deleteWorkoutSession()" class="btn btn-dark text-nowrap">Delete workout session</button>
+        </div>
     </div>
     <div
         [ngbCollapse]="isCollapsed"
-        id="workoutSession" class="collapse
-        ml-1"
+        id="workoutSession"
+        class="collapse"
     >
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>Set #</th>
-                    <th>Exercise</th>
-                    <th>Weight</th>
-                    <th>Reps Completed</th>
-                    <th>Target Reps</th>
-                    <th>Rest Time</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr
-                    app-set-result
-                    *ngFor="let setResult of setResults"
-                    [setResult]="setResult"
-                    [exercises]="exercises"
-                    (setResultDuplicate)="duplicateSetResult($event)"
-                    (setResultUpdateOrder)="updateSetResultOrder($event.setResultId, $event.order)"
-                    (setResultDelete)="deleteSetResult($event)"
-                >
-                </tr>
-                <tr>
-                    <td class="align-middle">
-                        <div *ngIf="setResults" class="pl-2">
-                            {{ setResults.length + 1}}
+        <app-set-result
+            *ngFor="let setResult of setResults"
+            [setResult]="setResult"
+            [exercises]="exercises"
+            (setResultDuplicate)="duplicateSetResult($event)"
+            (setResultUpdateOrder)="updateSetResultOrder($event.setResultId, $event.order)"
+            (setResultDelete)="deleteSetResult($event)"
+        >
+        </app-set-result>
+        <div class="align-items-center border-light-gray d-flex flex-row justify-content-between set-result-create-row">
+            <div class="align-items-center d-flex flex-row">
+                <div class="align-self-stretch border-light-gray d-flex flex-row set-result-set-number-cell workout-session-set-number-column">
+                    <div *ngIf="setResults" class="align-self-center set-result-set-number text-center">
+                        {{ setResults.length + 1}}
+                    </div>
+                </div>
+                <div class="border-light-gray set-result-exercise-cell workout-session-exercise-column">
+                    <select #exerciseName [formControl]="newSetResultExerciseName" class="form-control set-result-exercise">
+                        <option value="null" disabled selected> -- Exercise -- </option>
+                        <option *ngFor="let exercise of exercises">
+                            {{ exercise.name }}
+                        </option>
+                    </select>
+                </div>
+                <div class="border-light-gray set-result-weight-cell workout-session-weight-column">
+                    <input #weight [formControl]="newSetResultWeight" class="form-control set-result-weight" />
+                </div>
+                <div class="border-light-gray set-result-reps-actual-cell workout-session-reps-actual-column">
+                    <input #repsActual [formControl]="newSetResultRepsActual" class="form-control set-result-reps-actual" />
+                </div>
+                <div class="border-light-gray set-result-target-reps-cell workout-session-target-reps-column">
+                    <div class="align-items-center d-flex flex-row">
+                        <input #repsTargetLow [formControl]="newSetResultRepsTargetLow" class="form-control set-result-target-reps-low" />
+                        <span>
+                            <b>-</b>
+                        </span>
+                        <input #repsTargetHigh [formControl]="newSetResultRepsTargetHigh" class="form-control set-result-target-reps-high" />
+                        <div class="form-check">
+                            <input #toFailure
+                                    (change)=toggleNewSetToFailure(toFailure.checked)
+                                    [formControl]="newSetResultToFailure"
+                                    class="form-check-input"
+                                    type="checkbox">
+                            <label class="form-check-label text-nowrap">To Failure</label>
                         </div>
-                    </td>
-                    <td>
-                        <select #exerciseName [formControl]="newSetResultExerciseName" class="form-control">
-                            <option value="null" disabled selected> -- Exercise -- </option>
-                            <option *ngFor="let exercise of exercises">
-                                {{ exercise.name }}
-                            </option>
-                        </select>
-                    </td>
-                    <td>
-                        <input #weight [formControl]="newSetResultWeight" class="form-control" placeholder="Weight"/>
-                    </td>
-                    <td>
-                        <input #repsActual [formControl]="newSetResultRepsActual" class="form-control" placeholder="Reps Completed"/>
-                    </td>
-                    <td>
-                        <div class="align-items-center d-flex flex-row">
-                            <input #repsTargetLow [formControl]="newSetResultRepsTargetLow" class="form-control mr-2" placeholder="Rep Range Low" />
-                            <span class="mr-2">
-                                <b>-</b>
-                            </span>
-                            <input #repsTargetHigh [formControl]="newSetResultRepsTargetHigh" class="form-control mr-2" placeholder="Rep Range High" />
-                            <div class="form-check">
-                                <input #toFailure
-                                       (change)=toggleNewSetToFailure(toFailure.checked)
-                                       [formControl]="newSetResultToFailure"
-                                       class="form-check-input"
-                                       type="checkbox">
-                                <label class="form-check-label text-nowrap">To Failure</label>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <input #restTime class="form-control" placeholder="Rest Time"/>
-                    </td>
-                    <td>
-                        <button (click)="addSetResult(exerciseName.value, weight.value, repsActual.value, repsTargetLow.value, repsTargetHigh.value, toFailure.checked, restTime.value)" class="btn btn-dark text-nowrap">Add set</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                    </div>
+                </div>
+                <div class="border-light-gray set-result-rest-time-cell workout-session-rest-time-column">
+                    <input #restTime [formControl]="newSetResultRestTime" class="form-control set-result-rest-time" />
+                </div>
+            </div>
+            <div (click)="addSetResult(exerciseName.value, weight.value, repsActual.value, repsTargetLow.value, repsTargetHigh.value, toFailure.checked, restTime.value)" class="set-result-create-button">
+                <svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi-plus-circle hover-cursor-pointer hover-text-dark-gray text-light-gray" fill="currentColor">
+                    <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                    <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                </svg>
+            </div>
+        </div>
     </div>
 </div>

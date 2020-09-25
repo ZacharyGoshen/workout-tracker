@@ -1,10 +1,8 @@
 ﻿<Properties StartupConfiguration="{C51E2E51-15C3-45FE-B9A6-6106F1B57330}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="WorkoutTracker/ClientApp/src/app/components/workout-plan/workout-plan.component.ts">
+  <MonoDevelop.Ide.Workbench ActiveDocument="WorkoutTracker/ClientApp/src/app/components/workout-plan-list/workout-plan-list.component.css">
     <Files>
-      <File FileName="WorkoutTracker/ClientApp/src/app/components/workout-plan-list/workout-plan-list.component.html" Line="15" Column="47" />
-      <File FileName="WorkoutTracker/ClientApp/src/app/components/workout-plan-list/workout-plan-list.component.ts" Line="1" Column="1" />
-      <File FileName="WorkoutTracker/ClientApp/src/app/components/workout-plan/workout-plan.component.html" Line="1" Column="1" />
-      <File FileName="WorkoutTracker/ClientApp/src/app/components/workout-plan/workout-plan.component.ts" Line="1" Column="1" />
+      <File FileName="WorkoutTracker/ClientApp/src/app/components/workout-plan-list/workout-plan-list.component.html" Line="13" Column="77" />
+      <File FileName="WorkoutTracker/ClientApp/src/app/components/workout-plan-list/workout-plan-list.component.css" Line="26" Column="25" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -21,11 +19,12 @@
                       <Node name="navigation-bar" expanded="True" />
                       <Node name="set-plan" expanded="True" />
                       <Node name="set-result" expanded="True" />
-                      <Node name="workout-plan" expanded="True">
-                        <Node name="workout-plan.component.ts" selected="True" />
+                      <Node name="workout-plan" expanded="True" />
+                      <Node name="workout-plan-list" expanded="True">
+                        <Node name="workout-plan-list.component.css" selected="True" />
                       </Node>
-                      <Node name="workout-plan-list" expanded="True" />
                       <Node name="workout-session" expanded="True" />
+                      <Node name="workout-session-list" expanded="True" />
                     </Node>
                     <Node name="models" expanded="True" />
                     <Node name="services" expanded="True" />

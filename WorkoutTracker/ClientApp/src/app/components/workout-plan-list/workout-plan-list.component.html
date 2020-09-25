@@ -4,15 +4,14 @@
         <div id="workoutPlanExerciseHeader" class="border-light-gray workout-plan-exercise-column">Exercise Name</div>
         <div id="workoutPlanTargetRepsHeader" class="border-light-gray workout-plan-target-reps-column">Target Reps</div>
         <div id="workoutPlanRestTimeHeader" class="border-light-gray workout-plan-rest-time-column">Rest Time (s)</div>
-        <div></div>
     </div>
     <app-workout-plan *ngFor="let workoutPlan of workoutPlans"
                       [exercises]="exercises"
                       [workoutPlan]="workoutPlan"
                       (workoutPlanDelete)="deleteWorkoutPlan($event)">
     </app-workout-plan>
-    <div id="workoutPlanCreateRow" class="align-items-center d-flex flew-row justify-content-between">
-        <input #workoutPlanName [formControl]="newWorkoutPlanName" (keydown.enter)="addWorkoutPlan(workoutPlanName.value)" id="workoutPlanCreateName" class="form-control mr-2" placeholder="New Workout Plan Name" />
+    <div id="workoutPlanCreateRow" class="align-items-center d-flex flew-row">
+        <input #workoutPlanName [formControl]="newWorkoutPlanName" (keydown.enter)="addWorkoutPlan(workoutPlanName.value)" id="workoutPlanCreateName" class="form-control" placeholder="New Workout Plan Name" />
         <div (click)="addWorkoutPlan(workoutPlanName.value)">
             <svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi-plus-circle hover-cursor-pointer hover-text-dark-gray text-light-gray" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />

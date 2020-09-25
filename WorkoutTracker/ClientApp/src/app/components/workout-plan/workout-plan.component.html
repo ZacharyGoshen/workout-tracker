@@ -9,7 +9,6 @@
             <div
                 [attr.aria-expanded]="!isCollapsed"
                 (click)="isCollapsed = !isCollapsed"
-                type="button"
                 data-toggle="collapse"
                 data-target="#workoutPlan"
                 aria-controls="workoutPlan"
@@ -20,16 +19,16 @@
                      viewBox="0 0 16 16"
                      class="bi bi-caret-down-fill hover-cursor-pointer"
                      fill="currentColor"
-                     xmlns="http://www.w3.org/2000/svg">
+                >
                     <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
                 </svg>
                 <svg *ngIf="!isCollapsed"
                      width="1em"
                      height="1em"
                      viewBox="0 0 16 16"
-                     class="bi bi-caret-up-fill"
+                     class="bi bi-caret-up-fill hover-cursor-pointer"
                      fill="currentColor"
-                     xmlns="http://www.w3.org/2000/svg">
+                >
                     <path d="M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />
                 </svg>
             </div>
@@ -89,13 +88,11 @@
                     <input #restTime (keydown.enter)="$event.target.blur()" [formControl]="newSetPlanRestTime" class="form-control set-plan-rest-time text-center" />
                 </div>
             </div>
-            <div class="align-items-center d-flex flex-row set-plan-create-button">
-                <div (click)="addSetPlan(exerciseName.value, repsTargetLow.value, repsTargetHigh.value, toFailure.checked, restTime.value)">
-                    <svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi-plus-circle hover-cursor-pointer hover-text-dark-gray text-light-gray" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                        <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                    </svg>
-                </div>
+            <div (click)="addSetPlan(exerciseName.value, repsTargetLow.value, repsTargetHigh.value, toFailure.checked, restTime.value)" class="set-plan-create-button">
+                <svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi-plus-circle hover-cursor-pointer hover-text-dark-gray text-light-gray" fill="currentColor">
+                    <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                    <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                </svg>
             </div>
         </div>
     </div>

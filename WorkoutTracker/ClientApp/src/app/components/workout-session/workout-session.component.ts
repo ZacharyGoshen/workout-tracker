@@ -12,7 +12,7 @@ import { FormControl } from '@angular/forms';
 @Component({
   selector: 'app-workout-session',
   templateUrl: './workout-session.component.html',
-  styleUrls: ['./workout-session.component.css']
+  styleUrls: ['./workout-session.component.css', './../workout-session-list/workout-session-list.component.css', './../set-result/set-result.component.css']
 })
 export class WorkoutSessionComponent implements OnInit {
 
