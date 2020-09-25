@@ -1,17 +1,23 @@
-<div>
-    <h2>Workout Plans</h2>
-    <app-workout-plan
-        *ngFor="let workoutPlan of workoutPlans"
-        [exercises]="exercises"
-        [workoutPlan]="workoutPlan"
-        (workoutPlanDelete)="deleteWorkoutPlan($event)"
-    >
+<div id="workoutPlanList">
+    <div class="background-white border-light-gray d-flex fixed-top flex-row set-plan-column-names">
+        <div id="workoutPlanSetNumberHeader" class="border-light-gray workout-plan-set-number-column">Set #</div>
+        <div id="workoutPlanExerciseHeader" class="border-light-gray workout-plan-exercise-column">Exercise Name</div>
+        <div id="workoutPlanTargetRepsHeader" class="border-light-gray workout-plan-target-reps-column">Target Reps</div>
+        <div id="workoutPlanRestTimeHeader" class="border-light-gray workout-plan-rest-time-column">Rest Time (s)</div>
+        <div></div>
+    </div>
+    <app-workout-plan *ngFor="let workoutPlan of workoutPlans"
+                      [exercises]="exercises"
+                      [workoutPlan]="workoutPlan"
+                      (workoutPlanDelete)="deleteWorkoutPlan($event)">
     </app-workout-plan>
-    <h4>Create new workout plan</h4>
-    <div class="d-flex flew-row">
-        <input #workoutPlanName class="form-control mr-2" placeholder="Name" />
-        <button (click)="addWorkoutPlan(workoutPlanName.value)" class="btn btn-dark text-nowrap">
-            Add workout plan
-        </button>
+    <div id="workoutPlanCreateRow" class="align-items-center d-flex flew-row justify-content-between">
+        <input #workoutPlanName [formControl]="newWorkoutPlanName" (keydown.enter)="addWorkoutPlan(workoutPlanName.value)" id="workoutPlanCreateName" class="form-control mr-2" placeholder="New Workout Plan Name" />
+        <div (click)="addWorkoutPlan(workoutPlanName.value)">
+            <svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi-plus-circle hover-cursor-pointer hover-text-dark-gray text-light-gray" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+            </svg>
+        </div>
     </div>
 </div>

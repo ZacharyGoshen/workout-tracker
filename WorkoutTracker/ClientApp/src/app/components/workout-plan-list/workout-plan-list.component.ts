@@ -3,6 +3,7 @@ import { WorkoutPlanService } from '../../services/workout-plan.service';
 import { WorkoutPlan } from '../../models/workout-plan';
 import { Exercise } from '../../models/exercise';
 import { ExerciseService } from '../../services/exercise.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-workout-plan-list',
@@ -10,6 +11,8 @@ import { ExerciseService } from '../../services/exercise.service';
   styleUrls: ['./workout-plan-list.component.css']
 })
 export class WorkoutPlanListComponent implements OnInit {
+
+  newWorkoutPlanName = new FormControl('');
 
   exercises: Exercise[];
   workoutPlans: WorkoutPlan[];
@@ -32,7 +35,10 @@ export class WorkoutPlanListComponent implements OnInit {
   addWorkoutPlan(workoutPlanName: string): void {
     let workoutPlan = new WorkoutPlan(workoutPlanName);
     this.workoutPlanService.addWorkoutPlan(workoutPlan)
-      .subscribe(wp => this.workoutPlans.push(wp));
+      .subscribe(wp => {
+        this.workoutPlans.push(wp);
+        this.newWorkoutPlanName.setValue('');
+      });
   }
 
   deleteWorkoutPlan(workoutPlanId: number): void {

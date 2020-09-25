@@ -7,9 +7,9 @@ import { SetPlanService } from '../../services/set-plan.service';
 import { FormControl } from '@angular/forms';
 
 @Component({
-  selector: '[app-set-plan]',
+  selector: 'app-set-plan',
   templateUrl: './set-plan.component.html',
-  styleUrls: ['./set-plan.component.css']
+  styleUrls: ['./set-plan.component.css', './../workout-plan-list/workout-plan-list.component.css']
 })
 export class SetPlanComponent implements OnInit {
 

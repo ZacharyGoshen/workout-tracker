@@ -10,7 +10,7 @@ import { FormControl } from '@angular/forms';
 @Component({
   selector: 'app-workout-plan',
   templateUrl: './workout-plan.component.html',
-  styleUrls: ['./workout-plan.component.css']
+  styleUrls: ['./workout-plan.component.css', './../set-plan/set-plan.component.css', './../workout-plan-list/workout-plan-list.component.css']
 })
 export class WorkoutPlanComponent implements OnInit {
 

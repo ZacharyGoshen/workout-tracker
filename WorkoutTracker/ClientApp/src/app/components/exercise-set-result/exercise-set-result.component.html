@@ -8,7 +8,11 @@
         {{ dateService.toShortFormat(workoutSession.date) }}
     </div>
 </td>
-<td [hidden]="hidden">{{ setResult.order }}</td>
-<td [hidden]="hidden">{{ setResult.weight }}</td>
-<td [hidden]="hidden">{{ setResult.reps }}</td>
-<td [hidden]="hidden">{{ setResult.restTime }}</td>
+<td [hidden]="hidden" class="text-center">{{ setResult.order }}</td>
+<td [hidden]="hidden" class="text-center">{{ setResult.weight }}</td>
+<td [hidden]="hidden" class="text-center">{{ setResult.repsActual }}</td>
+<td *ngIf="!setResult.toFailure" [hidden]="hidden" class="text-center">
+    <span>{{ setResult.repsTargetLow }} - {{ setResult.repsTargetHigh }}</span>
+</td>
+<td *ngIf="setResult.toFailure" [hidden]="hidden" class="text-center">To Failure</td>
+<td [hidden]="hidden" class="text-center">{{ setResult.restTime }}</td>

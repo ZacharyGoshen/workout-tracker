@@ -1,115 +1,102 @@
-<div>
-    <div class="d-flex flex-row mb-2">
-        <input
-            #workoutPlanName
-            (change)="updateWorkoutPlanName(workoutPlanName.value)"
-            value="{{ workoutPlan.name }}"
-            class="form-control mr-2"
-        />
-        <button
-            [attr.aria-expanded]="!isCollapsed"
-            (click)="isCollapsed = !isCollapsed"
-            class="btn btn-dark mr-2"
-            type="button"
-            data-toggle="collapse"
-            data-target="#workoutPlan"
-            aria-controls="workoutPlan"
-        >
-            <svg
-                *ngIf="isCollapsed"
-                width="1em"
-                height="1em"
-                viewBox="0 0 16 16"
-                class="bi bi-caret-down-fill"
-                fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg">
-                <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
-            </svg>
-            <svg
-                *ngIf="!isCollapsed"
-                width="1em"
-                height="1em"
-                viewBox="0 0 16 16"
-                class="bi bi-caret-up-fill"
-                fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg"
+<div class="workout-plan">
+    <div class="align-items-center border-light-gray d-flex flex-row justify-content-between workout-plan-header">
+        <div class="align-items-center d-flex flex-row">
+            <input #workoutPlanName
+                   (change)="updateWorkoutPlanName(workoutPlanName.value)"
+                   (keydown.enter)="$event.target.blur()"
+                   value="{{ workoutPlan.name }}"
+                   class="form-control workout-plan-name" />
+            <div
+                [attr.aria-expanded]="!isCollapsed"
+                (click)="isCollapsed = !isCollapsed"
+                type="button"
+                data-toggle="collapse"
+                data-target="#workoutPlan"
+                aria-controls="workoutPlan"
             >
-                <path d="M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />
+                <svg *ngIf="isCollapsed"
+                     width="1em"
+                     height="1em"
+                     viewBox="0 0 16 16"
+                     class="bi bi-caret-down-fill hover-cursor-pointer"
+                     fill="currentColor"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                </svg>
+                <svg *ngIf="!isCollapsed"
+                     width="1em"
+                     height="1em"
+                     viewBox="0 0 16 16"
+                     class="bi bi-caret-up-fill"
+                     fill="currentColor"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />
+                </svg>
+            </div>
+        </div>
+        <div (click)="deleteWorkoutPlan()" class="workout-plan-delete-button">
+            <svg width="25px" height="25px" viewBox="0 0 16 16" class="bi bi-x hover-cursor-pointer hover-text-red text-light-gray" fill="currentColor">
+                <path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
             </svg>
-        </button>
-        <button (click)="deleteWorkoutPlan()" class="btn btn-dark text-nowrap">Delete workout plan</button>
+        </div>
     </div>
     <div
         [ngbCollapse]="isCollapsed"
         id="workoutPlan"
-        class="collapse"
+        class="collapse workout-plan-body"
     >
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>Set #</th>
-                    <th>Exercise</th>
-                    <th>Rep Range</th>
-                    <th>Rest Time (s)</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr
-                    app-set-plan
-                    *ngFor="let setPlan of setPlans"
-                    [setPlan]="setPlan"
-                    [exercises]="exercises"
-                    (setPlanDuplicate)="duplicateSetPlan($event)"
-                    (setPlanUpdateOrder)="updateSetPlanOrder($event.setPlanId, $event.order)"
-                    (setPlanDelete)="deleteSetPlan($event)">
-                </tr>
-                <tr>
-                    <td class="align-middle">
-                        <div *ngIf="setPlans" class="pl-2">
-                            {{ setPlans.length + 1 }}
-                        </div>
-                    </td>
-                    <td>
-                        <select #exerciseName [formControl]="newSetPlanExerciseName" class="form-control">
-                            <option value="null" disabled selected> -- Exercise -- </option>
-                            <option *ngFor="let exercise of exercises">
-                                {{ exercise.name }}
-                            </option>
-                        </select>
-                    </td>
-                    <td>
-                        <div class="align-items-center d-flex flex-row">
-                            <input #repsTargetLow [formControl]="newSetPlanRepsTargetLow" class="form-control mr-2" placeholder="Rep Range Low" />
-                            <span class="mr-2">
-                                <b>-</b>
-                            </span>
-                            <input #repsTargetHigh [formControl]="newSetPlanRepsTargetHigh" class="form-control mr-2" placeholder="Rep Range High" />
-                            <div class="form-check">
-                                <input
-                                    #toFailure
+        <app-set-plan
+            *ngFor="let setPlan of setPlans"
+            [setPlan]="setPlan"
+            [exercises]="exercises"
+            (setPlanDuplicate)="duplicateSetPlan($event)"
+            (setPlanUpdateOrder)="updateSetPlanOrder($event.setPlanId, $event.order)"
+            (setPlanDelete)="deleteSetPlan($event)">
+        </app-set-plan>
+        <div class="align-items-center border-light-gray d-flex flex-row justify-content-between set-plan-create-row">
+            <div class="align-items-center d-flex flex-row">
+                <div class="align-self-stretch border-light-gray d-flex flex-row set-plan-set-number-cell workout-plan-set-number-column">
+                    <div *ngIf="setPlans" (keydown.enter)="$event.target.blur()" class="align-self-center set-plan-set-number text-center">
+                        {{ setPlans.length + 1 }}
+                    </div>
+                </div>
+                <div class="border-light-gray set-plan-exercise-cell workout-plan-exercise-column">
+                    <select #exerciseName [formControl]="newSetPlanExerciseName" class="form-control set-plan-exercise">
+                        <option value="null" disabled selected> -- Exercise -- </option>
+                        <option *ngFor="let exercise of exercises">
+                            {{ exercise.name }}
+                        </option>
+                    </select>
+                </div>
+                <div class="border-light-gray set-plan-target-reps-cell workout-plan-target-reps-column">
+                    <div class="align-items-center d-flex flex-row">
+                        <input #repsTargetLow (keydown.enter)="$event.target.blur()" [formControl]="newSetPlanRepsTargetLow" class="form-control set-plan-target-reps-low" />
+                        <span>
+                            <b>-</b>
+                        </span>
+                        <input #repsTargetHigh (keydown.enter)="$event.target.blur()" [formControl]="newSetPlanRepsTargetHigh" class="form-control set-plan-target-reps-high" />
+                        <div class="form-check">
+                            <input #toFailure
                                     (change)=toggleNewSetToFailure(toFailure.checked)
                                     [formControl]="newSetPlanToFailure"
                                     class="form-check-input"
-                                    type="checkbox"
-                                >
-                                <label class="form-check-label text-nowrap">To Failure</label>
-                            </div>
+                                    type="checkbox">
+                            <label class="form-check-label text-nowrap">To Failure</label>
                         </div>
-                    </td>
-                    <td>
-                        <input #restTime [formControl]="newSetPlanRestTime" class="form-control" placeholder="Rest Time" />
-                    </td>
-                    <td>
-                        <button
-                            (click)="addSetPlan(exerciseName.value, repsTargetLow.value, repsTargetHigh.value, toFailure.checked, restTime.value)"
-                            class="btn btn-dark text-nowrap"
-                        >
-                            Add set
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                    </div>
+                </div>
+                <div class="border-light-gray set-plan-rest-time-cell workout-plan-rest-time-column">
+                    <input #restTime (keydown.enter)="$event.target.blur()" [formControl]="newSetPlanRestTime" class="form-control set-plan-rest-time text-center" />
+                </div>
+            </div>
+            <div class="align-items-center d-flex flex-row set-plan-create-button">
+                <div (click)="addSetPlan(exerciseName.value, repsTargetLow.value, repsTargetHigh.value, toFailure.checked, restTime.value)">
+                    <svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi-plus-circle hover-cursor-pointer hover-text-dark-gray text-light-gray" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                        <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                    </svg>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

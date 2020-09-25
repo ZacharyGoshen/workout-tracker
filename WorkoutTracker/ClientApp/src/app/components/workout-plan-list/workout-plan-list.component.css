@@ -1,0 +1,55 @@
+.set-plan-column-names {
+    border-bottom: solid 2px;
+    margin-top: 58px;
+    padding-left: 20px;
+}
+.workout-plan-exercise-column {
+    margin-right: 20px;
+    max-width: 320px;
+    min-width: 320px;
+}
+.workout-plan-rest-time-column {
+    margin-right: 20px;
+    max-width: 120px;
+    min-width: 120px;
+}
+.workout-plan-set-number-column {
+    margin-right: 20px;
+    max-width: 70px;
+    min-width: 70px;
+}
+.workout-plan-target-reps-column {
+    margin-right: 20px;
+    max-width: 246px;
+    min-width: 246px;
+}
+#workoutPlanCreateName {
+    max-width: 500px;
+    min-width: 500px;
+}
+#workoutPlanCreateRow {
+    padding: 20px 10px 0px 20px;
+}
+#workoutPlanList {
+    padding: 102px 0px 10px 0px;
+}
+#workoutPlanExerciseHeader {
+    border-right: solid 2px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+#workoutPlanRestTimeHeader {
+    border-right: solid 2px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+#workoutPlanSetNumberHeader {
+    border-right: solid 2px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+#workoutPlanTargetRepsHeader {
+    border-right: solid 2px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}

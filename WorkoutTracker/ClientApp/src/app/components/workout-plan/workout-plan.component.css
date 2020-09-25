@@ -1,0 +1,22 @@
+.set-plan-create-button {
+    margin-right: 10px;
+}
+.set-plan-create-row {
+    border-bottom: solid 2px;
+}
+.workout-plan {
+    margin-left: 20px;
+}
+.workout-plan-delete-button {
+    margin-right: 10px;
+}
+.workout-plan-header {
+    border-bottom: solid 2px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+.workout-plan-name {
+    margin-right: 10px;
+    max-width: 500px;
+    min-width: 500px;
+}

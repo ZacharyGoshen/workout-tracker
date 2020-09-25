@@ -1,4 +1,27 @@
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  padding: 30px 10px 10px 10px;
+/*    background-color: #fefefe;*/
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+.background-white {
+    background-color: white;
+}
+.border-light-gray {
+    border-color: #f0f0f0 !important;
+}
+.hover-cursor-pointer:hover {
+    cursor: pointer;
+}
+.hover-text-dark-gray:hover {
+    color: #303030;
+}
+.hover-text-red:hover {
+    color: red;
+}
+.text-black {
+    color: black;
+}
+.text-light-gray {
+    color: #9e9e9e;
+}
+
+

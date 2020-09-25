@@ -4,7 +4,7 @@ export class SetPlan {
   order: number;
   repsTargetLow: number;
   repsTargetHigh: number
-  toFailure: bool;
+  toFailure: boolean;
   restTime: number;
   workoutPlanId: number;
   exerciseId: number;
