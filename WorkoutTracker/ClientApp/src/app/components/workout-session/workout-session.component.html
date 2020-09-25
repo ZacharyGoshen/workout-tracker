@@ -5,6 +5,7 @@
                 #workoutSessionName
                 [value]="workoutSession.name"
                 (change)="updateWorkoutSessionName(workoutSessionName.value)"
+                (keydown.enter)="$event.target.blur()"
                 class="form-control workout-session-name"
             />
             <input
@@ -77,18 +78,18 @@
                     </select>
                 </div>
                 <div class="border-light-gray set-result-weight-cell workout-session-weight-column">
-                    <input #weight [formControl]="newSetResultWeight" class="form-control set-result-weight" />
+                    <input #weight [formControl]="newSetResultWeight" (keydown.enter)="$event.target.blur()" class="form-control set-result-weight" />
                 </div>
                 <div class="border-light-gray set-result-reps-actual-cell workout-session-reps-actual-column">
-                    <input #repsActual [formControl]="newSetResultRepsActual" class="form-control set-result-reps-actual" />
+                    <input #repsActual [formControl]="newSetResultRepsActual" (keydown.enter)="$event.target.blur()" class="form-control set-result-reps-actual" />
                 </div>
                 <div class="border-light-gray set-result-target-reps-cell workout-session-target-reps-column">
                     <div class="align-items-center d-flex flex-row">
-                        <input #repsTargetLow [formControl]="newSetResultRepsTargetLow" class="form-control set-result-target-reps-low" />
+                        <input #repsTargetLow [formControl]="newSetResultRepsTargetLow" (keydown.enter)="$event.target.blur()" class="form-control set-result-target-reps-low" />
                         <span>
                             <b>-</b>
                         </span>
-                        <input #repsTargetHigh [formControl]="newSetResultRepsTargetHigh" class="form-control set-result-target-reps-high" />
+                        <input #repsTargetHigh [formControl]="newSetResultRepsTargetHigh" (keydown.enter)="$event.target.blur()" class="form-control set-result-target-reps-high" />
                         <div class="form-check">
                             <input #toFailure
                                     (change)=toggleNewSetToFailure(toFailure.checked)
@@ -100,7 +101,7 @@
                     </div>
                 </div>
                 <div class="border-light-gray set-result-rest-time-cell workout-session-rest-time-column">
-                    <input #restTime [formControl]="newSetResultRestTime" class="form-control set-result-rest-time" />
+                    <input #restTime [formControl]="newSetResultRestTime" (keydown.enter)="$event.target.blur()" class="form-control set-result-rest-time" />
                 </div>
             </div>
             <div (click)="addSetResult(exerciseName.value, weight.value, repsActual.value, repsTargetLow.value, repsTargetHigh.value, toFailure.checked, restTime.value)" class="set-result-create-button">
