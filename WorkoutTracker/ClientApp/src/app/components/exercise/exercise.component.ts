@@ -23,9 +23,18 @@ export class ExerciseComponent implements OnInit {
 
   setResults: SetResult[];
   isCollapsed = true;
-  workoutSessionNameFilter = "";
-  dateStartFilter = "";
-  dateEndFilter = "";
+  setResultsVisible = 0;
+  workoutSessionNameFilter: string = "";
+  dateStartFilter: string = "";
+  dateEndFilter: string = "";
+  weightLowFilter: number = null;
+  weightHighFilter: number = null;
+  repsCompletedLowFilter: number = null;
+  repsCompletedHighFilter: number = null;
+  targetRepsLowFilter: number = null;
+  targetRepsHighFilter: number = null;
+  restTimeLowFilter: number = null;
+  restTimeHighFilter: number = null;
 
   constructor(
     private exerciseService: ExerciseService,
@@ -49,6 +58,7 @@ export class ExerciseComponent implements OnInit {
   getSetResults(): void {
     this.workoutSessionService.getWorkoutSessions().subscribe(workoutSessions => {
       this.setResultService.getSetResultsWithExerciseId(this.exercise.id).subscribe(setResults => {
+        this.setResultsVisible = setResults.length;
         this.setResults = setResults.sort((a, b) => {
           let dateA = workoutSessions.find(ws => ws.id == a.workoutSessionId).date;
           let dateB = workoutSessions.find(ws => ws.id == b.workoutSessionId).date;
@@ -63,6 +73,7 @@ export class ExerciseComponent implements OnInit {
   }
 
   filterSetResults(): void {
+    this.setResultsVisible = this.setResults.length;
     this.exerciseSetResultComponents.forEach(esrc => {
       esrc.hidden = false;
 
@@ -77,6 +88,38 @@ export class ExerciseComponent implements OnInit {
       }
       if (this.dateEndFilter && workoutSessionDate > this.dateEndFilter) {
         esrc.hidden = true;
+      }
+
+      if (this.weightLowFilter && esrc.setResult.weight < this.weightLowFilter) {
+        esrc.hidden = true;
+      }
+      if (this.weightHighFilter && esrc.setResult.weight > this.weightHighFilter) {
+        esrc.hidden = true;
+      }
+
+      if (this.repsCompletedLowFilter && esrc.setResult.repsActual < this.repsCompletedLowFilter) {
+        esrc.hidden = true;
+      }
+      if (this.repsCompletedHighFilter && esrc.setResult.repsActual > this.repsCompletedHighFilter) {
+        esrc.hidden = true;
+      }
+
+      if (this.targetRepsLowFilter && esrc.setResult.repsTargetLow < this.targetRepsLowFilter) {
+        esrc.hidden = true;
+      }
+      if (this.targetRepsHighFilter && esrc.setResult.repsTargetHigh > this.targetRepsHighFilter) {
+        esrc.hidden = true;
+      }
+
+      if (this.restTimeLowFilter && esrc.setResult.restTime < this.restTimeLowFilter) {
+        esrc.hidden = true;
+      }
+      if (this.restTimeHighFilter && esrc.setResult.restTime > this.restTimeHighFilter) {
+        esrc.hidden = true;
+      }
+
+      if (esrc.hidden) {
+        this.setResultsVisible -= 1;
       }
 
     });
@@ -94,6 +137,46 @@ export class ExerciseComponent implements OnInit {
 
   filterSetResultsByDateEnd(dateEnd: string): void {
     this.dateEndFilter = dateEnd;
+    this.filterSetResults();
+  }
+
+  filterSetResultsByWeightLow(weightLow: number): void {
+    this.weightLowFilter = weightLow;
+    this.filterSetResults();
+  }
+
+  filterSetResultsByWeightHigh(weightHigh: number): void {
+    this.weightHighFilter = weightHigh;
+    this.filterSetResults();
+  }
+
+  filterSetResultsByRepsCompletedLow(repsCompletedLow: number): void {
+    this.repsCompletedLowFilter = repsCompletedLow;
+    this.filterSetResults();
+  }
+
+  filterSetResultsByRepsCompletedHigh(repsCompletedHigh: number): void {
+    this.repsCompletedHighFilter = repsCompletedHigh;
+    this.filterSetResults();
+  }
+
+  filterSetResultsByTargetRepsLow(targetRepsLow: number): void {
+    this.targetRepsLowFilter = targetRepsLow;
+    this.filterSetResults();
+  }
+
+  filterSetResultsByTargetRepsHigh(targetRepsHigh: number): void {
+    this.targetRepsHighFilter = targetRepsHigh;
+    this.filterSetResults();
+  }
+
+  filterSetResultsByRestTimeLow(restTimeLow: number): void {
+    this.restTimeLowFilter = restTimeLow;
+    this.filterSetResults();
+  }
+
+  filterSetResultsByRestTimeHigh(restTimeHigh: number): void {
+    this.restTimeHighFilter = restTimeHigh;
     this.filterSetResults();
   }
 

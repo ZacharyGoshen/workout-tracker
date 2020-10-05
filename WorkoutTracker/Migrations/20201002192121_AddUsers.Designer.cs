@@ -8,8 +8,8 @@ using WorkoutTracker.DAL;
 namespace WorkoutTracker.Migrations
 {
     [DbContext(typeof(WorkoutTrackerContext))]
-    [Migration("20200911142542_Initial")]
-    partial class Initial
+    [Migration("20201002192121_AddUsers")]
+    partial class AddUsers
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -30,7 +30,12 @@ namespace WorkoutTracker.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Exercises");
                 });
@@ -62,12 +67,17 @@ namespace WorkoutTracker.Migrations
                     b.Property<bool>("ToFailure")
                         .HasColumnType("tinyint(1)");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.Property<int>("WorkoutPlanId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ExerciseId");
+
+                    b.HasIndex("UserId");
 
                     b.HasIndex("WorkoutPlanId");
 
@@ -104,6 +114,9 @@ namespace WorkoutTracker.Migrations
                     b.Property<bool>("ToFailure")
                         .HasColumnType("tinyint(1)");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Weight")
                         .HasColumnType("int");
 
@@ -114,9 +127,28 @@ namespace WorkoutTracker.Migrations
 
                     b.HasIndex("ExerciseId");
 
+                    b.HasIndex("UserId");
+
                     b.HasIndex("WorkoutSessionId");
 
                     b.ToTable("SetResults");
+                });
+
+            modelBuilder.Entity("WorkoutTracker.Models.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("User");
                 });
 
             modelBuilder.Entity("WorkoutTracker.Models.WorkoutPlan", b =>
@@ -128,7 +160,12 @@ namespace WorkoutTracker.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("WorkoutPlans");
                 });
@@ -146,9 +183,23 @@ namespace WorkoutTracker.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("WorkoutSessions");
+                });
+
+            modelBuilder.Entity("WorkoutTracker.Models.Exercise", b =>
+                {
+                    b.HasOne("WorkoutTracker.Models.User", "User")
+                        .WithMany("Exercises")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("WorkoutTracker.Models.SetPlan", b =>
@@ -156,6 +207,12 @@ namespace WorkoutTracker.Migrations
                     b.HasOne("WorkoutTracker.Models.Exercise", "Exercise")
                         .WithMany("SetPlans")
                         .HasForeignKey("ExerciseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WorkoutTracker.Models.User", "User")
+                        .WithMany("SetPlans")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -174,9 +231,33 @@ namespace WorkoutTracker.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("WorkoutTracker.Models.User", "User")
+                        .WithMany("SetResults")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("WorkoutTracker.Models.WorkoutSession", "WorkoutSession")
                         .WithMany("SetResults")
                         .HasForeignKey("WorkoutSessionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("WorkoutTracker.Models.WorkoutPlan", b =>
+                {
+                    b.HasOne("WorkoutTracker.Models.User", "User")
+                        .WithMany("WorkoutPlans")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("WorkoutTracker.Models.WorkoutSession", b =>
+                {
+                    b.HasOne("WorkoutTracker.Models.User", "User")
+                        .WithMany("WorkoutSessions")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

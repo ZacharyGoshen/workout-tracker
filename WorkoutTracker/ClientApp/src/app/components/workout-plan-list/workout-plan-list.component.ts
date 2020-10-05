@@ -48,7 +48,9 @@ export class WorkoutPlanListComponent implements OnInit {
 
   getExercises(): void {
     this.exerciseService.getExercises()
-      .subscribe(e => this.exercises = e);
+      .subscribe(e => {
+        this.exercises = e.sort((a, b) => (a.name > b.name) ? 1 : -1);
+      });
   }
 
 }

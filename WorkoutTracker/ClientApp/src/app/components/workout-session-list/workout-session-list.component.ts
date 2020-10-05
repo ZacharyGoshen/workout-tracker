@@ -50,6 +50,10 @@ export class WorkoutSessionListComponent implements OnInit {
   addWorkoutSession(workoutSessionDate: string, workoutPlanName: string): void {
     let workoutPlan = this.workoutPlans.find(wp => wp.name == workoutPlanName);
 
+    if (workoutPlan == null) {
+      workoutPlanName = "New Workout Session";
+    }
+
     this.workoutSessionService.addWorkoutSession(new WorkoutSession(workoutPlanName, workoutSessionDate))
       .subscribe(ws => {
         this.workoutSessions.push(ws);
@@ -77,7 +81,9 @@ export class WorkoutSessionListComponent implements OnInit {
 
   getExercises(): void {
     this.exerciseService.getExercises()
-      .subscribe(e => this.exercises = e);
+      .subscribe(e => {
+        this.exercises = e.sort((a, b) => (a.name > b.name) ? 1 : -1);
+      });
   }
 
 }

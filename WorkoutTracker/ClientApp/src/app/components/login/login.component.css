@@ -1,0 +1,24 @@
+#loginButton {
+    margin-right: 10px;
+}
+#loginContainer {
+    border: solid 2px black;
+    border-radius: 10px;
+    padding: 40px;
+    width: 300px;
+}
+#loginErrorMessage {
+    border-radius: 10px;
+    font-size: 12px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+#loginPage {
+    height: 100%;
+}
+#loginPassword {
+  margin-bottom: 20px;
+}
+#loginUsername {
+    margin-bottom: 20px;
+}

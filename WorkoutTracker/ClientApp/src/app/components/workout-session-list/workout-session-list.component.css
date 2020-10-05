@@ -1,6 +1,5 @@
 .set-result-column-names {
     border-bottom: solid 2px;
-    margin-top: 58px;
     padding-left: 20px;
 }
 .workout-session-exercise-column {
@@ -55,9 +54,9 @@
     padding: 104px 0px 10px 0px;
 }
 #workoutSessionRepsActualHeader {
-  border-right: solid 2px;
-  padding-bottom: 10px;
-  padding-top: 10px;
+    border-right: solid 2px;
+    padding-bottom: 10px;
+    padding-top: 10px;
 }
 #workoutSessionRestTimeHeader {
     border-right: solid 2px;
@@ -75,7 +74,7 @@
     padding-top: 10px;
 }
 #workoutSessionWeightHeader {
-  border-right: solid 2px;
-  padding-bottom: 10px;
-  padding-top: 10px;
+    border-right: solid 2px;
+    padding-bottom: 10px;
+    padding-top: 10px;
 }

@@ -9,14 +9,14 @@ using WorkoutTracker.Models;
 
 namespace WorkoutTracker.Controllers
 {
-    public class WorkoutSessions : Controller
+    public class WorkoutSessions : BaseController
     {
         [HttpGet]
         [Route("workoutSessions")]
         public JsonResult List()
         {
             var context = new WorkoutTrackerContext();
-            var workoutSessions = context.WorkoutSessions.ToList();
+            var workoutSessions = context.WorkoutSessions.Where(ws => ws.UserId == this.UserId).ToList();
             return Json(workoutSessions);
         }
 
@@ -25,7 +25,7 @@ namespace WorkoutTracker.Controllers
         public JsonResult GetById(int id)
         {
             var context = new WorkoutTrackerContext();
-            var workoutSession = context.WorkoutSessions.Where(ws => ws.Id == id).First();
+            var workoutSession = context.WorkoutSessions.Where(ws => ws.Id == id && ws.UserId == this.UserId).First();
             return Json(workoutSession);
         }
 
@@ -34,6 +34,7 @@ namespace WorkoutTracker.Controllers
         public JsonResult Update([FromBody] WorkoutSession workoutSession)
         {
             var context = new WorkoutTrackerContext();
+            workoutSession.UserId = this.UserId;
             context.Entry(context.WorkoutSessions.Find(workoutSession.Id)).CurrentValues.SetValues(workoutSession);
             context.SaveChanges();
             return Json(workoutSession);
@@ -44,6 +45,7 @@ namespace WorkoutTracker.Controllers
         public JsonResult Create([FromBody] WorkoutSession workoutSession)
         {
             var context = new WorkoutTrackerContext();
+            workoutSession.UserId = this.UserId;
             context.WorkoutSessions.Add(workoutSession);
             context.SaveChanges();
             return Json(workoutSession);

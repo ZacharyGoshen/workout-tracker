@@ -8,7 +8,7 @@ using WorkoutTracker.Models;
 
 namespace WorkoutTracker.Controllers
 {
-    public class SetPlans : Controller
+    public class SetPlans : BaseController
     {
         [HttpGet]
         [Route("setPlans")]
@@ -18,7 +18,7 @@ namespace WorkoutTracker.Controllers
 
             var context = new WorkoutTrackerContext();
             var setPlans = context.SetPlans
-                .Where(sp => sp.WorkoutPlanId == Int32.Parse(workoutPlanId));
+                .Where(sp => sp.WorkoutPlanId == Int32.Parse(workoutPlanId) && sp.UserId == this.UserId);
             return Json(setPlans);
         }
 
@@ -27,6 +27,7 @@ namespace WorkoutTracker.Controllers
         public JsonResult Create([FromBody] SetPlan setPlan)
         {
             var context = new WorkoutTrackerContext();
+            setPlan.UserId = this.UserId;
             context.SetPlans.Add(setPlan);
             context.SaveChanges();
             return Json(setPlan);
@@ -37,6 +38,7 @@ namespace WorkoutTracker.Controllers
         public JsonResult Update([FromBody] SetPlan setPlan)
         {
             var context = new WorkoutTrackerContext();
+            setPlan.UserId = this.UserId;
             context.Entry(context.SetPlans.Find(setPlan.Id)).CurrentValues.SetValues(setPlan);
             context.SaveChanges();
             return Json(setPlan);

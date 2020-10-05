@@ -1,10 +1,13 @@
-<div id="workoutPlanList">
-    <div class="background-white border-light-gray d-flex fixed-top flex-row set-plan-column-names">
+<div class="fixed-top">
+    <app-navigation-bar currentPage="workout-plans"></app-navigation-bar>
+    <div class="background-white border-light-gray d-flex flex-row set-plan-column-names">
         <div id="workoutPlanSetNumberHeader" class="border-light-gray workout-plan-set-number-column">Set #</div>
         <div id="workoutPlanExerciseHeader" class="border-light-gray workout-plan-exercise-column">Exercise Name</div>
         <div id="workoutPlanTargetRepsHeader" class="border-light-gray workout-plan-target-reps-column">Target Reps</div>
         <div id="workoutPlanRestTimeHeader" class="border-light-gray workout-plan-rest-time-column">Rest Time (s)</div>
     </div>
+</div>
+<div id="workoutPlanList">
     <app-workout-plan *ngFor="let workoutPlan of workoutPlans"
                       [exercises]="exercises"
                       [workoutPlan]="workoutPlan"

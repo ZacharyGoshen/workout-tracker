@@ -1,0 +1,14 @@
+<div id="loginPage" class="align-items-center d-flex justify-content-center">
+    <div id="loginContainer" class="border-light-gray">
+        <h1>Log In</h1>
+        <div [hidden]="errorMessageHidden" id="loginErrorMessage" class="background-light-red">Username or password is incorrect</div>
+        <div>Username</div>
+        <input #username id="loginUsername" class="form-control" />
+        <div>Password</div>
+        <input #password id="loginPassword" class="form-control" type="password"/>
+        <div class="d-flex flex-row"> 
+            <button (click)="logIn(username.value, password.value)" id="loginButton" class="btn btn-primary form-control">Log In</button>
+            <a class="btn btn-secondary form-control" href="app/register">Register</a>
+        </div>
+    </div>
+</div>

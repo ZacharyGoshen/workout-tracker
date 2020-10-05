@@ -1,0 +1,14 @@
+<div id="signupPage" class="align-items-center d-flex justify-content-center">
+    <div id="signupContainer" class="border-light-gray">
+        <h1>Sign Up</h1>
+        <div [hidden]="errorMessageHidden" id="signupErrorMessage" class="background-light-red">User already exists with that name</div>
+        <div>Username</div>
+        <input #username id="signupUsername" class="form-control" />
+        <div>Password</div>
+        <input #password id="signupPassword" class="form-control" type="password" />
+        <div class="d-flex flex-row">
+            <button (click)="addUser(username.value, password.value)" id="signupButton" class="btn btn-primary form-control">Sign Up</button>
+            <a class="btn btn-secondary form-control" href="app/login">Cancel</a>
+        </div>
+    </div>
+</div>

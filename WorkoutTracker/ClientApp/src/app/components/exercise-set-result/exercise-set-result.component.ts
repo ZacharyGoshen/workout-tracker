@@ -5,9 +5,9 @@ import { WorkoutSessionService } from '../../services/workout-session.service';
 import { DateService } from '../../services/date.service';
 
 @Component({
-  selector: '[app-exercise-set-result]',
+  selector: 'app-exercise-set-result',
   templateUrl: './exercise-set-result.component.html',
-  styleUrls: ['./exercise-set-result.component.css']
+  styleUrls: ['./exercise-set-result.component.css', './../exercise-list/exercise-list.component.css']
 })
 export class ExerciseSetResultComponent implements OnInit {
 

@@ -1,3 +1,6 @@
 #navigationBar {
     border-bottom: solid 2px;
 }
+#navigationBarLogo {
+    margin-right: 10px;
+}

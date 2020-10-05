@@ -1,0 +1,20 @@
+.exercise {
+    margin-left: 20px;
+}
+.exercise-delete-button {
+    margin-right: 10px;
+}
+.exercise-header {
+    border-bottom: solid 2px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+.exercise-name {
+    margin-right: 10px;
+    max-width: 500px;
+    min-width: 500px;
+}
+.exercise-no-entries-found {
+    border-bottom: solid 2px black;
+    padding: 20px 0px 20px 20px;
+}

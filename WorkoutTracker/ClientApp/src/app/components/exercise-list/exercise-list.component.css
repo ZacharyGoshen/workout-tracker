@@ -1,0 +1,81 @@
+.dropdown-item {
+    padding-left: 10px;
+}
+.dropdown-option-text {
+    margin-right: 10px;
+}
+.exercise-column-names {
+    border-bottom: solid 2px;
+    padding-left: 20px;
+}
+.exercise-date-column {
+    margin-right: 20px;
+    max-width: 170px;
+    min-width: 170px;
+}
+.exercise-header {
+    border-right: solid 2px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+.exercise-list-option {
+    margin-right: 20px;
+}
+.exercise-list-option-icon {
+    margin-right: 5px;
+}
+.exercise-reps-completed-column {
+    margin-right: 20px;
+    max-width: 150px;
+    min-width: 150px;
+}
+.exercise-rest-time-column {
+    margin-right: 20px;
+    max-width: 120px;
+    min-width: 120px;
+}
+.exercise-session-name-column {
+    margin-right: 20px;
+    max-width: 320px;
+    min-width: 320px;
+}
+.exercise-set-number-column {
+    margin-right: 20px;
+    max-width: 70px;
+    min-width: 70px;
+}
+.exercise-target-reps-column {
+    margin-right: 20px;
+    max-width: 246px;
+    min-width: 246px;
+}
+.exercise-weight-column {
+    margin-right: 20px;
+    max-width: 120px;
+    min-width: 120px;
+}
+.filter-date {
+    max-width: 170px;
+    min-width: 170px;
+}
+.filter-header {
+    font-size: 12px;
+}
+.filter-option-left {
+    margin-right: 10px;
+}
+#exerciseCreateName {
+    margin-right: 10px;
+    max-width: 500px;
+    min-width: 500px;
+}
+#exerciseCreateRow {
+    padding: 20px 10px 0px 20px;
+}
+#exerciseList {
+    padding: 150px 0px 10px 0px;
+}
+#exerciseListOptions {
+  border-bottom: solid 2px;
+  padding: 10px 0px 10px 20px;
+}

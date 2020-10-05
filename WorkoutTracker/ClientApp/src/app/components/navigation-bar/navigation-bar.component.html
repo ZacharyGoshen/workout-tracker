@@ -1,5 +1,16 @@
-<nav id="navigationBar" class="background-white border-light-gray fixed-top navbar navbar-expand-lg">
-    <a class="navbar-brand text-black">Workout Tracker</a>
+<nav id="navigationBar" class="background-white border-light-gray navbar navbar-expand-lg">
+    <a class="align-items-center d-flex flex-row hover-cursor-pointer hover-text-dark-gray navbar-brand text-black" href="app">
+        <svg id="navigationBarLogo" height="20" viewBox="0 0 510 510" width="20">
+            <path d="m0 151v208c0 8.284 6.716 15 15 15h18.96c8.284 0 15-6.716 15-15v-208c0-8.284-6.716-15-15-15h-18.96c-8.284 0-15 6.716-15 15z" />
+            <path d="m158 87c0-8.284-6.716-15-15-15h-45.04c-10.493 0-19 8.507-19 19v328c0 10.493 8.507 19 19 19h45.04c8.284 0 15-6.716 15-15v-121.02h33.32v-93.96h-33.32z" />
+            <path d="m352 87v121.02h-33.68v93.96h33.68v121.02c0 8.284 6.716 15 15 15h49c8.284 0 15-6.716 15-15v-336c0-8.284-6.716-15-15-15h-49c-8.284 0-15 6.716-15 15z" />
+            <path d="m495 136h-19c-8.284 0-15 6.716-15 15v208c0 8.284 6.716 15 15 15h19c8.284 0 15-6.716 15-15v-208c0-8.284-6.716-15-15-15z" />
+            <path d="m221.32 208.02h67v93.96h-67z" />
+        </svg>
+        <div>
+            Workout Tracker
+        </div>
+    </a>
     <button
         [attr.aria-expanded]="!isCollapsed"
         (click)="isCollapsed = !isCollapsed"
@@ -19,13 +30,45 @@
     >
         <ul class="mr-auto navbar-nav">
             <li class="nav-item">
-                <a class="nav-link text-black" href="app/workout-plans">Workout Plans</a>
+                <a
+                    [ngClass]="{
+                        'text-black': currentPage == 'workout-plans',
+                        'text-light-gray': currentPage != 'workout-plans'
+                    }"
+                    class="hover-text-dark-gray nav-link"
+                    href="app/workout-plans"
+                >
+                Workout Plans
+                </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-black" href="app/workout-sessions">Workout Sessions</a>
+                <a
+                    [ngClass]="{
+                        'text-black': currentPage == 'workout-sessions',
+                        'text-light-gray': currentPage != 'workout-sessions'
+                    }"
+                    class="hover-text-dark-gray nav-link"
+                    href="app/workout-sessions"
+                >
+                Workout Sessions
+                </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-black" href="app/exercises">Exercises</a>
+                <a
+                    [ngClass]="{
+                        'text-black': currentPage == 'exercises',
+                        'text-light-gray': currentPage != 'exercises'
+                    }"
+                    class="hover-text-dark-gray nav-link"
+                    href="app/exercises"
+                >
+                Exercises
+                </a>
+            </li>
+        </ul>
+        <ul class="ml-auto navbar-nav">
+            <li class="nav-item">
+                <div (click)="logout()" class="hover-cursor-pointer hover-text-dark-gray nav-link nav-link text-black">Logout</div>
             </li>
         </ul>
     </div>

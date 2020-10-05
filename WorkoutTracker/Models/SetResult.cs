@@ -13,6 +13,9 @@ namespace WorkoutTracker.Models
         public bool ToFailure { get; set; }
         public int RestTime { get; set; }
 
+        public int UserId { get; set; }
+        public User User { get; set; }
+
         public int WorkoutSessionId { get; set; }
         public WorkoutSession WorkoutSession { get; set; }
 

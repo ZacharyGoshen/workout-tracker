@@ -19,7 +19,7 @@ export class SetResultComponent implements OnInit {
 
   @Output() setResultUpdateOrder: EventEmitter<{ setResultId: number, order: number }> = new EventEmitter();
   @Output() setResultDelete: EventEmitter<number> = new EventEmitter();
-  @Output() setResultDuplicate: EventEmitter<SetPlan> = new EventEmitter();
+  @Output() setResultDuplicate: EventEmitter<SetResult> = new EventEmitter();
 
   repsTargetLow = new FormControl();
   repsTargetHigh = new FormControl();
