@@ -30,6 +30,16 @@
     <None Include="**/*" />
     <None Include="**/*" />
     <None Include="**/*" />
+    <None Include="$(SpaRoot)**" />
+    <None Include="**/*" />
+    <None Include="**/*" />
+    <None Include="**/*" />
+    <None Include="**/*" />
+    <None Include="**/*" />
+    <None Include="$(SpaRoot)**" />
+    <None Include="**/*" />
+    <None Include="**/*" />
+    <None Include="**/*" />
   </ItemGroup>
 
   <ItemGroup>
@@ -67,6 +77,14 @@
     <None Remove="obj\Debug\netcoreapp3.1\Razor\Pages\Error.cshtml.g.cs" />
     <None Remove="obj\Debug\netcoreapp3.1\Razor\Pages\_ViewImports.cshtml.g.cs" />
     <None Remove="obj\Debug\netcoreapp3.1\Razor\Pages\Error.cshtml.g.cs" />
+    <None Remove="obj\Debug\netcoreapp3.1\Razor\Pages\Error.cshtml.g.cs" />
+    <None Remove="obj\Debug\netcoreapp3.1\Razor\Pages\Error.cshtml.g.cs" />
+    <None Remove="obj\Debug\netcoreapp3.1\Razor\Pages\Error.cshtml.g.cs" />
+    <None Remove="obj\Debug\netcoreapp3.1\Razor\Pages\Error.cshtml.g.cs" />
+    <None Remove="obj\Debug\netcoreapp3.1\Razor\Pages\_ViewImports.cshtml.g.cs" />
+    <None Remove="obj\Debug\netcoreapp3.1\Razor\Pages\_ViewImports.cshtml.g.cs" />
+    <None Remove="obj\Debug\netcoreapp3.1\Razor\Pages\_ViewImports.cshtml.g.cs" />
+    <None Remove="obj\Debug\netcoreapp3.1\Razor\Pages\_ViewImports.cshtml.g.cs" />
     <None Remove="obj\Debug\netcoreapp3.1\Razor\Pages\Error.cshtml.g.cs" />
     <None Remove="obj\Debug\netcoreapp3.1\Razor\Pages\Error.cshtml.g.cs" />
     <None Remove="obj\Debug\netcoreapp3.1\Razor\Pages\Error.cshtml.g.cs" />

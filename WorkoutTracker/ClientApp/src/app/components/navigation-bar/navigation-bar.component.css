@@ -1,6 +1,58 @@
-#navigationBar {
-    border-bottom: solid 2px;
+#navbar {
+    align-items: center;
+    background-color: #283035;
+    display: flex;
+    flex-direction: row;
+    padding: 15px 20px;
 }
-#navigationBarLogo {
+#navbarLinks {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: row;
+}
+#navbarLogo {
+    color: white;
+    margin-right: 30px;
+}
+#navbarLogo:hover div {
+    color: #3eadcf;
+}
+#navbarLogo:hover svg {
+    fill: #3eadcf;
+}
+#navbarLogo:hover .navbar-link-underline {
+    width: 100%;
+}
+#navbarLogo div:first-child {
+    align-items: center;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    font-size: 1.25rem;
+}
+#navbarLogo svg {
+    fill: white;
     margin-right: 10px;
+}
+.navbar-link {
+    color: #7a7a8c;
+    margin-right: 20px;
+    transition: .2s;
+}
+.navbar-link:hover {
+    color: #3eadcf;
+    cursor: pointer;
+}
+.navbar-link:hover .navbar-link-underline {
+    width: 100%;
+}
+.navbar-link-current {
+    color: #3eadcf;
+}
+.navbar-link-underline {
+    background-color: #3eadcf;
+    height: 1px;
+    margin: auto;
+    transition: .3s;
+    width: 0%;
 }

@@ -1,49 +1,73 @@
-<div class="border-light-gray d-flex flex-row justify-content-between set-plan">
-    <div class="d-flex flex-row">
-        <div class="border-light-gray set-plan-set-number-cell workout-plan-set-number-column">
-            <input #setPlanOrder (change)="updateSetPlanOrder(setPlanOrder.value)" value="{{ setPlan.order }}" class="form-control set-plan-set-number text-center" />
-        </div>
-        <div class="border-light-gray set-plan-exercise-cell workout-plan-exercise-column">
-            <select #exerciseName (change)="updateSetPlanExerciseId(exerciseName.value)" class="form-control set-plan-exercise">
-                <option *ngFor="let exercise of exercises"
-                        [selected]="exercise.id == currentExercise.id">
-                    {{ exercise.name }}
-                </option>
-            </select>
-        </div>
-        <div class="border-light-gray set-plan-target-reps-cell workout-plan-target-reps-column">
-            <div class="align-items-center d-flex flex-row">
-                <input #setPlanRepsTargetLow [formControl]="repsTargetLow" (change)="updateSetPlanRepsTargetLow(setPlanRepsTargetLow.value)" value="{{ setPlan.repsTargetLow }}" class="form-control set-plan-target-reps-low text-center" />
-                <span>
-                    <b>-</b>
-                </span>
-                <input #setPlanRepsTargetHigh [formControl]="repsTargetHigh" (change)="updateSetPlanRepsTargetHigh(setPlanRepsTargetHigh.value)" value="{{ setPlan.repsTargetHigh }}" class="form-control set-plan-target-reps-high text-center" />
-                <div class="form-check">
-                    <input #setPlanToFailure
-                           [checked]="setPlan.toFailure"
-                           (change)="updateSetPlanToFailure(setPlanToFailure.checked)"
-                           type="checkbox" id="toFailureCheckbox"
-                           class="form-check-input">
-                    <label class="form-check-label text-nowrap" for="toFailureCheckbox">To Failure</label>
-                </div>
-            </div>
-        </div>
-        <div class="border-light-gray set-plan-rest-time-cell workout-plan-rest-time-column">
-            <input #setPlanRestTime (change)="updateSetPlanRestTime(setPlanRestTime.value)" value="{{ setPlan.restTime }}" class="form-control set-plan-rest-time text-center" />
+<div class="set-plan">
+    <div class="set-number-column">
+        <input
+            #setPlanOrder
+            [formControl]="setNumber"
+            (change)="updateSetPlanOrder(setPlanOrder.value)"
+            (keydown.enter)="$event.target.blur()"
+            class="form-control set-number-input"
+            value="{{ setPlan.order }}"
+            type="number"
+        />
+    </div>
+    <div class="exercise-column">
+        <select #exerciseName (change)="updateSetPlanExerciseId(exerciseName.value)" class="form-control exercise-select">
+            <option *ngFor="let exercise of exercises"
+                    [selected]="exercise.id == currentExercise.id">
+                {{ exercise.name }}
+            </option>
+        </select>
+    </div>
+    <div class="target-reps-column">
+        <div class="align-items-center d-flex flex-row">
+            <input
+                #setPlanRepsTargetLow
+                [formControl]="repsTargetLow"
+                (change)="updateSetPlanRepsTargetLow(setPlanRepsTargetLow.value)"
+                (keydown.enter)="$event.target.blur()"
+                class="form-control rep-input"
+                value="{{ setPlan.repsTargetLow }}"
+                type="number"
+            />
+            <span class="dash">-</span>
+            <input
+                #setPlanRepsTargetHigh
+                [formControl]="repsTargetHigh"
+                (change)="updateSetPlanRepsTargetHigh(setPlanRepsTargetHigh.value)"
+                (keydown.enter)="$event.target.blur()"
+                class="form-control rep-input"
+                value="{{ setPlan.repsTargetHigh }}"
+                type="number"
+            />
+            <label class="checkbox-container">
+                To Failure
+                <input #setPlanToFailure
+                       [checked]="setPlan.toFailure"
+                       (change)="updateSetPlanToFailure(setPlanToFailure.checked)"
+                       type="checkbox">
+                <span class="checkmark"></span>
+            </label>
         </div>
     </div>
-    <div class="align-items-center d-flex flex-row">
-        <div (click)="duplicateSetPlan()" class="set-plan-duplicate-button">
-            <svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi-clipboard-plus hover-cursor-pointer hover-text-dark-gray text-light-gray" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
-                <path fill-rule="evenodd" d="M9.5 1h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3zM8 7a.5.5 0 0 1 .5.5V9H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V10H6a.5.5 0 0 1 0-1h1.5V7.5A.5.5 0 0 1 8 7z" />
-            </svg>
-        </div>
-        <div (click)="deleteSetPlan()" class="set-plan-delete-button">
-            <svg width="25px" height="25px" viewBox="0 0 16 16" class="bi bi-x hover-cursor-pointer hover-text-red text-light-gray" fill="currentColor">
-                <path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-            </svg>
-        </div>
+    <div class="rest-time-column">
+        <input
+            #setPlanRestTime
+            [formControl]="restTime"
+            (change)="updateSetPlanRestTime(setPlanRestTime.value)"
+            (keydown.enter)="$event.target.blur()"
+            class="form-control rest-time-input"
+            value="{{ setPlan.restTime }}"
+            type="number"
+        />
+    </div>
+    <div class="set-plan-buttons">
+        <svg (click)="duplicateSetPlan()" class="copy-set-plan-button" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
+            <path fill-rule="evenodd" d="M9.5 1h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3zM8 7a.5.5 0 0 1 .5.5V9H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V10H6a.5.5 0 0 1 0-1h1.5V7.5A.5.5 0 0 1 8 7z" />
+        </svg>
+        <svg (click)="deleteSetPlan()" class="delete-set-plan-button" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+        </svg>
     </div>
 </div>
-
+<app-popper #popper></app-popper>

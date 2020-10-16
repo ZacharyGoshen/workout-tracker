@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, ViewChild } from '@angular/core';
 import { WorkoutPlan } from '../../models/workout-plan';
 import { EventEmitter } from '@angular/core';
 import { SetPlan } from '../../models/set-plan';
@@ -6,11 +6,30 @@ import { SetPlanService } from '../../services/set-plan.service';
 import { Exercise } from '../../models/exercise';
 import { WorkoutPlanService } from '../../services/workout-plan.service';
 import { FormControl } from '@angular/forms';
+import { trigger, state, style, animate, transition } from '@angular/animations';
+import { PopperComponent } from '../popper/popper.component';
 
 @Component({
   selector: 'app-workout-plan',
   templateUrl: './workout-plan.component.html',
-  styleUrls: ['./workout-plan.component.css', './../set-plan/set-plan.component.css', './../workout-plan-list/workout-plan-list.component.css']
+  styleUrls: ['./workout-plan.component.css', './../set-plan/set-plan.component.css', './../workout-plan-list/workout-plan-list.component.css'],
+  animations: [
+    trigger('openClose', [
+      state('closed', style({
+        height: '0',
+        overflow: 'hidden'
+      })),
+      state('open', style({
+        overflow: 'hidden'
+      })),
+      transition('closed => open', [
+        animate('200ms')
+      ]),
+      transition('open => closed', [
+        animate('200ms')
+      ])
+    ])
+  ]
 })
 export class WorkoutPlanComponent implements OnInit {
 
@@ -19,6 +38,14 @@ export class WorkoutPlanComponent implements OnInit {
 
   @Output() workoutPlanDelete: EventEmitter<number> = new EventEmitter();
 
+  @ViewChild('workoutPlanName') workoutPlanNameInput;
+  @ViewChild('exerciseName') exerciseInput;
+  @ViewChild('repsTargetLow') repsTargetLowInput;
+  @ViewChild('repsTargetHigh') repsTargetHighInput;
+  @ViewChild('restTime') restTimeInput;
+  @ViewChild(PopperComponent) popperComponent: PopperComponent;
+
+  workoutPlanNameFormControl = new FormControl();
   newSetPlanExerciseName = new FormControl(null);
   newSetPlanRepsTargetLow = new FormControl('');
   newSetPlanRepsTargetHigh = new FormControl('');
@@ -40,6 +67,12 @@ export class WorkoutPlanComponent implements OnInit {
   }
 
   updateWorkoutPlanName(name: string): void {
+    if (name == "") {
+      this.popperComponent.create(this.workoutPlanNameInput.nativeElement, 'Enter a valid name.');
+      this.workoutPlanNameFormControl.setValue(this.workoutPlan.name);
+      return;
+    }
+
     this.workoutPlan.name = name;
     this.workoutPlanService.updateWorkoutPlan(this.workoutPlan).subscribe();
   }
@@ -59,10 +92,26 @@ export class WorkoutPlanComponent implements OnInit {
   addSetPlan(exerciseName: string, repsTargetLow: string, repsTargetHigh: string, toFailure: boolean, restTime: string): void {
     let exercise = this.exercises.find(e => e.name == exerciseName);
     if (!exercise) {
+      this.popperComponent.create(this.exerciseInput.nativeElement, 'Select an exercise.');
       return;
     }
 
     let order = this.setPlans.length + 1;
+
+    if (parseInt(repsTargetLow) < 0 || parseInt(repsTargetLow) > 99) {
+      this.popperComponent.create(this.repsTargetLowInput.nativeElement, 'Enter a value between 0-99.');
+      return;
+    }
+
+    if (parseInt(repsTargetHigh) < 0 || parseInt(repsTargetHigh) > 99) {
+      this.popperComponent.create(this.repsTargetHighInput.nativeElement, 'Enter a value between 0-99.');
+      return;
+    }
+
+    if (parseInt(repsTargetLow) > parseInt(repsTargetHigh)) {
+      this.popperComponent.create(this.repsTargetLowInput.nativeElement, `Enter a valid range.`);
+      return;
+    }
 
     if (!repsTargetLow && !repsTargetHigh) {
       repsTargetLow = '0';
@@ -71,6 +120,11 @@ export class WorkoutPlanComponent implements OnInit {
       repsTargetHigh = repsTargetLow;
     } else if (repsTargetHigh && !repsTargetLow) {
       repsTargetLow = repsTargetHigh;
+    }
+
+    if (parseInt(restTime) < 0 || parseInt(restTime) > 999) {
+      this.popperComponent.create(this.restTimeInput.nativeElement, 'Enter a value between 0-999.');
+      return;
     }
 
     if (!restTime) restTime = '0';
@@ -133,6 +187,8 @@ export class WorkoutPlanComponent implements OnInit {
     this.newSetPlanRepsTargetLow.setValue('');
     this.newSetPlanRepsTargetHigh.setValue('');
     this.newSetPlanToFailure.setValue(false);
+    this.newSetPlanRepsTargetLow.enable();
+    this.newSetPlanRepsTargetHigh.enable();
     this.newSetPlanRestTime.setValue('');
   }
 

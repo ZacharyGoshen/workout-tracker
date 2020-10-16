@@ -1,55 +1,82 @@
-.set-plan-column-names {
-    border-bottom: solid 2px;
-    padding-left: 20px;
+.exercise-column {
+    border-right: solid 2px #283035;
+    max-width: 340px;
+    min-width: 340px;
+    padding: 10px 20px;
 }
-.workout-plan-exercise-column {
-    margin-right: 20px;
-    max-width: 320px;
-    min-width: 320px;
+.rest-time-column {
+    border-right: solid 2px #283035;
+    max-width: 140px;
+    min-width: 140px;
+    padding: 10px 20px;
 }
-.workout-plan-rest-time-column {
-    margin-right: 20px;
-    max-width: 120px;
-    min-width: 120px;
+.set-number-column {
+    border-right: solid 2px #283035;
+    max-width: 90px;
+    min-width: 90px;
+    padding: 10px 20px;
 }
-.workout-plan-set-number-column {
-    margin-right: 20px;
-    max-width: 70px;
-    min-width: 70px;
+.target-reps-column {
+    border-right: solid 2px #283035;
+    max-width: 266px;
+    min-width: 266px;
+    padding: 10px 20px;
 }
-.workout-plan-target-reps-column {
-    margin-right: 20px;
-    max-width: 246px;
-    min-width: 246px;
+.workout-plan-list-column-name {
+    border-right: solid 2px #283035;
 }
-#workoutPlanCreateName {
+#newWorkoutPlanButton {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    height: 60px;
+    justify-content: flex-end;
+}
+#newWorkoutPlanButton:hover {
+    cursor: pointer;
+}
+#newWorkoutPlanButton:hover svg{
+    fill: #3eadcf;
+}
+#newWorkoutPlanButton svg {
+    fill: #283035;
+    height: 20px;
+    width: 20px;
+}
+#newWorkoutPlanName {
+    border: solid 2px #283035;
+    background-color: #283035;
+    color: white;
     margin-right: 10px;
     max-width: 500px;
     min-width: 500px;
 }
-#workoutPlanCreateRow {
-    padding: 20px 10px 0px 20px;
+#newWorkoutPlanName:focus {
+    box-shadow: none;
+    border: solid 2px #3eadcf;
 }
-#workoutPlanExerciseHeader {
-    border-right: solid 2px;
-    padding-bottom: 10px;
-    padding-top: 10px;
+#newWorkoutPlanRow {
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: -0.5rem 0.5rem 1rem #000;
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+    padding: 0px 10px;
+    transition: .2s;
+}
+#newWorkoutPlanRow:hover {
+    transform: translateX(.5rem);
 }
 #workoutPlanList {
     padding: 104px 0px 10px 0px;
 }
-#workoutPlanRestTimeHeader {
-    border-right: solid 2px;
-    padding-bottom: 10px;
-    padding-top: 10px;
-}
-#workoutPlanSetNumberHeader {
-    border-right: solid 2px;
-    padding-bottom: 10px;
-    padding-top: 10px;
-}
-#workoutPlanTargetRepsHeader {
-    border-right: solid 2px;
-    padding-bottom: 10px;
-    padding-top: 10px;
+#workoutPlanListHeader {
+    background-color: #17141d;
+    border-bottom: solid 2px #283035;
+    color: #7a7a8c;
+    padding-left: 30px;
+    display: flex;
+    flex-direction: row;
 }

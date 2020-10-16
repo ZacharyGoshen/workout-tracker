@@ -1,10 +1,11 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, ViewChild } from '@angular/core';
 import { SetPlan } from '../../models/set-plan';
 import { Exercise } from '../../models/exercise';
 import { ExerciseService } from '../../services/exercise.service';
 import { EventEmitter } from '@angular/core';
 import { SetPlanService } from '../../services/set-plan.service';
 import { FormControl } from '@angular/forms';
+import { PopperComponent } from '../popper/popper.component';
 
 @Component({
   selector: 'app-set-plan',
@@ -15,13 +16,22 @@ export class SetPlanComponent implements OnInit {
 
   @Input() setPlan: SetPlan;
   @Input() exercises: Exercise[];
+  @Input() workoutPlanLength: number;
 
   @Output() setPlanDelete: EventEmitter<number> = new EventEmitter();
   @Output() setPlanUpdateOrder: EventEmitter<{ setPlanId: number, order: number }> = new EventEmitter();
   @Output() setPlanDuplicate: EventEmitter<SetPlan> = new EventEmitter();
 
+  @ViewChild('setPlanOrder') setNumberInput;
+  @ViewChild('setPlanRepsTargetLow') repsTargetLowInput;
+  @ViewChild('setPlanRepsTargetHigh') repsTargetHighInput;
+  @ViewChild('setPlanRestTime') restTimeInput;
+  @ViewChild(PopperComponent) popperComponent: PopperComponent;
+
+  setNumber = new FormControl();
   repsTargetLow = new FormControl();
   repsTargetHigh = new FormControl();
+  restTime = new FormControl();
 
   currentExercise: Exercise;
 
@@ -39,28 +49,46 @@ export class SetPlanComponent implements OnInit {
     this.setPlanDuplicate.emit(this.setPlan);
   }
 
+  updateSetPlanOrder(order: string): void {
+    order = parseInt(order);
+    if (!order || order < 1 || order > this.workoutPlanLength) {
+      this.popperComponent.create(this.setNumberInput.nativeElement, `Enter a value between 1-${this.workoutPlanLength}.`);
+      this.setNumber.setValue(this.setPlan.order);
+      return;
+    }
+    this.setPlanUpdateOrder.emit({ setPlanId: this.setPlan.id, order: order });
+  }
+
   updateSetPlanExerciseId(exerciseName: string): void {
     this.setPlan.exerciseId = this.exercises.find(e => e.name == exerciseName).id;
     this.setPlanService.updateSetPlan(this.setPlan).subscribe();
   }
 
-  updateSetPlanOrder(order: string): void {
-    this.setPlanUpdateOrder.emit({ setPlanId: this.setPlan.id, order: parseInt(order) });
-  }
-
   updateSetPlanRepsTargetLow(repsTargetLow: string): void {
-    this.setPlan.repsTargetLow = parseInt(repsTargetLow);
-    if (this.setPlan.repsTargetHigh < this.setPlan.repsTargetLow) {
-      this.setPlan.repsTargetHigh = this.setPlan.repsTargetLow;
+    repsTargetLow = parseInt(repsTargetLow);
+    if (isNaN(repsTargetLow) || repsTargetLow < 0 || repsTargetLow > 99) {
+      this.popperComponent.create(this.repsTargetLowInput.nativeElement, 'Enter a value between 0-99.');
+      this.repsTargetLow.setValue(this.setPlan.repsTargetLow);
+      return;
     }
+    if (repsTargetLow > this.setPlan.repsTargetHigh) {
+      this.setPlan.repsTargetHigh = repsTargetLow;
+    }
+    this.setPlan.repsTargetLow = repsTargetLow;
     this.setPlanService.updateSetPlan(this.setPlan).subscribe();
   }
 
   updateSetPlanRepsTargetHigh(repsTargetHigh: string): void {
-    this.setPlan.repsTargetHigh= parseInt(repsTargetHigh);
-    if (this.setPlan.repsTargetLow > this.setPlan.repsTargetHigh) {
-      this.setPlan.repsTargetLow = this.setPlan.repsTargetHigh;
+    repsTargetHigh = parseInt(repsTargetHigh);
+    if (isNaN(repsTargetHigh) || repsTargetHigh < 0 || repsTargetHigh > 99) {
+      this.popperComponent.create(this.repsTargetHighInput.nativeElement, 'Enter a value between 0-99.');
+      this.repsTargetHigh.setValue(this.setPlan.repsTargetHigh);
+      return;
     }
+    if (repsTargetHigh < this.setPlan.repsTargetLow) {
+      this.setPlan.repsTargetLow = repsTargetHigh;
+    }
+    this.setPlan.repsTargetHigh = repsTargetHigh;
     this.setPlanService.updateSetPlan(this.setPlan).subscribe();
   }
 
@@ -71,7 +99,13 @@ export class SetPlanComponent implements OnInit {
   }
 
   updateSetPlanRestTime(restTime: string): void {
-    this.setPlan.restTime = parseInt(restTime);
+    restTime = parseInt(restTime);
+    if (isNaN(restTime) || restTime < 0 || restTime > 999) {
+      this.popperComponent.create(this.restTimeInput.nativeElement, 'Enter a value between 0-999.');
+      this.restTime.setValue(this.setPlan.restTime);
+      return;
+    }
+    this.setPlan.restTime = restTime;
     this.setPlanService.updateSetPlan(this.setPlan).subscribe();
   }
 

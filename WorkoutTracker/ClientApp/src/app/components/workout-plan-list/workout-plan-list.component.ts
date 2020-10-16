@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { WorkoutPlanService } from '../../services/workout-plan.service';
 import { WorkoutPlan } from '../../models/workout-plan';
 import { Exercise } from '../../models/exercise';
 import { ExerciseService } from '../../services/exercise.service';
 import { FormControl } from '@angular/forms';
+import { PopperComponent } from '../popper/popper.component';
 
 @Component({
   selector: 'app-workout-plan-list',
@@ -16,6 +17,9 @@ export class WorkoutPlanListComponent implements OnInit {
 
   exercises: Exercise[];
   workoutPlans: WorkoutPlan[];
+
+  @ViewChild('workoutPlanName') workoutPlanNameInput;
+  @ViewChild(PopperComponent) popperComponent: PopperComponent;
 
   constructor(
     private workoutPlanService: WorkoutPlanService,
@@ -33,6 +37,11 @@ export class WorkoutPlanListComponent implements OnInit {
   }
 
   addWorkoutPlan(workoutPlanName: string): void {
+    if (workoutPlanName.length == 0) {
+      this.popperComponent.create(this.workoutPlanNameInput.nativeElement, 'Enter a valid name.');
+      return;
+    }
+
     let workoutPlan = new WorkoutPlan(workoutPlanName);
     this.workoutPlanService.addWorkoutPlan(workoutPlan)
       .subscribe(wp => {

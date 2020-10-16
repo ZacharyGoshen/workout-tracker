@@ -12,4 +12,8 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
+  followLink(link: string): void {
+    location.href = link;
+  }
+
 }

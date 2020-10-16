@@ -1,48 +1,87 @@
+.copy-set-plan-button {
+    height: 20px;
+    fill: #7a7a8c;
+    margin-right: 10px;
+    width: 20px;
+}
+.copy-set-plan-button:hover {
+    cursor: pointer;
+    fill: #3eadcf;
+}
+.dash {
+    color: #7a7a8c;
+    margin-right: 10px;
+}
+.delete-set-plan-button {
+    height: 25px;
+    fill: #7a7a8c;
+    margin-right: 10px;
+    width: 25px;
+}
+.delete-set-plan-button:hover {
+    cursor: pointer;
+    fill: red;
+}
+.exercise-select {
+    border: solid 2px #283035;
+    background-color: #283035;
+    color: white;
+    margin-right: 10px;
+}
+.exercise-select:focus {
+    box-shadow: none;
+    border: solid 2px #3eadcf;
+}
+.rep-input {
+    border: solid 2px #283035;
+    background-color: #283035;
+    color: white;
+    margin-right: 10px;
+    text-align: center;
+}
+.rep-input:disabled {
+    background-color: #17141d;
+    color: transparent;
+    
+}
+.rep-input:focus {
+    box-shadow: none;
+    border: solid 2px #3eadcf;
+}
+.rest-time-input {
+    border: solid 2px #283035;
+    background-color: #283035;
+    color: white;
+    margin-right: 10px;
+    text-align: center;
+}
+.rest-time-input:focus {
+    box-shadow: none;
+    border: solid 2px #3eadcf;
+}
+.set-number-input {
+    border: solid 2px #283035;
+    background-color: #283035;
+    color: white;
+    text-align: center;
+}
+.set-number-input:focus {
+    box-shadow: none;
+    border: solid 2px #3eadcf;
+}
 .set-plan {
-    border-bottom: solid 2px;
+    display: flex;
+    flex-direction: row;
 }
-.set-plan-delete-button {
-    margin-right: 10px;
+.set-plan-buttons {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    justify-content: flex-end;
+    opacity: 0;
+    transition: .3s;
 }
-.set-plan-duplicate-button {
-    margin-right: 10px;
-}
-.set-plan-exercise {
-  max-width: 300px;
-  min-width: 300px;
-}
-.set-plan-rest-time {
-    max-width: 75px;
-    min-width: 75px;
-}
-.set-plan-set-number {
-    max-width: 50px;
-    min-width: 50px;
-}
-.set-plan-target-reps-low {
-    margin-right: 10px;
-    max-width: 50px;
-    min-width: 50px;
-}
-.set-plan-target-reps-high {
-    margin-left: 10px;
-    margin-right: 10px;
-    max-width: 50px;
-    min-width: 50px;
-}
-.set-plan-exercise-cell {
-    border-right: solid 2px;
-    padding: 10px 0px;
-}
-.set-plan-rest-time-cell {
-    border-right: solid 2px;
-    padding: 10px 0px;
-}
-.set-plan-set-number-cell {
-    border-right: solid 2px;
-    padding: 10px 0px;
-}
-.set-plan-target-reps-cell {
-    border-right: solid 2px;
-    padding: 10px 0px;
+.set-plan:hover .set-plan-buttons {
+    opacity: 1;
 }
