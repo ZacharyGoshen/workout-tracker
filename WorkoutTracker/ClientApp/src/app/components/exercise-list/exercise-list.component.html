@@ -1,145 +1,128 @@
 <div class="fixed-top">
     <app-navigation-bar currentPage="exercises"></app-navigation-bar>
-    <div id="exerciseListOptions" class="align-items-center background-white border-light-gray d-flex flex-row">
-        <div ngbDropdown autoClose="outside">
-            <div ngbDropdownToggle id="sortExercisesButton" class="align-items-center d-flex exercise-list-option flex-row hover-cursor-pointer">
-                <svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi-sort-down exercise-list-option-icon" fill="currentColor">
-                    <path fill-rule="evenodd" d="M3 2a.5.5 0 0 1 .5.5v10a.5.5 0 0 1-1 0v-10A.5.5 0 0 1 3 2z" />
-                    <path fill-rule="evenodd" d="M5.354 10.146a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L3 11.793l1.646-1.647a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 9a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5z" />
-                </svg>
-                <div>Sort Exercises</div>
-            </div>
-            <div ngbDropdownMenu class="position-front" aria-labelledby="sortExercisesButton">
-                <div (click)="sortExercisesByName()" class="align-items-center d-flex dropdown-item flex-row hover-background-light-gray hover-cursor-pointer hover-text-black">
-                    <div class="dropdown-option-text">Name</div>
-                    <svg *ngIf="exercisesSortedAlphabetically" width="15px" height="15px" viewBox="0 0 16 16" class="bi bi-arrow-down" fill="currentColor">
-                        <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z" />
-                    </svg>
-                    <svg *ngIf="!exercisesSortedAlphabetically" width="15px" height="15px" viewBox="0 0 16 16" class="bi bi-arrow-up" fill="currentColor">
-                        <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z" />
-                    </svg>
-                </div>
-            </div>
-        </div>
-        <!--<div class="align-items-center d-flex exercise-list-option flex-row hover-cursor-pointer">
-            <svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi-filter exercise-list-option-icon" fill="currentColor">
-                <path fill-rule="evenodd" d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z" />
-            </svg>
-            <div>Filter Exercises</div>
-        </div>-->
-        <!--<div class="align-items-center d-flex exercise-list-option flex-row hover-cursor-pointer">
-            <svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi-sort-down exercise-list-option-icon" fill="currentColor">
+    <div id="exerciseListOptions">
+        <div #sortExercisesButton (click)="toggleSortExercisesMenu()" class="exercise-list-option">
+            <svg class="exercise-list-option-icon" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M3 2a.5.5 0 0 1 .5.5v10a.5.5 0 0 1-1 0v-10A.5.5 0 0 1 3 2z" />
                 <path fill-rule="evenodd" d="M5.354 10.146a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L3 11.793l1.646-1.647a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 9a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5z" />
             </svg>
-            <div>Sort Sets</div>
-        </div>-->
-        <div ngbDropdown autoClose="outside">
-            <div ngbDropdownToggle id="filterSetsButton" class="align-items-center d-flex exercise-list-option flex-row hover-cursor-pointer">
-                <svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi-filter exercise-list-option-icon" fill="currentColor">
-                    <path fill-rule="evenodd" d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z" />
+            <div>Sort Exercises</div>
+        </div>
+        <div #sortExercisesMenu class="popper-menu">
+            <div (click)="sortExercisesByName()" class="sort-option">
+                <div>Name</div>
+                <svg *ngIf="exercisesSortedAlphabetically" class="sort-arrow" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z" />
                 </svg>
-                <div>Filter Sets</div>
+                <svg *ngIf="!exercisesSortedAlphabetically" class="sort-arrow" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z" />
+                </svg>
             </div>
-            <div ngbDropdownMenu class="position-front" aria-labelledby="filterSetsButton">
-                <div class="dropdown-item hover-background-light-gray">
-                    <div class="filter-header text-light-gray">Session Name</div>
-                    <input #workoutSessionNameFilter
-                           (keyup)="filterSetResultsByWorkoutSessionName(workoutSessionNameFilter.value)"
-                           class="form-control mr-2"
-                           placeholder="Session Name" />
-                </div>
-                <div class="d-flex dropdown-item flex-row hover-background-light-gray">
-                    <div class="filter-option-left">
-                        <div class="filter-header text-light-gray">Start Date</div>
-                        <input #dateStartFilter
-                               (change)="filterSetResultsByDateStart(dateStartFilter.value)"
-                               class="filter-date form-control"
-                               type="date" />
-                    </div>
-                    <div>
-                        <div class="filter-header text-light-gray">End Date</div>
-                        <input #dateEndFilter
-                               (change)="filterSetResultsByDateEnd(dateEndFilter.value)"
-                               class="filter-date form-control"
-                               type="date" />
-                    </div>
-                </div>
-                <div class="d-flex dropdown-item flex-row hover-background-light-gray">
-                    <div class="filter-option-left">
-                        <div class="filter-header text-light-gray">Weight Low</div>
-                        <input #weightLowFilter
-                               (change)="filterSetResultsByWeightLow(weightLowFilter.value)"
-                               class="form-control"
-                               type="number" />
-                    </div>
-                    <div>
-                        <div class="filter-header text-light-gray">Weight High</div>
-                        <input #weightHighFilter
-                               (change)="filterSetResultsByWeightHigh(weightHighFilter.value)"
-                               class="form-control"
-                               type="number" />
-                    </div>
-                </div>
-                <div class="d-flex dropdown-item flex-row hover-background-light-gray">
-                    <div class="filter-option-left">
-                        <div class="filter-header text-light-gray">Reps Completed Low</div>
-                        <input #repsCompletedLowFilter
-                               (change)="filterSetResultsByRepsCompletedLow(repsCompletedLowFilter.value)"
-                               class="form-control"
-                               type="number" />
-                    </div>
-                    <div>
-                        <div class="filter-header text-light-gray">Reps Completed High</div>
-                        <input #repsCompletedHighFilter
-                               (change)="filterSetResultsByRepsCompletedHigh(repsCompletedHighFilter.value)"
-                               class="form-control"
-                               type="number" />
-                    </div>
-                </div>
-                <div class="d-flex dropdown-item flex-row hover-background-light-gray">
-                    <div class="filter-option-left">
-                        <div class="filter-header text-light-gray">Target Reps Low</div>
-                        <input #targetRepsLowFilter
-                               (change)="filterSetResultsByTargetRepsLow(targetRepsLowFilter.value)"
-                               class="form-control"
-                               type="number" />
-                    </div>
-                    <div>
-                        <div class="filter-header text-light-gray">Target Reps High</div>
-                        <input #targetRepsHighFilter
-                               (change)="filterSetResultsByTargetRepsHigh(targetRepsHighFilter.value)"
-                               class="form-control"
-                               type="number" />
-                    </div>
-                </div>
-                <div class="d-flex dropdown-item flex-row hover-background-light-gray">
-                    <div class="filter-option-left">
-                        <div class="filter-header text-light-gray">Rest Time Low</div>
-                        <input #restTimeLowFilter
-                               (change)="filterSetResultsByRestTimeLow(restTimeLowFilter.value)"
-                               class="form-control"
-                               type="number" />
-                    </div>
-                    <div>
-                        <div class="filter-header text-light-gray">Rest Time High</div>
-                        <input #restTimeHighFilter
-                               (change)="filterSetResultsByRestTimeHigh(restTimeHighFilter.value)"
-                               class="form-control"
-                               type="number" />
-                    </div>
-                </div>
+        </div>
+        <div #filterSetsButton (click)="toggleFilterSetsMenu()"class="exercise-list-option">
+            <svg class="exercise-list-option-icon" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z" />
+            </svg>
+            <div>Filter Sets</div>
+        </div>
+        <div #filterSetsMenu class="popper-menu">
+            <div class="filter-header">Session Name</div>
+            <input
+                #workoutSessionNameFilter
+                (keyup)="filterSetResultsByWorkoutSessionName(workoutSessionNameFilter.value)"
+                class="form-control name-input"
+                placeholder="Session Name"
+            />
+            <div class="filter-header">Date</div>
+            <div class="input-range">
+                <input
+                    #dateStartFilter
+                    (change)="filterSetResultsByDateStart(dateStartFilter.value)"
+                    class="date-input form-control"
+                    type="date"
+                />
+                <div class="dash">-</div>
+                <input
+                    #dateEndFilter
+                    (change)="filterSetResultsByDateEnd(dateEndFilter.value)"
+                    class="date-input form-control"
+                    type="date"
+                />
+            </div>
+            <div class="filter-header">Weight</div>
+            <div class="input-range">
+                <input
+                    #weightLowFilter
+                    (change)="filterSetResultsByWeightLow(weightLowFilter.value)"
+                    class="number-input-three-digits form-control"
+                    type="number"
+                />
+                <div class="dash">-</div>
+                <input
+                    #weightHighFilter
+                    (change)="filterSetResultsByWeightHigh(weightHighFilter.value)"
+                    class="form-control number-input-three-digits"
+                    type="number"
+                />
+            </div>
+            <div class="filter-header">Reps Completed</div>
+            <div class="input-range">
+                <input
+                    #repsCompletedLowFilter
+                    (change)="filterSetResultsByRepsCompletedLow(repsCompletedLowFilter.value)"
+                    class="form-control number-input-two-digits"
+                    type="number"
+                />
+                <div class="dash">-</div>
+                <input
+                    #repsCompletedHighFilter
+                    (change)="filterSetResultsByRepsCompletedHigh(repsCompletedHighFilter.value)"
+                    class="form-control number-input-two-digits"
+                    type="number"
+                />
+            </div>
+            <div class="filter-header">Target Reps</div>
+            <div class="input-range">
+                <input
+                    #targetRepsLowFilter
+                    (change)="filterSetResultsByTargetRepsLow(targetRepsLowFilter.value)"
+                    class="form-control number-input-two-digits"
+                    type="number"
+                />
+                <div class="dash">-</div>
+                <input
+                    #targetRepsHighFilter
+                    (change)="filterSetResultsByTargetRepsHigh(targetRepsHighFilter.value)"
+                    class="form-control number-input-two-digits"
+                    type="number"
+                />
+            </div>
+            <div class="filter-header">Rest Time</div>
+            <div class="input-range">
+                <input
+                    #restTimeLowFilter
+                    (change)="filterSetResultsByRestTimeLow(restTimeLowFilter.value)"
+                    class="form-control number-input-three-digits"
+                    type="number"
+                />
+                <div class="dash">-</div>
+                <input
+                    #restTimeHighFilter
+                    (change)="filterSetResultsByRestTimeHigh(restTimeHighFilter.value)"
+                    class="form-control number-input-three-digits"
+                    type="number"
+                />
             </div>
         </div>
     </div>
-    <div class="background-white border-light-gray d-flex flex-row exercise-column-names">
-        <div class="border-light-gray exercise-header exercise-session-name-column">Session Name</div>
-        <div class="border-light-gray exercise-date-column exercise-header">Date</div>
-        <div class="border-light-gray exercise-header exercise-set-number-column">Set #</div>
-        <div class="border-light-gray exercise-header exercise-weight-column">Weight</div>
-        <div class="border-light-gray exercise-header exercise-reps-completed-column">Reps Completed</div>
-        <div class="border-light-gray exercise-header exercise-target-reps-column">Target Reps</div>
-        <div class="border-light-gray exercise-header exercise-rest-time-column">Rest Time (s)</div>
+    <div id="exerciseListColumnNames">
+        <div class="column-cell session-name-cell">Session Name</div>
+        <div class="column-cell date-cell">Date</div>
+        <div class="column-cell set-number-cell">Set #</div>
+        <div class="column-cell weight-cell">Weight</div>
+        <div class="column-cell reps-completed-cell">Reps Completed</div>
+        <div class="column-cell target-reps-cell">Target Reps</div>
+        <div class="column-cell rest-time-cell">Rest Time (s)</div>
     </div>
 </div>
 <div id="exerciseList">
@@ -147,13 +130,22 @@
                   [exercise]="exercise"
                   (exerciseDelete)="deleteExercise($event)">
     </app-exercise>
-    <div id="exerciseCreateRow" class="align-items-center d-flex flew-row">
-        <input #exerciseName [formControl]="newExerciseName" (keydown.enter)="addExercise(exerciseName.value)" id="exerciseCreateName" class="form-control" placeholder="New Exercise Name" />
-        <div (click)="addExercise(exerciseName.value)">
-            <svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi-plus-circle hover-cursor-pointer hover-text-dark-gray text-light-gray" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <div id="newExerciseRow">
+        <input
+            #exerciseName
+            [formControl]="newExerciseName"
+            (keydown.enter)="addExercise(exerciseName.value)"
+            id="newExerciseName"
+            class="form-control"
+            placeholder="New Exercise Name"
+            maxlength="50"
+        />
+        <div (click)="addExercise(exerciseName.value)" id="newExerciseButton">
+            <svg viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
                 <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
             </svg>
         </div>
     </div>
 </div>
+<app-popper #popper></app-popper>

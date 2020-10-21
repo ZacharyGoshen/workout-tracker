@@ -1,111 +1,124 @@
 <div class="workout-session">
-    <div class="align-items-center border-light-gray d-flex flex-row justify-content-between workout-session-header">
-        <div class="align-items-center d-flex flex-row">
-            <input
-                #workoutSessionName
-                [value]="workoutSession.name"
-                (change)="updateWorkoutSessionName(workoutSessionName.value)"
-                (keydown.enter)="$event.target.blur()"
-                class="form-control workout-session-name"
-            />
-            <input
-                #workoutSessionDate
-                [value]="workoutSession.date"
-                (change)="updateWorkoutSessionDate(workoutSessionDate.value)"
-                class="form-control workout-session-date"
-                type="date"
-            />
-            <div
-                [attr.aria-expanded]="!isCollapsed"
-                (click)="isCollapsed = !isCollapsed"
-                data-toggle="collapse"
-                data-target="#workoutSession"
-                aria-condivols="workoutSession"
-            >
-                <svg *ngIf="isCollapsed"
-                        width="1em"
-                        height="1em"
-                        viewBox="0 0 16 16"
-                        class="bi bi-caret-down-fill hover-cursor-pointer"
-                        fill="currentColor"
-                >
-                    <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
-                </svg>
-                <svg *ngIf="!isCollapsed"
-                        width="1em"
-                        height="1em"
-                        viewBox="0 0 16 16"
-                        class="bi bi-caret-up-fill hover-cursor-pointer"
-                        fill="currentColor"
-                >
-                    <path d="M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />
-                </svg>
-            </div>
-        </div>
-        <div (click)="deleteWorkoutSession()" class="workout-session-delete-button">
-            <svg width="25px" height="25px" viewBox="0 0 16 16" class="bi bi-x hover-cursor-pointer hover-text-red text-light-gray" fill="currentColor">
-                <path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+    <div [formGroup]="workoutSessionForm" class="workout-session-header">
+        <input
+            #nameInput
+            formControlName="name"
+            [value]="workoutSession.name"
+            (change)="updateWorkoutSessionName(nameInput.value)"
+            (keydown.enter)="$event.target.blur()"
+            class="form-control workout-session-name"
+            maxlength="50"
+        />
+        <input
+            #dateInput
+            formControlName="date"
+            [value]="workoutSession.date"
+            (change)="updateWorkoutSessionDate(dateInput.value)"
+            class="form-control workout-session-date"
+            type="date"
+        />
+        <div
+            [attr.aria-expanded]="!isCollapsed"
+            (click)="isCollapsed = !isCollapsed"
+            class="collapse-area"
+        >
+            <svg *ngIf="isCollapsed" viewBox="0 0 16 16" class="collapse-button">
+                <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+            </svg>
+            <svg *ngIf="!isCollapsed" viewBox="0 0 16 16" class="collapse-button">
+                <path d="M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />
             </svg>
         </div>
+        <svg (click)="deleteWorkoutSession()" class="delete-workout-session-button" viewBox="0 0 16 16" >
+            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+        </svg>
     </div>
     <div
-        [ngbCollapse]="isCollapsed"
-        id="workoutSession"
-        class="collapse"
+        [@workoutSessionDisplay]="isCollapsed ? 'closed' : 'open'"
+        [@workoutSessionHeight]="isCollapsed ? 'closed' : 'open'"
     >
         <app-set-result
             *ngFor="let setResult of setResults"
             [setResult]="setResult"
             [exercises]="exercises"
+            [workoutSessionLength]="setResults.length"
             (setResultDuplicate)="duplicateSetResult($event)"
             (setResultUpdateOrder)="updateSetResultOrder($event.setResultId, $event.order)"
             (setResultDelete)="deleteSetResult($event)"
         >
         </app-set-result>
-        <div class="align-items-center border-light-gray d-flex flex-row justify-content-between set-result-create-row">
-            <div class="align-items-center d-flex flex-row">
-                <div class="align-self-stretch border-light-gray d-flex flex-row set-result-set-number-cell workout-session-set-number-column">
-                    <div *ngIf="setResults" class="align-self-center set-result-set-number text-center">
-                        {{ setResults.length + 1}}
-                    </div>
-                </div>
-                <div class="border-light-gray set-result-exercise-cell workout-session-exercise-column">
-                    <select #exerciseName [formControl]="newSetResultExerciseName" class="form-control set-result-exercise">
-                        <option value="null" disabled selected> -- Exercise -- </option>
-                        <option *ngFor="let exercise of exercises">
-                            {{ exercise.name }}
-                        </option>
-                    </select>
-                </div>
-                <div class="border-light-gray set-result-weight-cell workout-session-weight-column">
-                    <input #weight [formControl]="newSetResultWeight" (keydown.enter)="$event.target.blur()" class="form-control set-result-weight" />
-                </div>
-                <div class="border-light-gray set-result-reps-actual-cell workout-session-reps-actual-column">
-                    <input #repsActual [formControl]="newSetResultRepsActual" (keydown.enter)="$event.target.blur()" class="form-control set-result-reps-actual" />
-                </div>
-                <div class="border-light-gray set-result-target-reps-cell workout-session-target-reps-column">
-                    <div class="align-items-center d-flex flex-row">
-                        <input #repsTargetLow [formControl]="newSetResultRepsTargetLow" (keydown.enter)="$event.target.blur()" class="form-control set-result-target-reps-low" />
-                        <span>
-                            <b>-</b>
-                        </span>
-                        <input #repsTargetHigh [formControl]="newSetResultRepsTargetHigh" (keydown.enter)="$event.target.blur()" class="form-control set-result-target-reps-high" />
-                        <div class="form-check">
-                            <input #toFailure
-                                    (change)=toggleNewSetToFailure(toFailure.checked)
-                                    [formControl]="newSetResultToFailure"
-                                    class="form-check-input"
-                                    type="checkbox">
-                            <label class="form-check-label text-nowrap">To Failure</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="border-light-gray set-result-rest-time-cell workout-session-rest-time-column">
-                    <input #restTime [formControl]="newSetResultRestTime" (keydown.enter)="$event.target.blur()" class="form-control set-result-rest-time" />
-                </div>
+        <div [formGroup]="setResultForm" class="new-set-result-row">
+            <div *ngIf="setResults" class="column-cell set-number-cell">
+                {{ setResults.length + 1}}
             </div>
-            <div (click)="addSetResult(exerciseName.value, weight.value, repsActual.value, repsTargetLow.value, repsTargetHigh.value, toFailure.checked, restTime.value)" class="set-result-create-button">
-                <svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi-plus-circle hover-cursor-pointer hover-text-dark-gray text-light-gray" fill="currentColor">
+            <div class="column-cell exercise-cell">
+                <select
+                    #exerciseInput
+                    formControlName="exercise"
+                    class="form-control exercise-select"
+                >
+                    <option value="null" disabled selected> -- Exercise -- </option>
+                    <option *ngFor="let exercise of exercises">
+                        {{ exercise.name }}
+                    </option>
+                </select>
+            </div>
+            <div class="column-cell target-reps-cell">
+                <input
+                    #repsTargetLowInput
+                    formControlName="repsTargetLow"
+                    (keydown.enter)="$event.target.blur()"
+                    class="form-control number-input-two-digits"
+                    type="number"
+                />
+                <span class="dash">-</span>
+                <input
+                    #repsTargetHighInput
+                    formControlName="repsTargetHigh"
+                    (keydown.enter)="$event.target.blur()"
+                    class="form-control number-input-two-digits"
+                    type="number"
+                />
+                <label class="checkbox-container">
+                    To Failure
+                    <input
+                        #toFailureInput
+                        formControlName="toFailure"
+                        (change)=toggleNewSetToFailure(toFailureInput.checked)
+                        type="checkbox"
+                    >
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+            <div class="column-cell rest-time-cell">
+                <input
+                    #restTimeInput
+                    formControlName="restTime"
+                    (keydown.enter)="$event.target.blur()"
+                    class="form-control number-input-three-digits"
+                    type="number"
+                />
+            </div>
+            <div class="column-cell weight-cell">
+                <input
+                    #weightInput
+                    formControlName="weight"
+                    (keydown.enter)="$event.target.blur()"
+                    class="form-control number-input-three-digits"
+                    type="number"
+                />
+            </div>
+            <div class="column-cell reps-completed-cell">
+                <input
+                    #repsActualInput
+                    formControlName="repsActual"
+                    (keydown.enter)="$event.target.blur()"
+                    class="form-control number-input-two-digits"
+                    type="number"
+                />
+            </div>
+            <div (click)="addSetResult(exerciseInput.value, weightInput.value, repsActualInput.value, repsTargetLowInput.value, repsTargetHighInput.value, toFailureInput.checked, restTimeInput.value)" class="new-set-result-button">
+                <svg viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
                     <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
                 </svg>
@@ -113,3 +126,4 @@
         </div>
     </div>
 </div>
+<app-popper #popper></app-popper>

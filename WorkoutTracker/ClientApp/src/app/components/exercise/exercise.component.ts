@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, Input, Output, ViewChildren, QueryList, ViewChild, ElementRef } from '@angular/core';
 import { Exercise } from '../../models/exercise';
 import { EventEmitter } from '@angular/core';
 import { ExerciseService } from '../../services/exercise.service';
@@ -7,11 +7,45 @@ import { SetResultService } from '../../services/set-result.service';
 import { WorkoutSession } from '../../models/workout-session';
 import { WorkoutSessionService } from '../../services/workout-session.service';
 import { ExerciseSetResultComponent } from '../exercise-set-result/exercise-set-result.component';
+import { trigger, state, style, animate, transition } from '@angular/animations';
+import { PopperComponent } from '../popper/popper.component';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-exercise',
   templateUrl: './exercise.component.html',
-  styleUrls: ['./exercise.component.css']
+  styleUrls: ['./exercise.component.css'],
+  animations: [
+    trigger('exerciseDisplay', [
+      state('closed', style({
+        display: 'none',
+      })),
+      state('open', style({
+        display: 'block'
+      })),
+      transition('closed => open', [
+        animate('0ms')
+      ]),
+      transition('open => closed', [
+        animate('200ms')
+      ])
+    ]),
+    trigger('exerciseHeight', [
+      state('closed', style({
+        height: '0',
+        overflow: 'hidden'
+      })),
+      state('open', style({
+        overflow: 'hidden'
+      })),
+      transition('closed => open', [
+        animate('200ms')
+      ]),
+      transition('open => closed', [
+        animate('200ms')
+      ])
+    ])
+  ]
 })
 export class ExerciseComponent implements OnInit {
 
@@ -19,7 +53,11 @@ export class ExerciseComponent implements OnInit {
 
   @Output() exerciseDelete: EventEmitter<number> = new EventEmitter();
 
+  @ViewChild('exerciseNameInput') exerciseNameInput: ElementRef;
+  @ViewChild(PopperComponent) popperComponent: PopperComponent;
   @ViewChildren(ExerciseSetResultComponent) exerciseSetResultComponents: QueryList<ExerciseSetResultComponent>;
+
+  exerciseName = new FormControl();
 
   setResults: SetResult[];
   isCollapsed = true;
@@ -47,6 +85,12 @@ export class ExerciseComponent implements OnInit {
   }
 
   updateExerciseName(name: string): void {
+    if (name.length == 0) {
+      this.popperComponent.create(this.exerciseNameInput.nativeElement, 'Enter a valid name.');
+      this.exerciseName.setValue(this.exercise.name);
+      return;
+    }
+
     this.exercise.name = name;
     this.exerciseService.updateExercise(this.exercise).subscribe();
   }

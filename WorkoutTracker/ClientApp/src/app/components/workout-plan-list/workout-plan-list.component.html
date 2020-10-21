@@ -1,10 +1,10 @@
 <div class="fixed-top">
     <app-navigation-bar currentPage="workout-plans"></app-navigation-bar>
     <div id="workoutPlanListHeader">
-        <div class="set-number-column workout-plan-list-column-name">Set #</div>
-        <div class="exercise-column workout-plan-list-column-name">Exercise Name</div>
-        <div class="target-reps-column workout-plan-list-column-name">Target Reps</div>
-        <div class="rest-time-column workout-plan-list-column-name">Rest Time (s)</div>
+        <div class="column-cell set-number-cell">Set #</div>
+        <div class="column-cell exercise-cell">Exercise Name</div>
+        <div class="column-cell target-reps-cell">Target Reps</div>
+        <div class="column-cell rest-time-cell">Rest Time (s)</div>
     </div>
 </div>
 <div *ngIf="exercises" id="workoutPlanList">

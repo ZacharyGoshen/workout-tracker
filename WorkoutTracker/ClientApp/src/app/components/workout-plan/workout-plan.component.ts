@@ -14,7 +14,21 @@ import { PopperComponent } from '../popper/popper.component';
   templateUrl: './workout-plan.component.html',
   styleUrls: ['./workout-plan.component.css', './../set-plan/set-plan.component.css', './../workout-plan-list/workout-plan-list.component.css'],
   animations: [
-    trigger('openClose', [
+    trigger('workoutPlanDisplay', [
+      state('closed', style({
+        display: 'none',
+      })),
+      state('open', style({
+        display: 'block'
+      })),
+      transition('closed => open', [
+        animate('0ms')
+      ]),
+      transition('open => closed', [
+        animate('200ms')
+      ])
+    ]),
+    trigger('workoutPlanHeight', [
       state('closed', style({
         height: '0',
         overflow: 'hidden'

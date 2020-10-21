@@ -1,55 +1,95 @@
-<div class="border-light-gray d-flex flex-row justify-content-between set-result">
-    <div class="d-flex flex-row">
-        <div class="border-light-gray set-result-set-number-cell workout-session-set-number-column">
-            <input #setResultOrder (change)="updateSetResultOrder(setResultOrder.value)" value="{{ setResult.order }}" class="form-control set-result-set-number text-center" />
-        </div>
-        <div class="border-light-gray set-result-exercise-cell workout-session-exercise-column">
-            <select #exerciseName (change)="updateSetResultExerciseId(exerciseName.value)" class="form-control set-result-exercise">
-                <option *ngFor="let exercise of exercises"
-                        [selected]="exercise.id == currentExercise.id">
-                    {{ exercise.name }}
-                </option>
-            </select>
-        </div>
-        <div class="border-light-gray set-result-weight-cell workout-session-weight-column">
-            <input #setResultWeight (change)="updateSetResultWeight(setResultWeight.value)" value="{{ setResult.weight }}" class="form-control set-result-weight" />
-        </div>
-        <div class="border-light-gray set-result-reps-actual-cell workout-session-reps-actual-column">
-            <input #setResultRepsActual (change)="updateSetResultRepsActual(setResultRepsActual.value)" value="{{ setResult.repsActual }}" class="form-control set-result-reps-actual" />
-        </div>
-        <div class="border-light-gray set-result-target-reps-cell workout-session-target-reps-column">
-            <div class="align-items-center d-flex flex-row">
-                <input #setResultRepsTargetLow [formControl]="repsTargetLow" (change)="updateSetResultRepsTargetLow(setResultRepsTargetLow.value)" value="{{ setResult.repsTargetLow }}" class="form-control set-result-target-reps-low" />
-                <span>
-                    <b>-</b>
-                </span>
-                <input #setResultRepsTargetHigh [formControl]="repsTargetHigh" (change)="updateSetResultRepsTargetHigh(setResultRepsTargetHigh.value)" value="{{ setResult.repsTargetHigh }}" class="form-control set-result-target-reps-high" />
-                <div class="form-check">
-                    <input #setResultToFailure
-                           [checked]="setResult.toFailure"
-                           (change)="updateSetResultToFailure(setResultToFailure.checked)"
-                           type="checkbox" id="toFailureCheckbox"
-                           class="form-check-input">
-                    <label class="form-check-label text-nowrap" for="toFailureCheckbox">To Failure</label>
-                </div>
-            </div>
-        </div>
-        <div class="border-light-gray set-result-rest-time-cell workout-session-rest-time-column">
-            <input #setResultRestTime (change)="updateSetResultRestTime(setResultRestTime.value)" value="{{ setResult.restTime }}" class="form-control set-result-rest-time" />
-        </div>
+<div [formGroup]="setResultForm" class="set-result">
+    <div class="column-cell set-number-cell">
+        <input
+            #setNumberInput
+            formControlName="setNumber"
+            (change)="updateSetResultOrder(setNumberInput.value)"
+            (keydown.enter)="$event.target.blur()"
+            class="form-control number-input-two-digits"
+            value="{{ setResult.order }}"
+            type="number"
+        />
     </div>
-    <div class="align-items-center d-flex flex-row">
-        <div (click)="duplicateSetResult()" class="set-result-duplicate-button">
-            <svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi-clipboard-plus hover-cursor-pointer hover-text-dark-gray text-light-gray" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
-                <path fill-rule="evenodd" d="M9.5 1h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3zM8 7a.5.5 0 0 1 .5.5V9H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V10H6a.5.5 0 0 1 0-1h1.5V7.5A.5.5 0 0 1 8 7z" />
-            </svg>
-        </div>
-        <div (click)="deleteSetResult()" class="set-result-delete-button">
-            <svg width="25px" height="25px" viewBox="0 0 16 16" class="bi bi-x hover-cursor-pointer hover-text-red text-light-gray" fill="currentColor">
-                <path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-            </svg>
-        </div>
+    <div class="column-cell exercise-cell">
+        <select #exerciseName (change)="updateSetResultExerciseId(exerciseName.value)" class="form-control exercise-select">
+            <option *ngFor="let exercise of exercises" [selected]="exercise.id == currentExercise.id">
+                {{ exercise.name }}
+            </option>
+        </select>
+    </div>
+    <div class="column-cell target-reps-cell">
+        <input
+            #repsTargetLowInput
+            formControlName="repsTargetLow"
+            (change)="updateSetResultRepsTargetLow(repsTargetLowInput.value)"
+            (keydown.enter)="$event.target.blur()"
+            value="{{ setResult.repsTargetLow }}"
+            class="form-control number-input-two-digits"
+            type="number"
+        />
+        <span class="dash">-</span>
+        <input
+            #repsTargetHighInput
+            formControlName="repsTargetHigh"
+            (change)="updateSetResultRepsTargetHigh(repsTargetHighInput.value)"
+            (keydown.enter)="$event.target.blur()"
+            value="{{ setResult.repsTargetHigh }}"
+            class="form-control number-input-two-digits"
+            type="number"
+        />
+        <label class="checkbox-container">
+            To Failure
+            <input
+                #toFailureInput
+                [checked]="setResult.toFailure"
+                (change)="updateSetResultToFailure(toFailureInput.checked)"
+                class="form-check-input"
+                type="checkbox"
+            >
+            <span class="checkmark"></span>
+        </label>
+    </div>
+    <div class="column-cell rest-time-cell">
+        <input
+            #restTimeInput
+            formControlName="restTime"
+            (change)="updateSetResultRestTime(restTimeInput.value)"
+            (keydown.enter)="$event.target.blur()"
+            value="{{ setResult.restTime }}"
+            class="form-control number-input-three-digits"
+            type="number"
+        />
+    </div>
+    <div class="column-cell weight-cell">
+        <input
+            #weightInput
+            formControlName="weight"
+            (change)="updateSetResultWeight(weightInput.value)"
+            (keydown.enter)="$event.target.blur()"
+            value="{{ setResult.weight }}"
+            class="form-control number-input-three-digits"
+            type="number"
+        />
+    </div>
+    <div class="column-cell reps-completed-cell">
+        <input
+            #repsActualInput
+            formControlName="repsActual"
+            (change)="updateSetResultRepsActual(repsActualInput.value)"
+            (keydown.enter)="$event.target.blur()"
+            value="{{ setResult.repsActual }}"
+            class="form-control number-input-two-digits"
+            type="number"
+        />
+    </div>
+    <div class="set-result-buttons">
+        <svg (click)="duplicateSetResult()" class="copy-set-result-button" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
+            <path fill-rule="evenodd" d="M9.5 1h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3zM8 7a.5.5 0 0 1 .5.5V9H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V10H6a.5.5 0 0 1 0-1h1.5V7.5A.5.5 0 0 1 8 7z" />
+        </svg>
+        <svg (click)="deleteSetResult()" class="delete-set-result-button" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+        </svg>
     </div>
 </div>
-
+<app-popper #popper></app-popper>

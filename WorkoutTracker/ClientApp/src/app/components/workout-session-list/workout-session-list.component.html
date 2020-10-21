@@ -1,31 +1,44 @@
 <div class="fixed-top">
     <app-navigation-bar currentPage="workout-sessions"></app-navigation-bar>
-    <div class="background-white border-light-gray d-flex flex-row set-result-column-names">
-        <div id="workoutSessionSetNumberHeader" class="border-light-gray workout-session-set-number-column">Set #</div>
-        <div id="workoutSessionExerciseHeader" class="border-light-gray workout-session-exercise-column">Exercise Name</div>
-        <div id="workoutSessionWeightHeader" class="border-light-gray workout-session-weight-column">Weight Used</div>
-        <div id="workoutSessionRepsActualHeader" class="border-light-gray workout-session-reps-actual-column">Reps Completed</div>
-        <div id="workoutSessionTargetRepsHeader" class="border-light-gray workout-session-target-reps-column">Target Reps</div>
-        <div id="workoutSessionRestTimeHeader" class="border-light-gray workout-session-rest-time-column">Rest Time (s)</div>
-        <div></div>
+    <div id="workoutSessionListHeader">
+        <div class="column-cell set-number-cell">Set #</div>
+        <div class="column-cell exercise-cell">Exercise Name</div>
+        <div class="column-cell target-reps-cell">Target Reps</div>
+        <div class="column-cell rest-time-cell">Rest Time (s)</div>
+        <div class="column-cell weight-cell">Weight Used</div>
+        <div class="column-cell reps-completed-cell">Reps Completed</div>
     </div>
 </div>
-<div id="workoutSessionList">
-    <app-workout-session *ngFor="let workoutSession of workoutSessions"
-                         [workoutSession]="workoutSession"
-                         [exercises]="exercises"
-                         (workoutSessionDelete)="deleteWorkoutSession($event)">
+<div *ngIf="exercises" id="workoutSessionList">
+    <app-workout-session
+        *ngFor="let workoutSession of workoutSessions"
+        [workoutSession]="workoutSession"
+        [exercises]="exercises"
+        (workoutSessionDelete)="deleteWorkoutSession($event)"
+    >
     </app-workout-session>
-    <div id="workoutSessionCreateRow" class="align-items-center d-flex flew-row">
-        <select #workoutSessionName [formControl]="newWorkoutSessionName" id="workoutSessionCreateName" class="form-control">
+    <div id="newWorkoutSessionRow">
+        <select
+            #workoutSessionName
+            [formControl]="newWorkoutSessionName"
+            id="newWorkoutSessionName"
+            class="form-control"
+        >
             <option value="null" disabled selected> -- New Workout Session -- </option>
             <option *ngFor="let workoutPlan of workoutPlans">
                 {{ workoutPlan.name }}
             </option>
         </select>
-        <input #workoutSessionDate [formControl]="newWorkoutSessionDate" id="workoutSessionCreateDate" class="form-control" type="date" />
-        <div (click)="addWorkoutSession(workoutSessionDate.value, workoutSessionName.value)">
-            <svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi-plus-circle hover-cursor-pointer hover-text-dark-gray text-light-gray" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <input
+            #workoutSessionDate
+            [formControl]="newWorkoutSessionDate"
+            id="newWorkoutSessionDate"
+            class="form-control"
+            type="date"
+            placeholder="mm/dd/yyyy"
+        />
+        <div (click)="addWorkoutSession(workoutSessionDate.value, workoutSessionName.value)" id="newWorkoutSessionButton">
+            <svg viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
                 <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
             </svg>

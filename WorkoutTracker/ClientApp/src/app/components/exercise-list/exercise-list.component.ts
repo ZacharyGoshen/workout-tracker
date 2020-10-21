@@ -1,8 +1,10 @@
-import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList, ViewChild, Renderer2, ElementRef } from '@angular/core';
 import { ExerciseService } from '../../services/exercise.service';
 import { Exercise } from '../../models/exercise';
 import { FormControl } from '@angular/forms';
 import { ExerciseComponent } from '../exercise/exercise.component';
+import { createPopper, Instance } from '@popperjs/core';
+import { PopperComponent } from '../popper/popper.component';
 
 @Component({
   selector: 'app-exercise-list',
@@ -11,14 +13,40 @@ import { ExerciseComponent } from '../exercise/exercise.component';
 })
 export class ExerciseListComponent implements OnInit {
 
+  @ViewChild('sortExercisesButton') sortExercisesButton: ElementRef;
+  @ViewChild('sortExercisesMenu') sortExercisesMenu: ElementRef;
+  @ViewChild('filterSetsButton') filterSetsButton: ElementRef;
+  @ViewChild('filterSetsMenu') filterSetsMenu: ElementRef;
+  @ViewChild('exerciseName') exerciseNameInput: ElementRef;
+  @ViewChild(PopperComponent) popperComponent: PopperComponent;
   @ViewChildren(ExerciseComponent) exerciseComponents: QueryList<ExerciseComponent>;
 
   newExerciseName = new FormControl('');
 
   exercises: Exercise[];
   exercisesSortedAlphabetically = true;
+  sortExercisesMenuInstance: Instance = null;
+  filterSetsMenuInstance: Instance = null;
 
-  constructor(private exerciseService: ExerciseService) { }
+  constructor(private exerciseService: ExerciseService, private renderer: Renderer2) {
+    this.renderer.listen('window', 'mousedown', (e: Event) => {
+      if (
+        this.sortExercisesMenuInstance != null &&
+        !this.sortExercisesButton.nativeElement.contains(e.target) &&
+        !this.sortExercisesMenu.nativeElement.contains(e.target)
+      ) {
+        this.toggleSortExercisesMenu();
+      }
+
+      if (
+        this.filterSetsMenuInstance != null &&
+        !this.filterSetsButton.nativeElement.contains(e.target) &&
+        !this.filterSetsMenu.nativeElement.contains(e.target)
+      ) {
+        this.toggleFilterSetsMenu();
+      }
+    });
+  }
 
   ngOnInit() {
     this.getExercises();
@@ -32,6 +60,11 @@ export class ExerciseListComponent implements OnInit {
   }
 
   addExercise(exerciseName: string): void {
+    if (exerciseName.length == 0) {
+      this.popperComponent.create(this.exerciseNameInput.nativeElement, 'Enter a valid name.');
+      return;
+    }
+
     let exercise = new Exercise(exerciseName);
     this.exerciseService.addExercise(exercise)
       .subscribe(e => {
@@ -96,5 +129,27 @@ export class ExerciseListComponent implements OnInit {
 
   filterSetResultsByRestTimeHigh(restTimeHigh: number): void {
     this.exerciseComponents.forEach(ec => ec.filterSetResultsByRestTimeHigh(restTimeHigh));
+  }
+
+  toggleSortExercisesMenu(): void {
+    if (this.sortExercisesMenuInstance == null) {
+      this.sortExercisesMenu.nativeElement.setAttribute('data-show', '');
+      this.sortExercisesMenuInstance = createPopper(this.sortExercisesButton.nativeElement, this.sortExercisesMenu.nativeElement);
+    } else {
+      this.sortExercisesMenu.nativeElement.removeAttribute('data-show');
+      this.sortExercisesMenuInstance.destroy();
+      this.sortExercisesMenuInstance = null;
+    }
+  }
+
+  toggleFilterSetsMenu(): void {
+    if (this.filterSetsMenuInstance == null) {
+      this.filterSetsMenu.nativeElement.setAttribute('data-show', '');
+      this.filterSetsMenuInstance = createPopper(this.filterSetsButton.nativeElement, this.filterSetsMenu.nativeElement);
+    } else {
+      this.filterSetsMenu.nativeElement.removeAttribute('data-show');
+      this.filterSetsMenuInstance.destroy();
+      this.filterSetsMenuInstance = null;
+    }
   }
 }

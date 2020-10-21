@@ -1,13 +1,56 @@
+.collapse-area {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;    
+    height: 60px;
+}
+.collapse-area:hover {
+    cursor: pointer;
+}
+.collapse-area:hover .collapse-button {
+    cursor: pointer;
+    fill: #3eadcf;
+}
+.collapse-button {
+    height: 1rem;
+    fill: #283035;
+    width: 1rem;
+}
+.collapse-button:hover {
+    cursor: pointer;
+    fill: #3eadcf;
+}
+.collapsed-area {
+    padding-bottom: 10px;
+}
+.delete-exercise-button {
+    fill: #283035;
+    height: 25px;
+    margin-right: 10px;
+    width: 25px;
+}
+.delete-exercise-button:hover {
+    fill: red;
+    cursor: pointer;
+}
 .exercise {
-    margin-left: 20px;
+    border-radius: 10px;
+    box-shadow: -0.5rem 0.5rem 1rem #000;
+    margin: 20px;
+    padding-left: 10px;
+    transition: .2s;
+}
+.exercise:hover {
+    transform: translateX(.5rem);
 }
 .exercise-delete-button {
     margin-right: 10px;
 }
 .exercise-header {
-    border-bottom: solid 2px;
-    padding-bottom: 20px;
-    padding-top: 20px;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
 }
 .exercise-name {
     margin-right: 10px;
@@ -17,4 +60,20 @@
 .exercise-no-entries-found {
     border-bottom: solid 2px black;
     padding: 20px 0px 20px 20px;
+}
+.exercise-name {
+    border: solid 2px #283035;
+    background-color: #283035;
+    color: white;
+    margin-right: 10px;
+    max-width: 500px;
+    min-width: 500px;
+}
+.exercise-name:focus {
+    box-shadow: none;
+    border: solid 2px #3eadcf;
+}
+.no-entries-found {
+    color: #7a7a8c;
+    padding-left: 10px;
 }

@@ -1,80 +1,103 @@
-.set-result-column-names {
-    border-bottom: solid 2px;
-    padding-left: 20px;
+.column-cell {
+    align-items: center;
+    align-self: stretch;
+    padding: 0px 20px;
+    border-right: solid 2px #283035;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 10px 0px;
 }
-.workout-session-exercise-column {
-    margin-right: 20px;
-    max-width: 320px;
-    min-width: 320px;
+.exercise-cell {
+    max-width: 340px;
+    min-width: 340px;
+    padding: 0px 20px;
 }
-.workout-session-reps-actual-column {
-    margin-right: 20px;
-    max-width: 150px;
-    min-width: 150px;
+.reps-completed-cell {
+    max-width: 170px;
+    min-width: 170px;
 }
-.workout-session-rest-time-column {
-    margin-right: 20px;
-    max-width: 120px;
-    min-width: 120px;
+.rest-time-cell {
+    max-width: 170px;
+    min-width: 170px;
 }
-.workout-session-set-number-column {
-    margin-right: 20px;
-    max-width: 70px;
-    min-width: 70px;
+.set-number-cell {
+    max-width: 90px;
+    min-width: 90px;
 }
-.workout-session-target-reps-column {
-    margin-right: 20px;
-    max-width: 246px;
-    min-width: 246px;
+.target-reps-cell {
+    max-width: 300px;
+    min-width: 300px;
+    padding: 0px 20px;
 }
-.workout-session-weight-column {
-    margin-right: 20px;
-    max-width: 120px;
-    min-width: 120px;
+.weight-cell {
+    max-width: 170px;
+    min-width: 170px;
 }
-#workoutSessionCreateName {
-    margin-right: 10px;
-    max-width: 500px;
-    min-width: 500px;
+#newWorkoutSessionButton {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    height: 60px;
+    justify-content: flex-end;
 }
-#workoutSessionCreateDate {
+#newWorkoutSessionButton:hover {
+    cursor: pointer;
+}
+#newWorkoutSessionButton:hover svg{
+    fill: #3eadcf;
+}
+#newWorkoutSessionButton svg {
+    fill: #283035;
+    height: 20px;
+    width: 20px;
+}
+#newWorkoutSessionDate {
+    border: solid 2px #283035;
+    background-color: #283035;
+    color: white;
     margin-right: 10px;
     max-width: 170px;
     min-width: 170px;
 }
-#workoutSessionCreateRow {
-    padding: 20px 10px 0px 20px;
+#newWorkoutSessionDate:focus {
+    box-shadow: none;
+    border: solid 2px #3eadcf;
 }
-#workoutSessionExerciseHeader {
-    border-right: solid 2px;
-    padding-bottom: 10px;
-    padding-top: 10px;
+#newWorkoutSessionName {
+    border: solid 2px #283035;
+    background-color: #283035;
+    color: white;
+    margin-right: 10px;
+    max-width: 500px;
+    min-width: 500px;
+}
+#newWorkoutSessionName:focus {
+    box-shadow: none;
+    border: solid 2px #3eadcf;
+}
+#newWorkoutSessionRow {
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: -0.5rem 0.5rem 1rem #000;
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+    padding: 0px 10px;
+    transition: .2s;
+}
+#newWorkoutSessionRow:hover {
+    transform: translateX(.5rem);
 }
 #workoutSessionList {
     padding: 104px 0px 10px 0px;
 }
-#workoutSessionRepsActualHeader {
-    border-right: solid 2px;
-    padding-bottom: 10px;
-    padding-top: 10px;
-}
-#workoutSessionRestTimeHeader {
-    border-right: solid 2px;
-    padding-bottom: 10px;
-    padding-top: 10px;
-}
-#workoutSessionSetNumberHeader {
-    border-right: solid 2px;
-    padding-bottom: 10px;
-    padding-top: 10px;
-}
-#workoutSessionTargetRepsHeader {
-    border-right: solid 2px;
-    padding-bottom: 10px;
-    padding-top: 10px;
-}
-#workoutSessionWeightHeader {
-    border-right: solid 2px;
-    padding-bottom: 10px;
-    padding-top: 10px;
+#workoutSessionListHeader {
+    background-color: #17141d;
+    border-bottom: solid 2px #283035;
+    color: #7a7a8c;
+    padding-left: 30px;
+    display: flex;
+    flex-direction: row;
 }

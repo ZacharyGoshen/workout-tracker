@@ -11,6 +11,7 @@ export class PopperComponent implements OnInit {
   @ViewChild('popper') popper;
 
   popperInstance: Instance = null;
+  message: string = "";
 
   constructor() {
   }

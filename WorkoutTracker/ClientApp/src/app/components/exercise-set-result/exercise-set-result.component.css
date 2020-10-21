@@ -1,5 +1,6 @@
 .exercise-set-result {
-    border-bottom: solid 2px;
+    display: flex;
+    flex-direction: row;
 }
 .exercise-set-result-cell {
     border-right: solid 2px;

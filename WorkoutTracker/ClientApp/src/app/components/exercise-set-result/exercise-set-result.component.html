@@ -1,16 +1,12 @@
-<div *ngIf="workoutSession" [ngClass]="{'hidden': hidden}" class="border-light-gray d-flex exercise-set-result flex-row">
-    <div class="border-light-gray exercise-set-result-cell exercise-session-name-column">
-        {{ workoutSession.name }}
-    </div>
-    <div class="border-light-gray exercise-set-result-cell exercise-date-column">
-        {{ dateService.toShortFormat(workoutSession.date) }}
-    </div>
-    <div class="border-light-gray exercise-set-result-cell exercise-set-number-column">{{ setResult.order }}</div>
-    <div class="border-light-gray exercise-set-result-cell exercise-weight-column">{{ setResult.weight }}</div>
-    <div class="border-light-gray exercise-set-result-cell exercise-reps-completed-column">{{ setResult.repsActual }}</div>
-    <div *ngIf="!setResult.toFailure" class="border-light-gray exercise-set-result-cell exercise-target-reps-column">
+<div *ngIf="workoutSession" [ngClass]="{'hidden': hidden}" class="exercise-set-result">
+    <div class="column-cell session-name-cell">{{ workoutSession.name }}</div>
+    <div class="column-cell date-cell">{{ dateService.toShortFormat(workoutSession.date) }}</div>
+    <div class="column-cell set-number-cell">{{ setResult.order }}</div>
+    <div class="column-cell weight-cell">{{ setResult.weight }}</div>
+    <div class="column-cell reps-completed-cell">{{ setResult.repsActual }}</div>
+    <div *ngIf="!setResult.toFailure" class="column-cell target-reps-cell">
         <span>{{ setResult.repsTargetLow }} - {{ setResult.repsTargetHigh }}</span>
     </div>
-    <div *ngIf="setResult.toFailure" class="border-light-gray exercise-set-result-cell exercise-target-reps-column">To Failure</div>
-    <div class="border-light-gray exercise-set-result-cell exercise-rest-time-column">{{ setResult.restTime }}</div>
+    <div *ngIf="setResult.toFailure" class="column-cell target-reps-cell">To Failure</div>
+    <div class="column-cell rest-time-cell">{{ setResult.restTime }}</div>
 </div>

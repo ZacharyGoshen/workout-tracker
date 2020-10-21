@@ -1,16 +1,16 @@
 <div class="set-plan">
-    <div class="set-number-column">
+    <div class="column-cell set-number-cell">
         <input
             #setPlanOrder
             [formControl]="setNumber"
             (change)="updateSetPlanOrder(setPlanOrder.value)"
             (keydown.enter)="$event.target.blur()"
-            class="form-control set-number-input"
+            class="form-control number-input-two-digits"
             value="{{ setPlan.order }}"
             type="number"
         />
     </div>
-    <div class="exercise-column">
+    <div class="column-cell exercise-cell">
         <select #exerciseName (change)="updateSetPlanExerciseId(exerciseName.value)" class="form-control exercise-select">
             <option *ngFor="let exercise of exercises"
                     [selected]="exercise.id == currentExercise.id">
@@ -18,44 +18,44 @@
             </option>
         </select>
     </div>
-    <div class="target-reps-column">
-        <div class="align-items-center d-flex flex-row">
+    <div class="column-cell target-reps-cell">
+        <input
+            #setPlanRepsTargetLow
+            [formControl]="repsTargetLow"
+            (change)="updateSetPlanRepsTargetLow(setPlanRepsTargetLow.value)"
+            (keydown.enter)="$event.target.blur()"
+            class="form-control number-input-two-digits"
+            value="{{ setPlan.repsTargetLow }}"
+            type="number"
+        />
+        <span class="dash">-</span>
+        <input
+            #setPlanRepsTargetHigh
+            [formControl]="repsTargetHigh"
+            (change)="updateSetPlanRepsTargetHigh(setPlanRepsTargetHigh.value)"
+            (keydown.enter)="$event.target.blur()"
+            class="form-control number-input-two-digits"
+            value="{{ setPlan.repsTargetHigh }}"
+            type="number"
+        />
+        <label class="checkbox-container">
+            To Failure
             <input
-                #setPlanRepsTargetLow
-                [formControl]="repsTargetLow"
-                (change)="updateSetPlanRepsTargetLow(setPlanRepsTargetLow.value)"
-                (keydown.enter)="$event.target.blur()"
-                class="form-control rep-input"
-                value="{{ setPlan.repsTargetLow }}"
-                type="number"
-            />
-            <span class="dash">-</span>
-            <input
-                #setPlanRepsTargetHigh
-                [formControl]="repsTargetHigh"
-                (change)="updateSetPlanRepsTargetHigh(setPlanRepsTargetHigh.value)"
-                (keydown.enter)="$event.target.blur()"
-                class="form-control rep-input"
-                value="{{ setPlan.repsTargetHigh }}"
-                type="number"
-            />
-            <label class="checkbox-container">
-                To Failure
-                <input #setPlanToFailure
-                       [checked]="setPlan.toFailure"
-                       (change)="updateSetPlanToFailure(setPlanToFailure.checked)"
-                       type="checkbox">
-                <span class="checkmark"></span>
-            </label>
-        </div>
+                #setPlanToFailure
+                [checked]="setPlan.toFailure"
+                (change)="updateSetPlanToFailure(setPlanToFailure.checked)"
+                type="checkbox"
+            >
+            <span class="checkmark"></span>
+        </label>
     </div>
-    <div class="rest-time-column">
+    <div class="column-cell rest-time-cell">
         <input
             #setPlanRestTime
             [formControl]="restTime"
             (change)="updateSetPlanRestTime(setPlanRestTime.value)"
             (keydown.enter)="$event.target.blur()"
-            class="form-control rest-time-input"
+            class="form-control number-input-three-digits"
             value="{{ setPlan.restTime }}"
             type="number"
         />

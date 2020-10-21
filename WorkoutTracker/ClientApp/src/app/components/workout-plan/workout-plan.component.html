@@ -9,11 +9,7 @@
             class="form-control workout-plan-name"
             maxlength="50"
         />
-        <div
-            [attr.aria-expanded]="!isCollapsed"
-            (click)="isCollapsed = !isCollapsed"
-            class="collapse-area"
-        >
+        <div (click)="isCollapsed = !isCollapsed" class="collapse-area">
             <svg *ngIf="isCollapsed" viewBox="0 0 16 16" class="collapse-button">
                 <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
             </svg>
@@ -22,13 +18,12 @@
             </svg>
         </div>
         <svg (click)="deleteWorkoutPlan()" class="delete-workout-plan-button" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
         </svg>
     </div>
     <div
-        [@openClose]="isCollapsed ? 'closed' : 'open'"
-        id="workoutPlan"
-        class="workout-plan-body"
+        [@workoutPlanDisplay]="isCollapsed ? 'closed' : 'open'"
+        [@workoutPlanHeight]="isCollapsed ? 'closed' : 'open'"
     >   
         <app-set-plan
             *ngFor="let setPlan of setPlans"
@@ -37,13 +32,14 @@
             [workoutPlanLength]="setPlans.length"
             (setPlanDuplicate)="duplicateSetPlan($event)"
             (setPlanUpdateOrder)="updateSetPlanOrder($event.setPlanId, $event.order)"
-            (setPlanDelete)="deleteSetPlan($event)">
+            (setPlanDelete)="deleteSetPlan($event)"
+        >
         </app-set-plan>
         <div class="new-set-plan-row">
-            <div *ngIf="setPlans" class="new-set-plan-number set-number-column">
+            <div *ngIf="setPlans" class="column-cell set-number-cell">
                 {{ setPlans.length + 1 }}
             </div>
-            <div class="exercise-column">
+            <div class="column-cell exercise-cell">
                 <select #exerciseName [formControl]="newSetPlanExerciseName" class="form-control exercise-select">
                     <option value="null" disabled selected> -- Exercise -- </option>
                     <option *ngFor="let exercise of exercises">
@@ -51,12 +47,12 @@
                     </option>
                 </select>
             </div>
-            <div class="target-reps-cell target-reps-column">
+            <div class="column-cell target-reps-cell">
                 <input
                     #repsTargetLow
                     (keydown.enter)="$event.target.blur()"
                     [formControl]="newSetPlanRepsTargetLow"
-                    class="form-control rep-input"
+                    class="form-control number-input-two-digits"
                     type="number"
                 />
                 <span class="dash">-</span>
@@ -64,7 +60,7 @@
                     #repsTargetHigh
                     (keydown.enter)="$event.target.blur()"
                     [formControl]="newSetPlanRepsTargetHigh"
-                    class="form-control rep-input"
+                    class="form-control number-input-two-digits"
                     type="number"
                 />
                 <label class="checkbox-container">
@@ -76,17 +72,17 @@
                     <span class="checkmark"></span>
                 </label>
             </div>
-            <div class="rest-time-column">
+            <div class="column-cell rest-time-cell">
                 <input
                     #restTime
                     (keydown.enter)="$event.target.blur()"
                     [formControl]="newSetPlanRestTime"
-                    class="form-control rest-time-input"
+                    class="form-control number-input-three-digits"
                     type="number"
                 />
             </div>
             <div (click)="addSetPlan(exerciseName.value, repsTargetLow.value, repsTargetHigh.value, toFailure.checked, restTime.value)" class="new-set-plan-button">
-                <svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi-plus-circle hover-cursor-pointer hover-text-dark-gray text-light-gray" fill="currentColor">
+                <svg viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
                     <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
                 </svg>

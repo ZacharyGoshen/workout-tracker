@@ -49,9 +49,9 @@ export class SetPlanComponent implements OnInit {
     this.setPlanDuplicate.emit(this.setPlan);
   }
 
-  updateSetPlanOrder(order: string): void {
-    order = parseInt(order);
-    if (!order || order < 1 || order > this.workoutPlanLength) {
+  updateSetPlanOrder(orderString: string): void {
+    let order = parseInt(orderString);
+    if (!orderString || order < 1 || order > this.workoutPlanLength) {
       this.popperComponent.create(this.setNumberInput.nativeElement, `Enter a value between 1-${this.workoutPlanLength}.`);
       this.setNumber.setValue(this.setPlan.order);
       return;
@@ -64,8 +64,8 @@ export class SetPlanComponent implements OnInit {
     this.setPlanService.updateSetPlan(this.setPlan).subscribe();
   }
 
-  updateSetPlanRepsTargetLow(repsTargetLow: string): void {
-    repsTargetLow = parseInt(repsTargetLow);
+  updateSetPlanRepsTargetLow(repsTargetLowString: string): void {
+    let repsTargetLow = parseInt(repsTargetLowString);
     if (isNaN(repsTargetLow) || repsTargetLow < 0 || repsTargetLow > 99) {
       this.popperComponent.create(this.repsTargetLowInput.nativeElement, 'Enter a value between 0-99.');
       this.repsTargetLow.setValue(this.setPlan.repsTargetLow);
@@ -78,8 +78,8 @@ export class SetPlanComponent implements OnInit {
     this.setPlanService.updateSetPlan(this.setPlan).subscribe();
   }
 
-  updateSetPlanRepsTargetHigh(repsTargetHigh: string): void {
-    repsTargetHigh = parseInt(repsTargetHigh);
+  updateSetPlanRepsTargetHigh(repsTargetHighString: string): void {
+    let repsTargetHigh = parseInt(repsTargetHighString);
     if (isNaN(repsTargetHigh) || repsTargetHigh < 0 || repsTargetHigh > 99) {
       this.popperComponent.create(this.repsTargetHighInput.nativeElement, 'Enter a value between 0-99.');
       this.repsTargetHigh.setValue(this.setPlan.repsTargetHigh);
@@ -98,8 +98,8 @@ export class SetPlanComponent implements OnInit {
     this.setPlanService.updateSetPlan(this.setPlan).subscribe();
   }
 
-  updateSetPlanRestTime(restTime: string): void {
-    restTime = parseInt(restTime);
+  updateSetPlanRestTime(restTimeString: string): void {
+    let restTime = parseInt(restTimeString);
     if (isNaN(restTime) || restTime < 0 || restTime > 999) {
       this.popperComponent.create(this.restTimeInput.nativeElement, 'Enter a value between 0-999.');
       this.restTime.setValue(this.setPlan.restTime);

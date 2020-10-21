@@ -1,27 +1,125 @@
-.set-result-create-button {
-    margin-right: 10px;
+.collapse-area {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;    
+    height: 60px;
 }
-.set-result-create-row {
-    border-bottom: solid 2px;
+.collapse-area:hover {
+    cursor: pointer;
+}
+.collapse-area:hover .collapse-button {
+    cursor: pointer;
+    fill: #3eadcf;
+}
+.collapse-button {
+    height: 1rem;
+    fill: #283035;
+    width: 1rem;
+}
+.collapse-button:hover {
+    cursor: pointer;
+    fill: #3eadcf;
+}
+.dash {
+    color: #7a7a8c;
+    text-align: center;
+}
+.delete-workout-session-button {
+    fill: #283035;
+    height: 25px;
+    margin-right: 10px;
+    width: 25px;
+}
+.delete-workout-session-button:hover {
+    fill: red;
+    cursor: pointer;
+}
+.new-set-result-number {
+    align-self: stretch;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.new-set-result-button {
+    align-self: stretch;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    justify-content: flex-end;
+    margin-right: 12px;
+}
+.new-set-result-button:hover svg {
+    cursor: pointer;
+    fill: #3eadcf;
+}
+.new-set-result-button svg {
+    height: 20px;
+    fill: #283035;
+    width: 20px;
+}
+.new-set-result-row {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+}
+.rest-time-input {
+    border: solid 2px #283035;
+    background-color: #283035;
+    color: white;
+}
+.rest-time-input:focus {
+    box-shadow: none;
+    border: solid 2px #3eadcf;
+}
+.weight-input {
+    border: solid 2px #283035;
+    background-color: #283035;
+    color: white;
+}
+.weight-input:focus {
+    box-shadow: none;
+    border: solid 2px #3eadcf;
 }
 .workout-session {
-    margin-left: 20px;
+    border-radius: 10px;
+    box-shadow: -0.5rem 0.5rem 1rem #000;
+    margin: 20px;
+    padding-left: 10px;
+    transition: .2s;
+}
+.workout-session:hover {
+    transform: translateX(.5rem);
 }
 .workout-session-date {
+    border: solid 2px #283035;
+    background-color: #283035;
+    color: white;
     margin-right: 10px;
     max-width: 170px;
     min-width: 170px;
 }
-.workout-session-delete-button {
-    margin-right: 10px;
+.workout-session-date:focus {
+    box-shadow: none;
+    border: solid 2px #3eadcf;
 }
 .workout-session-header {
-    border-bottom: solid 2px;
-    padding-bottom: 20px;
-    padding-top: 20px;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
 }
 .workout-session-name {
+    border: solid 2px #283035;
+    background-color: #283035;
+    color: white;
     margin-right: 10px;
     max-width: 500px;
     min-width: 500px;
+}
+.workout-session-name:focus {
+    box-shadow: none;
+    border: solid 2px #3eadcf;
 }

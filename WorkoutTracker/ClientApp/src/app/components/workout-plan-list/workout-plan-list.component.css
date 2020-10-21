@@ -1,29 +1,30 @@
-.exercise-column {
+.column-cell {
+    align-items: center;
+    align-self: stretch;
+    padding: 0px 20px;
     border-right: solid 2px #283035;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 10px 0px;
+}
+.exercise-cell {
     max-width: 340px;
     min-width: 340px;
-    padding: 10px 20px;
+    padding: 0px 20px;
 }
-.rest-time-column {
-    border-right: solid 2px #283035;
-    max-width: 140px;
-    min-width: 140px;
-    padding: 10px 20px;
+.rest-time-cell {
+    max-width: 170px;
+    min-width: 170px;
 }
-.set-number-column {
-    border-right: solid 2px #283035;
+.set-number-cell {
     max-width: 90px;
     min-width: 90px;
-    padding: 10px 20px;
 }
-.target-reps-column {
-    border-right: solid 2px #283035;
-    max-width: 266px;
-    min-width: 266px;
-    padding: 10px 20px;
-}
-.workout-plan-list-column-name {
-    border-right: solid 2px #283035;
+.target-reps-cell {
+    max-width: 300px;
+    min-width: 300px;
+    padding: 0px 20px;
 }
 #newWorkoutPlanButton {
     align-items: center;
