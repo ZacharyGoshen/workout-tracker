@@ -8,6 +8,8 @@ import { UserService } from './services/user.service';
 export class AppComponent {
   title = 'app';
 
+  private loggedIn: boolean = false;
+
   constructor(private userService: UserService) {
     this.authorize();
   }
@@ -20,6 +22,8 @@ export class AppComponent {
       console.log(location.href);
       if (result == false && location.href.indexOf('app/login') == -1 && location.href.indexOf('app/register') == -1) {
         location.href = 'app/login';
+      } else {
+        this.loggedIn = true;
       }
     })
   }

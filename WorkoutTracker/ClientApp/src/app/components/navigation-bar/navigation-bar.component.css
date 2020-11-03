@@ -13,6 +13,7 @@
 #navbarLogo {
     color: white;
     margin-right: 30px;
+    white-space: nowrap;
 }
 #navbarLogo:hover div {
     color: #3eadcf;
@@ -33,11 +34,16 @@
 #navbarLogo svg {
     fill: white;
     margin-right: 10px;
+    max-height: 20px;
+    max-width: 20px;
+    min-height: 20px;
+    min-width: 20px;
 }
 .navbar-link {
     color: #7a7a8c;
     margin-right: 20px;
     transition: .2s;
+    white-space: nowrap;
 }
 .navbar-link:hover {
     color: #3eadcf;

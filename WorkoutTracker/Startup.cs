@@ -32,7 +32,7 @@ namespace WorkoutTracker
             });
             services.AddSession(so =>
             {
-                so.IdleTimeout = TimeSpan.FromSeconds(60);
+                so.IdleTimeout = TimeSpan.FromSeconds(600);
             });
         }
 
