@@ -1,14 +1,29 @@
-<div id="loginPage" class="align-items-center d-flex justify-content-center">
-    <div id="loginContainer" class="border-light-gray">
-        <h1>Log In</h1>
-        <div [hidden]="errorMessageHidden" id="loginErrorMessage" class="background-light-red">Username or password is incorrect</div>
-        <div>Username</div>
-        <input #username id="loginUsername" class="form-control" />
-        <div>Password</div>
-        <input #password id="loginPassword" class="form-control" type="password"/>
-        <div class="d-flex flex-row"> 
-            <button (click)="logIn(username.value, password.value)" id="loginButton" class="btn btn-primary form-control">Log In</button>
-            <a class="btn btn-secondary form-control" href="app/register">Register</a>
+<div id="page">
+    <div id="slidingContainer">
+        <div [@slide]="leftVisible ? 'right' : 'left'" id="slidingBox">
+            <!--<div #bubble class="bubble"></div>-->
+        </div>
+        <div id="loginSide">
+            <div class="header">Login</div>
+            <input #loginUsernameInput class="form-control input" placeholder="User Name" />
+            <input #loginPasswordInput class="form-control input" placeholder="Password" type="password" />
+            <div class="buttons">
+                <div (click)="logIn(loginUsernameInput.value, loginPasswordInput.value)" class="button">Login</div>
+                <div (click)="toggleSlider()" class="button">Signup</div>
+            </div>
+        </div>
+        <div id="signupSide">
+            <div class="header">Signup</div>
+            <input #signupUsernameInput class="form-control input" placeholder="User Name" />
+            <input #signupPasswordInput class="form-control input" placeholder="Password" type="password" />
+            <input #signupConfirmPasswordInput class="form-control input" placeholder="Confirm Password" type="password" />
+            <div class="buttons">
+                <div (click)="addUser(signupUsernameInput.value, signupPasswordInput.value, signupConfirmPasswordInput.value)" class="button">Signup</div>
+                <div (click)="toggleSlider()" class="button">Login</div>
+            </div>
         </div>
     </div>
 </div>
+<app-popper #popper></app-popper>
+
+

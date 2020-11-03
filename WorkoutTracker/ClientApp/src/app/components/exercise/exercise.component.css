@@ -27,7 +27,6 @@
 .delete-exercise-button {
     fill: #283035;
     height: 25px;
-    margin-right: 10px;
     width: 25px;
 }
 .delete-exercise-button:hover {
@@ -39,13 +38,22 @@
     box-shadow: -0.5rem 0.5rem 1rem #000;
     margin: 20px;
     padding-left: 10px;
+    padding-right: 20px;
     transition: .2s;
 }
 .exercise:hover {
     transform: translateX(.5rem);
 }
-.exercise-delete-button {
-    margin-right: 10px;
+.exercise-description {
+    border: solid 2px #283035;
+    background-color: #283035;
+    color: white;
+    margin-bottom: 10px;
+    resize: none;
+}
+.exercise-description:focus {
+    box-shadow: none;
+    border: solid 2px #3eadcf;
 }
 .exercise-header {
     align-items: center;

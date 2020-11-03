@@ -53,11 +53,12 @@ export class ExerciseComponent implements OnInit {
 
   @Output() exerciseDelete: EventEmitter<number> = new EventEmitter();
 
-  @ViewChild('exerciseNameInput') exerciseNameInput: ElementRef;
-  @ViewChild(PopperComponent) popperComponent: PopperComponent;
+  @ViewChild('exerciseNameInput', { static: false }) exerciseNameInput: ElementRef;
+  @ViewChild(PopperComponent, { static: false }) popperComponent: PopperComponent;
   @ViewChildren(ExerciseSetResultComponent) exerciseSetResultComponents: QueryList<ExerciseSetResultComponent>;
 
   exerciseName = new FormControl();
+  exerciseDescription = new FormControl();
 
   setResults: SetResult[];
   isCollapsed = true;
@@ -92,6 +93,12 @@ export class ExerciseComponent implements OnInit {
     }
 
     this.exercise.name = name;
+    this.exerciseService.updateExercise(this.exercise).subscribe();
+  }
+
+  updateExerciseDescription(description: string): void {
+    console.log(description);
+    this.exercise.description = description;
     this.exerciseService.updateExercise(this.exercise).subscribe();
   }
 

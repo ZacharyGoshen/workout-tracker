@@ -13,12 +13,12 @@ import { PopperComponent } from '../popper/popper.component';
 })
 export class ExerciseListComponent implements OnInit {
 
-  @ViewChild('sortExercisesButton') sortExercisesButton: ElementRef;
-  @ViewChild('sortExercisesMenu') sortExercisesMenu: ElementRef;
-  @ViewChild('filterSetsButton') filterSetsButton: ElementRef;
-  @ViewChild('filterSetsMenu') filterSetsMenu: ElementRef;
-  @ViewChild('exerciseName') exerciseNameInput: ElementRef;
-  @ViewChild(PopperComponent) popperComponent: PopperComponent;
+  @ViewChild('sortExercisesButton', { static: false }) sortExercisesButton: ElementRef;
+  @ViewChild('sortExercisesMenu', { static: false }) sortExercisesMenu: ElementRef;
+  @ViewChild('filterSetsButton', { static: false }) filterSetsButton: ElementRef;
+  @ViewChild('filterSetsMenu', { static: false }) filterSetsMenu: ElementRef;
+  @ViewChild('exerciseName', { static: false }) exerciseNameInput: ElementRef;
+  @ViewChild(PopperComponent, { static: false }) popperComponent: PopperComponent;
   @ViewChildren(ExerciseComponent) exerciseComponents: QueryList<ExerciseComponent>;
 
   newExerciseName = new FormControl('');
@@ -133,23 +133,49 @@ export class ExerciseListComponent implements OnInit {
 
   toggleSortExercisesMenu(): void {
     if (this.sortExercisesMenuInstance == null) {
-      this.sortExercisesMenu.nativeElement.setAttribute('data-show', '');
-      this.sortExercisesMenuInstance = createPopper(this.sortExercisesButton.nativeElement, this.sortExercisesMenu.nativeElement);
+      this.sortExercisesMenu.nativeElement.setAttribute('display-block', '');
+      this.sortExercisesMenuInstance = createPopper(this.sortExercisesButton.nativeElement, this.sortExercisesMenu.nativeElement, {
+        modifiers: [
+          {
+            name: 'offset',
+            options: {
+              offset: [0, 10],
+            },
+          },
+        ],
+      });
+      this.sortExercisesMenu.nativeElement.setAttribute('visible', '');
     } else {
-      this.sortExercisesMenu.nativeElement.removeAttribute('data-show');
-      this.sortExercisesMenuInstance.destroy();
-      this.sortExercisesMenuInstance = null;
+      this.sortExercisesMenu.nativeElement.removeAttribute('visible');
+      setTimeout(() => {
+        this.sortExercisesMenuInstance.destroy();
+        this.sortExercisesMenuInstance = null;
+        this.sortExercisesMenu.nativeElement.removeAttribute('display-block');
+      }, 300);
     }
   }
 
   toggleFilterSetsMenu(): void {
     if (this.filterSetsMenuInstance == null) {
-      this.filterSetsMenu.nativeElement.setAttribute('data-show', '');
-      this.filterSetsMenuInstance = createPopper(this.filterSetsButton.nativeElement, this.filterSetsMenu.nativeElement);
+      this.filterSetsMenu.nativeElement.setAttribute('display-block', '');
+      this.filterSetsMenuInstance = createPopper(this.filterSetsButton.nativeElement, this.filterSetsMenu.nativeElement, {
+        modifiers: [
+          {
+            name: 'offset',
+            options: {
+              offset: [0, 10],
+            },
+          },
+        ],
+      });
+      this.filterSetsMenu.nativeElement.setAttribute('visible', '');
     } else {
-      this.filterSetsMenu.nativeElement.removeAttribute('data-show');
-      this.filterSetsMenuInstance.destroy();
-      this.filterSetsMenuInstance = null;
+      this.filterSetsMenu.nativeElement.removeAttribute('visible');
+      setTimeout(() => {
+        this.filterSetsMenuInstance.destroy();
+        this.filterSetsMenuInstance = null;
+        this.filterSetsMenu.nativeElement.removeAttribute('display-block');
+      }, 300);
     }
   }
 }

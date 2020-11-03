@@ -23,13 +23,13 @@ export class SetResultComponent implements OnInit {
   @Output() setResultDelete: EventEmitter<number> = new EventEmitter();
   @Output() setResultDuplicate: EventEmitter<SetResult> = new EventEmitter();
 
-  @ViewChild('setNumberInput') setNumberInput;
-  @ViewChild('repsTargetLowInput') repsTargetLowInput;
-  @ViewChild('repsTargetHighInput') repsTargetHighInput;
-  @ViewChild('restTimeInput') restTimeInput;
-  @ViewChild('weightInput') weightInput;
-  @ViewChild('repsActualInput') repsActualInput;
-  @ViewChild(PopperComponent) popperComponent: PopperComponent;
+  @ViewChild('setNumberInput', { static: false }) setNumberInput;
+  @ViewChild('repsTargetLowInput', { static: false }) repsTargetLowInput;
+  @ViewChild('repsTargetHighInput', { static: false }) repsTargetHighInput;
+  @ViewChild('restTimeInput', { static: false }) restTimeInput;
+  @ViewChild('weightInput', { static: false }) weightInput;
+  @ViewChild('repsActualInput', { static: false }) repsActualInput;
+  @ViewChild(PopperComponent, { static: false }) popperComponent: PopperComponent;
 
   setResultForm = new FormGroup({
     setNumber: new FormControl(),
@@ -65,7 +65,7 @@ export class SetResultComponent implements OnInit {
       this.setResultForm.controls['setNumber'].setValue(this.setResult.order);
       return;
     }
-    this.setResultUpdateOrder.emit({ setResultId: this.setResult.id, order: parseInt(order) });
+    this.setResultUpdateOrder.emit({ setResultId: this.setResult.id, order: order });
   }
 
   updateSetResultWeight(weightString: string): void {

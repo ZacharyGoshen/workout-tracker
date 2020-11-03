@@ -1,11 +1,9 @@
 ﻿<Properties StartupConfiguration="{C51E2E51-15C3-45FE-B9A6-6106F1B57330}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="WorkoutTracker/ClientApp/src/app/components/workout-plan/workout-plan.component.ts">
+  <MonoDevelop.Ide.Workbench ActiveDocument="WorkoutTracker/ClientApp/src/app/components/exercise/exercise.component.ts">
     <Files>
-      <File FileName="WorkoutTracker/ClientApp/src/app/components/exercise-list/exercise-list.component.html" Line="151" Column="1" />
-      <File FileName="WorkoutTracker/ClientApp/src/app/components/exercise-list/exercise-list.component.ts" Line="63" Column="1" />
-      <File FileName="WorkoutTracker/ClientApp/src/app/components/exercise/exercise.component.html" Line="6" Column="51" />
-      <File FileName="WorkoutTracker/ClientApp/src/app/components/exercise/exercise.component.ts" Line="60" Column="5" />
-      <File FileName="WorkoutTracker/ClientApp/src/app/components/workout-plan/workout-plan.component.ts" Line="1" Column="1" />
+      <File FileName="WorkoutTracker/ClientApp/src/app/components/exercise/exercise.component.html" Line="36" Column="37" />
+      <File FileName="WorkoutTracker/ClientApp/src/app/components/exercise/exercise.component.css" Line="29" Column="18" />
+      <File FileName="WorkoutTracker/ClientApp/src/app/components/exercise/exercise.component.ts" Line="98" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -17,9 +15,9 @@
                   <Node name="app" expanded="True">
                     <Node name="components" expanded="True">
                       <Node name="exercise" expanded="True" />
-                      <Node name="workout-plan" expanded="True">
-                        <Node name="workout-plan.component.ts" selected="True" />
-                      </Node>
+                    </Node>
+                    <Node name="models" expanded="True">
+                      <Node name="exercise.ts" selected="True" />
                     </Node>
                   </Node>
                 </Node>

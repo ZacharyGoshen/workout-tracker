@@ -18,7 +18,6 @@ import { NavigationBarComponent } from './components/navigation-bar/navigation-b
 import { SetResultComponent } from './components/set-result/set-result.component';
 import { ExerciseSetResultComponent } from './components/exercise-set-result/exercise-set-result.component';
 import { LoginComponent } from './components/login/login.component';
-import { SignupComponent } from './components/signup/signup.component';
 import { HomeComponent } from './components/home/home.component';
 import { PopperComponent } from './components/popper/popper.component';
 
@@ -36,7 +35,6 @@ import { PopperComponent } from './components/popper/popper.component';
     SetResultComponent,
     ExerciseSetResultComponent,
     LoginComponent,
-    SignupComponent,
     HomeComponent,
     PopperComponent
   ],
@@ -48,7 +46,6 @@ import { PopperComponent } from './components/popper/popper.component';
     RouterModule.forRoot([
       { path: 'app', component: HomeComponent, pathMatch: 'full' },
       { path: 'app/login', component: LoginComponent, pathMatch: 'full' },
-      { path: 'app/register', component: SignupComponent, pathMatch: 'full' },
       { path: 'app/exercises', component: ExerciseListComponent, pathMatch: 'full' },
       { path: 'app/workout-plans', component: WorkoutPlanListComponent, pathMatch: 'full' },
       { path: 'app/workout-sessions', component: WorkoutSessionListComponent, pathMatch: 'full' },

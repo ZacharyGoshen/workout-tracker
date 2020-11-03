@@ -25,10 +25,19 @@
         [@exerciseHeight]="isCollapsed ? 'closed' : 'open'"
         class="collapsed-area"
     >
-        <div>
-            <app-exercise-set-result *ngFor="let setResult of setResults" [setResult]="setResult"></app-exercise-set-result>
-            <div *ngIf="setResultsVisible == 0" class="no-entries-found">No entries found</div>
-        </div>
+        <textarea
+            #exerciseDescriptionInput
+            [formControl]="exerciseDescription"
+            (change)="updateExerciseDescription(exerciseDescriptionInput.value)"
+            (keydown.enter)="$event.target.blur()"
+            class="exercise-description form-control"
+            maxlength="500"
+            placeholder="Enter a description..."
+            value="{{ exercise.description  }}"
+        >
+        </textarea>
+        <app-exercise-set-result *ngFor="let setResult of setResults" [setResult]="setResult"></app-exercise-set-result>
+        <div *ngIf="setResultsVisible == 0" class="no-entries-found">No entries found</div>
     </div>
 </div>
 <app-popper #popper></app-popper>

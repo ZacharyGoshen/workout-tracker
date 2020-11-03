@@ -8,7 +8,7 @@ import { createPopper, Instance } from '@popperjs/core';
 })
 export class PopperComponent implements OnInit {
 
-  @ViewChild('popper') popper;
+  @ViewChild('popper', { static: false }) popper;
 
   popperInstance: Instance = null;
   message: string = "";

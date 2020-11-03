@@ -54,15 +54,15 @@ export class WorkoutSessionComponent implements OnInit {
 
   @Output() workoutSessionDelete: EventEmitter<number> = new EventEmitter();
 
-  @ViewChild('nameInput') nameInput;
-  @ViewChild('dateInput') dateInput;
-  @ViewChild('exerciseInput') exerciseInput;
-  @ViewChild('repsTargetLowInput') repsTargetLowInput;
-  @ViewChild('repsTargetHighInput') repsTargetHighInput;
-  @ViewChild('restTimeInput') restTimeInput;
-  @ViewChild('weightInput') weightInput;
-  @ViewChild('repsActualInput') repsActualInput;
-  @ViewChild(PopperComponent) popperComponent: PopperComponent;
+  @ViewChild('nameInput', { static: false }) nameInput;
+  @ViewChild('dateInput', { static: false }) dateInput;
+  @ViewChild('exerciseInput', { static: false }) exerciseInput;
+  @ViewChild('repsTargetLowInput', { static: false }) repsTargetLowInput;
+  @ViewChild('repsTargetHighInput', { static: false }) repsTargetHighInput;
+  @ViewChild('restTimeInput', { static: false }) restTimeInput;
+  @ViewChild('weightInput', { static: false }) weightInput;
+  @ViewChild('repsActualInput', { static: false }) repsActualInput;
+  @ViewChild(PopperComponent, { static: false }) popperComponent: PopperComponent;
 
   workoutSessionForm = new FormGroup({
     name: new FormControl(''),

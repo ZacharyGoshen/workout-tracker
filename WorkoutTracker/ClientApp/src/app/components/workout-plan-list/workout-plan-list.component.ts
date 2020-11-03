@@ -18,8 +18,8 @@ export class WorkoutPlanListComponent implements OnInit {
   exercises: Exercise[];
   workoutPlans: WorkoutPlan[];
 
-  @ViewChild('workoutPlanName') workoutPlanNameInput;
-  @ViewChild(PopperComponent) popperComponent: PopperComponent;
+  @ViewChild('workoutPlanName', { static: false }) workoutPlanNameInput;
+  @ViewChild(PopperComponent, { static: false }) popperComponent: PopperComponent;
 
   constructor(
     private workoutPlanService: WorkoutPlanService,

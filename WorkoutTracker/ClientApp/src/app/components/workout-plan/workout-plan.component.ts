@@ -52,12 +52,12 @@ export class WorkoutPlanComponent implements OnInit {
 
   @Output() workoutPlanDelete: EventEmitter<number> = new EventEmitter();
 
-  @ViewChild('workoutPlanName') workoutPlanNameInput;
-  @ViewChild('exerciseName') exerciseInput;
-  @ViewChild('repsTargetLow') repsTargetLowInput;
-  @ViewChild('repsTargetHigh') repsTargetHighInput;
-  @ViewChild('restTime') restTimeInput;
-  @ViewChild(PopperComponent) popperComponent: PopperComponent;
+  @ViewChild('workoutPlanName', { static: false }) workoutPlanNameInput;
+  @ViewChild('exerciseName', { static: false }) exerciseInput;
+  @ViewChild('repsTargetLow', { static: false }) repsTargetLowInput;
+  @ViewChild('repsTargetHigh', { static: false }) repsTargetHighInput;
+  @ViewChild('restTime', { static: false }) restTimeInput;
+  @ViewChild(PopperComponent, { static: false }) popperComponent: PopperComponent;
 
   workoutPlanNameFormControl = new FormControl();
   newSetPlanExerciseName = new FormControl(null);

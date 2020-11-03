@@ -182,11 +182,13 @@
     color: #7a7a8c;
     display: none;
     opacity: 0;
+    overflow: hidden;
     padding: 10px 10px 0px 10px;
     transition: opacity .3s;
-    z-index: 1;
 }
-.popper-menu[data-show] {
+.popper-menu[display-block] {
     display: block;
+}
+.popper-menu[visible] {
     opacity: 1;
 }

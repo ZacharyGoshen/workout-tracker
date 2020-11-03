@@ -22,11 +22,11 @@ export class SetPlanComponent implements OnInit {
   @Output() setPlanUpdateOrder: EventEmitter<{ setPlanId: number, order: number }> = new EventEmitter();
   @Output() setPlanDuplicate: EventEmitter<SetPlan> = new EventEmitter();
 
-  @ViewChild('setPlanOrder') setNumberInput;
-  @ViewChild('setPlanRepsTargetLow') repsTargetLowInput;
-  @ViewChild('setPlanRepsTargetHigh') repsTargetHighInput;
-  @ViewChild('setPlanRestTime') restTimeInput;
-  @ViewChild(PopperComponent) popperComponent: PopperComponent;
+  @ViewChild('setPlanOrder', { static: false }) setNumberInput;
+  @ViewChild('setPlanRepsTargetLow', { static: false }) repsTargetLowInput;
+  @ViewChild('setPlanRepsTargetHigh', { static: false }) repsTargetHighInput;
+  @ViewChild('setPlanRestTime', { static: false }) restTimeInput;
+  @ViewChild(PopperComponent, { static: false }) popperComponent: PopperComponent;
 
   setNumber = new FormControl();
   repsTargetLow = new FormControl();
